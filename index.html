@@ -1,48 +1,45 @@
-const knowledgeBase = {
-    ...,
-    conocimientos_apoyo: {
-        titulo: '<h3 class="font-bold text-[#3a86ff]">💪 CONOCIMIENTOS DE APOYO</h3>',
-        contenido: `
-        <p class="mb-4">Técnicas y movimientos específicos que complementan tu entrenamiento:</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="character-card">
-                <h4 class="font-bold">Breaking</h4>
-                <div class="mt-2 space-y-2">
-                    <a href="https://youtu.be/mh1S-G_2uVI" target="_blank" class="video-link block text-center">Monkey swing</a>
-                    <a href="https://www.youtube.com/shorts/kMxjwhaAIQk" target="_blank" class="video-link block text-center">CCs</a>
-                    <a href="https://www.youtube.com/shorts/3hPAm_omUHM" target="_blank" class="video-link block text-center">Zulu spin</a>
-                    <a href="https://youtu.be/GeyIYYExTos?si=g90X2PTJOsLx8dnz" target="_blank" class="video-link block text-center">Scoot o esquiva baja</a>
-                    <a href="https://www.instagram.com/reel/CmcDzHjBg4D/?igsh=MTh1d3F5czUya2t0dw==" target="_blank" class="video-link block text-center">Valdez o macaco</a>
-                    <a href="https://youtu.be/CV7QCh2oOno?si=CrBG0TbHkOKXN1co&t=82" target="_blank" class="video-link block text-center">Hoja, delfín o bajada a gusanito</a>
-                    <a href="https://www.instagram.com/p/DC6lEJNuuUw/?img_index=1" target="_blank" class="video-link block text-center">Front swipe</a>
-                    <a href="https://www.instagram.com/p/CsbkT25RPZl/" target="_blank" class="video-link block text-center">Bronko</a>
-                    <div class="video-link block text-center bg-gray-600">Hook (breaking) - Pendiente link</div>
+            // CONOCIMIENTOS DE APOYO
+            conocimientos_apoyo: {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">💪 CONOCIMIENTOS DE APOYO</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">Técnicas y movimientos específicos que complementan tu entrenamiento.</p>
                 </div>
-            </div>
-            
-            <div class="character-card">
-                <h4 class="font-bold">Mano a Mano & Movimientos Corporales</h4>
-                <div class="mt-2 space-y-2">
-                    <div class="video-link block text-center bg-gray-600">Agarres de mano a mano - Pendiente link</div>
-                    <div class="video-link block text-center bg-gray-600">Figuras de mano a mano en proceso - Pendiente link</div>
-                    <a href="https://www.instagram.com/p/C6Mrhu5uUg5/" target="_blank" class="video-link block text-center">Roll de hombros o rueda con los hombros</a>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">Breaking</h4>
+                    <div class="mt-1 space-y-1">
+                        <a href="https://youtu.be/mh1S-G_2uVI" target="_blank" class="video-link block text-center text-xs">Monkey swing</a>
+                        <a href="https://www.youtube.com/shorts/kMxjwhaAIQk" target="_blank" class="video-link block text-center text-xs">CCs</a>
+                        <a href="https://www.youtube.com/shorts/3hPAm_omUHM" target="_blank" class="video-link block text-center text-xs">Zulu spin</a>
+                        <a href="https://youtu.be/GeyIYYExTos?si=g90X2PTJOsLx8dnz" target="_blank" class="video-link block text-center text-xs">Scoot o esquiva baja</a>
+                        <a href="https://www.instagram.com/reel/CmcDzHjBg4D/?igsh=MTh1d3F5czUya2t0dw==" target="_blank" class="video-link block text-center text-xs">Valdez o macaco</a>
+                        <a href="https://youtu.be/CV7QCh2oOno?si=CrBG0TbHkOKXN1co&t=82" target="_blank" class="video-link block text-center text-xs">Hoja, delfín o bajada a gusanito</a>
+                        <a href="https://www.instagram.com/p/DC6lEJNuuUw/?img_index=1" target="_blank" class="video-link block text-center text-xs">Front swipe</a>
+                        <a href="https://www.instagram.com/p/CsbkT25RPZl/" target="_blank" class="video-link block text-center text-xs">Bronko</a>
+                        <div class="video-link block text-center text-xs bg-gray-600">Hook (breaking) - Pendiente link</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="mt-4 character-card">
-            <h4 class="font-bold">🎥 EJEMPLOS INTEGRADORES</h4>
-            <p class="text-sm mt-2">Aplicación completa de todas las técnicas:</p>
-            <div class="mt-2 flex flex-wrap gap-2">
-                <a href="https://www.youtube.com/watch?v=P4r-gk4E7c4&list=RDP4r-gk4E7c4&start_radio=1" target="_blank" class="video-link">Piso: Breakin, mano a mano, teatro</a>
-                <a href="https://youtu.be/p44MfTpCqrQ?si=c7-UfYvpkPQDhsW5" target="_blank" class="video-link">Aéreo: Aplicación completa</a>
-                <a href="https://www.youtube.com/watch?v=j8uJ89Gh9LI" target="_blank" class="video-link">Performance impecable</a>
-            </div>
-        </div>
-        `,
-        pregunta: '¿Necesitas repasar algún movimiento específico?',
-        navButtons: true
-    },
-    ...
-};
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">Mano a Mano & Movimientos Corporales</h4>
+                    <div class="mt-1 space-y-1">
+                        <div class="video-link block text-center text-xs bg-gray-600">Agarres de mano a mano - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Figuras de mano a mano en proceso - Pendiente link</div>
+                        <a href="https://www.instagram.com/p/C6Mrhu5uUg5/" target="_blank" class="video-link block text-center text-xs">Roll de hombros o rueda con los hombros</a>
+                    </div>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🎥 EJEMPLOS INTEGRADORES</h4>
+                    <p class="text-xs mt-1">Aplicación completa de todas las técnicas:</p>
+                    <div class="mt-1 flex flex-wrap">
+                        <a href="https://www.youtube.com/watch?v=P4r-gk4E7c4&list=RDP4r-gk4E7c4&start_radio=1" target="_blank" class="video-link text-xs">Piso: Breakin, mano a mano, teatro</a>
+                        <a href="https://youtu.be/p44MfTpCqrQ?si=c7-UfYvpkPQDhsW5" target="_blank" class="video-link text-xs">Aéreo: Aplicación completa</a>
+                        <a href="https://www.youtube.com/watch?v=j8uJ89Gh9LI" target="_blank" class="video-link text-xs">Performance impecable</a>
+                    </div>
+                </div>
+                `,
+                pregunta: '¿Necesitas repasar algún movimiento específico?',
+                navButtons: true
+            },
