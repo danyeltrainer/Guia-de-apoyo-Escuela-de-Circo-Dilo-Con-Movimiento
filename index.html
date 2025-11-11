@@ -1,4 +1,1208 @@
-            // CONOCIMIENTOS DE APOYO
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio - Dilo con Movimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --brand-bg: #1a1a1d;
+            --brand-surface: #2a2a2d;
+            --brand-text: #f0f0f0;
+            --brand-primary: #c3073f;
+            --brand-secondary: #950740;
+            --bot-bubble: #3b3b3f;
+            --user-bubble: #c3073f;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #1a1a1d;
+            color: #f0f0f0;
+            height: 100vh;
+        }
+        
+        #chat-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        #chat-container::-webkit-scrollbar-track {
+            background: var(--brand-surface);
+            border-radius: 10px;
+        }
+        
+        #chat-container::-webkit-scrollbar-thumb {
+            background-color: #555;
+            border-radius: 10px;
+        }
+        
+        .chat-bubble {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: popIn 0.3s ease forwards;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .concept-tag {
+            display: inline-block;
+            background: var(--brand-primary);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            margin: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            min-height: 28px;
+            text-align: center;
+        }
+        
+        .concept-tag:hover {
+            background: var(--brand-secondary);
+            transform: translateY(-1px);
+        }
+        
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--brand-secondary);
+            color: white;
+            padding: 8px 10px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            margin: 3px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            min-height: 32px;
+            text-align: center;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .action-button:hover {
+            background: #7a0533;
+            transform: translateY(-1px);
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #3a86ff;
+            color: white;
+            padding: 8px 10px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            margin: 3px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            min-height: 32px;
+            flex: 1;
+        }
+        
+        .nav-button:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+            padding: 8px 10px;
+            background: rgba(195, 7, 63, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 44px;
+        }
+        
+        .process-step:hover {
+            background: rgba(195, 7, 63, 0.2);
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--brand-primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .example-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid var(--brand-primary);
+        }
+        
+        .character-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #3a86ff;
+        }
+        
+        .element-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin: 3px;
+            font-weight: bold;
+        }
+        
+        .fire { background: rgba(255, 69, 0, 0.2); color: #ff4500; border: 1px solid #ff4500; }
+        .water { background: rgba(0, 191, 255, 0.2); color: #00bfff; border: 1px solid #00bfff; }
+        .air { background: rgba(173, 216, 230, 0.2); color: #add8e6; border: 1px solid #add8e6; }
+        .earth { background: rgba(139, 69, 19, 0.2); color: #8b4513; border: 1px solid #8b4513; }
+        
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 10px;
+            border-radius: 8px;
+            margin: 4px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            color: #60a5fa;
+            border: 1px solid #60a5fa;
+            transition: all 0.2s ease;
+            text-align: center;
+            min-height: 30px;
+        }
+        
+        .video-link:hover {
+            background: rgba(96, 165, 250, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .rules-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #10b981;
+        }
+        
+        .safety-warning {
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid #dc2626;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 0.8rem;
+        }
+        
+        .nav-buttons-container {
+            position: sticky;
+            bottom: 0;
+            background: rgba(42, 42, 45, 0.95);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+        
+        .announcement-card {
+            background: rgba(106, 90, 205, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #6a5acd;
+        }
+        
+        .task-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+        }
+        
+        .breaking-task {
+            border-left: 3px solid #c3073f;
+        }
+        
+        .lira-task {
+            border-left: 3px solid #3a86ff;
+        }
+        
+        .team-task {
+            border-left: 3px solid #10b981;
+        }
+        
+        /* Mobile-first responsive design */
+        @media (max-width: 640px) {
+            body {
+                padding: 0;
+                font-size: 14px;
+                line-height: 1.4;
+            }
+            
+            .flex-col {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            #chat-container {
+                padding: 8px;
+                height: calc(100vh - 140px);
+                max-height: calc(100vh - 140px);
+            }
+            
+            .chat-bubble {
+                max-width: 95% !important;
+                padding: 10px;
+                font-size: 0.85rem;
+                margin-bottom: 8px;
+            }
+            
+            .process-step {
+                padding: 8px;
+                font-size: 0.85rem;
+                margin: 5px 0;
+            }
+            
+            .step-number {
+                width: 22px;
+                height: 22px;
+                font-size: 0.7rem;
+                margin-right: 8px;
+            }
+            
+            .action-button, .nav-button {
+                padding: 8px;
+                font-size: 0.75rem;
+                margin: 2px;
+                min-height: 34px;
+            }
+            
+            .concept-tag {
+                padding: 6px 8px;
+                font-size: 0.7rem;
+                margin: 2px;
+                min-height: 30px;
+            }
+            
+            .video-link {
+                padding: 6px 8px;
+                font-size: 0.7rem;
+                display: block;
+                text-align: center;
+                margin: 3px 0;
+                min-height: 30px;
+            }
+            
+            .nav-buttons-container {
+                padding: 8px;
+                gap: 5px;
+                flex-wrap: wrap;
+            }
+            
+            header {
+                padding: 10px;
+                min-height: 60px;
+            }
+            
+            header h1 {
+                font-size: 1rem;
+                margin: 0;
+            }
+            
+            footer {
+                padding: 10px;
+                min-height: 80px;
+            }
+            
+            input#user-input {
+                font-size: 16px;
+                padding: 10px;
+                min-height: 44px;
+            }
+            
+            /* Table responsive */
+            .overflow-x-auto {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            table {
+                font-size: 0.7rem;
+                min-width: 400px;
+            }
+            
+            table th, table td {
+                padding: 6px 4px;
+            }
+            
+            /* Improve button layouts for small screens */
+            .button-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 6px;
+            }
+            
+            /* Ensure content doesn't overflow */
+            img, video, iframe {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Improve text readability */
+            p, li, span, div {
+                line-height: 1.4;
+                margin-bottom: 6px;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                line-height: 1.3;
+                margin-top: 8px;
+                margin-bottom: 6px;
+            }
+            
+            ul, ol {
+                padding-left: 20px;
+                margin: 6px 0;
+            }
+            
+            li {
+                margin-bottom: 4px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 13px;
+            }
+            
+            #chat-container {
+                padding: 6px;
+            }
+            
+            .chat-bubble {
+                max-width: 98% !important;
+                padding: 8px;
+            }
+            
+            .nav-buttons-container {
+                flex-direction: column;
+            }
+            
+            .nav-button {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-button, .concept-tag {
+                width: 100%;
+                margin: 3px 0;
+            }
+            
+            header {
+                padding: 8px;
+                flex-direction: column;
+                text-align: center;
+                min-height: 70px;
+            }
+            
+            header h1 {
+                font-size: 0.9rem;
+            }
+            
+            footer {
+                padding: 8px;
+                min-height: 90px;
+            }
+            
+            .footer-buttons {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+            }
+            
+            table {
+                font-size: 0.65rem;
+                min-width: 350px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            body {
+                font-size: 12px;
+            }
+            
+            #chat-container {
+                padding: 4px;
+            }
+            
+            .chat-bubble {
+                padding: 8px;
+            }
+            
+            .process-step {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+            
+            .action-button, .nav-button, .concept-tag {
+                font-size: 0.7rem;
+                padding: 6px 8px;
+            }
+            
+            header h1 {
+                font-size: 0.85rem;
+            }
+            
+            table {
+                font-size: 0.6rem;
+                min-width: 320px;
+            }
+            
+            .footer-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .flex-col {
+                max-width: 95%;
+                height: 95vh;
+            }
+            
+            #chat-container {
+                padding: 12px;
+            }
+            
+            .chat-bubble {
+                max-width: 80% !important;
+            }
+        }
+        
+        /* High DPI screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .chat-bubble, .process-step, .action-button, .nav-button {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+        
+        /* Orientation specific styles */
+        @media (max-width: 640px) and (orientation: landscape) {
+            .flex-col {
+                max-height: 90vh;
+            }
+            
+            header {
+                padding: 8px;
+                min-height: 50px;
+            }
+            
+            #chat-container {
+                padding: 6px;
+                height: calc(90vh - 110px);
+            }
+            
+            footer {
+                padding: 8px;
+                min-height: 60px;
+            }
+            
+            .footer-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Prevent text size adjustment on orientation change */
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        /* Better spacing for content */
+        .content-section {
+            margin-bottom: 12px;
+        }
+        
+        .content-section h3 {
+            margin-bottom: 8px;
+        }
+        
+        .content-section p {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body class="h-full bg-[#1a1a1d] text-[#f0f0f0] flex items-center justify-center p-1 sm:p-4">
+    <div class="flex flex-col w-full max-w-2xl h-full max-h-[95vh] bg-[#2a2a2d] rounded-2xl shadow-2xl overflow-hidden border border-[#1a1a1d]">
+        <header class="bg-[#1a1a1d] p-3 flex items-center justify-between border-b border-[#1a1a1d] shadow-md">
+            <div class="flex items-center space-x-2 flex-1 min-w-0">
+                <div class="p-1 bg-[#c3073f] rounded-full flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                        <path d="M15.07 13.09a7 7 0 0 0-4.14 4.17"/>
+                        <path d="M18.81 9.26a11.08 11.08 0 0 0-1.07-2.61"/>
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10c0-1.76-.44-3.41-1.22-4.88"/>
+                        <path d="M19.88 5.12A10 10 0 0 0 12 2v0"/>
+                        <path d="m10.12 7.2-.62-2.01"/>
+                        <path d="m5.2 11.2-.5 1.6"/>
+                        <path d="m4.61 6.1-.9 1.2"/>
+                        <path d="M9.82 17.18a7 7 0 0 0 4.14-4.17"/>
+                        <path d="M5.19 18.74A11.08 11.08 0 0 0 6.26 21.35"/>
+                        <path d="M12 22v0c5.5 0 10-4.5 10-10 0-1.76-.44-3.41-1.22-4.88"/>
+                        <path d="M4.12 18.88A10 10 0 0 0 12 22v0"/>
+                        <path d="m13.88 16.8.62 2.01"/>
+                        <path d="m18.8 12.8.5-1.6"/>
+                        <path d="m19.39 17.9.9-1.2"/>
+                    </svg>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h1 class="text-base font-bold truncate">Guía: Circo Urbano</h1>
+                    <p class="text-xs text-gray-400 truncate">Dilo con Movimiento</p>
+                </div>
+            </div>
+            <div class="text-xs text-gray-400 text-right flex-shrink-0 pl-2">
+                <p class="font-bold text-[#c3073f]">GALA FINAL</p>
+                <p>10 Ene</p>
+            </div>
+        </header>
+
+        <div id="chat-container" class="flex-1 p-2 sm:p-4 md:p-6 space-y-3 overflow-y-auto">
+            <!-- Mensaje de bienvenida para estudiantes -->
+            <div class="chat-bubble max-w-[90%] sm:max-w-[85%] bg-[#3b3b3f] p-3 rounded-2xl rounded-tl-none">
+                <p class="font-semibold text-[#c3073f]">¡Hola, Artista!</p>
+                <p class="mt-1">Soy tu guía de la <strong>Escuela "Dilo con Movimiento"</strong>. Estoy aquí para ayudarte a <strong>recordar y aplicar mejor los conocimientos del año</strong>.</p>
+                
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📣 EVENTOS</h4>
+                    
+                    <div class="announcement-card">
+                        <h5 class="font-bold text-sm">29 nov: Pasacalle</h5>
+                        <p class="text-xs mt-1">Participa en "Caminando Juntxs".</p>
+                        <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
+                    </div>
+                    
+                    <div class="announcement-card">
+                        <h5 class="font-bold text-sm">10-18 ene: ENFETELA</h5>
+                        <p class="text-xs mt-1">Festival Latinoamericano de Teatro.</p>
+                    </div>
+                    
+                    <div class="announcement-card">
+                        <h5 class="font-bold text-sm">10 Ene: GALA FINAL</h5>
+                        <p class="text-xs mt-1">Nuestra gran muestra.</p>
+                    </div>
+                </div>
+
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
+                    <p class="text-xs">• <strong>Gala Final:</strong> 10 Ene</p>
+                    <p class="text-xs mt-1">• <strong>Tareas:</strong> 
+                        <div class="flex flex-wrap mt-1">
+                            <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
+                            <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
+                            <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
+                        </div>
+                    </p>
+                    <p class="text-xs mt-1">• <strong>Música:</strong> <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>
+                    <p class="text-xs">• <strong>Calendario:</strong> <a href="https://probaaaaaaaaan.my.canva.site/calendario2026escueladcm" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>
+                </div>
+
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#10b981] mb-1 text-center">📜 NORMAS</h4>
+                    <div class="safety-warning text-xs">
+                        <p class="font-bold text-red-400">⚠️ ACTIVIDADES DE RIESGO</p>
+                        <p class="mt-1">Acrobacias y movimientos aéreos requieren precaución.</p>
+                    </div>
+                    <ul class="text-xs space-y-1 mt-1 list-disc list-inside">
+                        <li>Mantener limpio el espacio</li>
+                        <li>Regular volumen</li>
+                        <li>Cuidar a las infancias</li>
+                        <li>Respeto mutuo</li>
+                    </ul>
+                </div>
+
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📚 TEMAS DE ESTUDIO</h4>
+                    
+                    <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
+                    <div class="process-step" onclick="startProcess('peso')">
+                        <div class="step-number">⚖️</div>
+                        <div>
+                            <div class="font-medium text-sm">Peso</div>
+                            <div class="text-xs text-gray-400">Fuerza del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('tiempo')">
+                        <div class="step-number">⏱️</div>
+                        <div>
+                            <div class="font-medium text-sm">Tiempo</div>
+                            <div class="text-xs text-gray-400">Velocidad del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('espacio')">
+                        <div class="step-number">🌐</div>
+                        <div>
+                            <div class="font-medium text-sm">Espacio</div>
+                            <div class="text-xs text-gray-400">Actitud espacial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('flujo')">
+                        <div class="step-number">💧</div>
+                        <div>
+                            <div class="font-medium text-sm">Flujo</div>
+                            <div class="text-xs text-gray-400">Control del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="font-bold mt-2 text-sm">🎭 PERSONAJES</h5>
+                    <div class="process-step" onclick="startProcess('personajes')">
+                        <div class="step-number">👤</div>
+                        <div>
+                            <div class="font-medium text-sm">Guía de Personajes</div>
+                            <div class="text-xs text-gray-400">Mundo post-apocalíptico</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('motores')">
+                        <div class="step-number">⚙️</div>
+                        <div>
+                            <div class="font-medium text-sm">Motores</div>
+                            <div class="text-xs text-gray-400">Origen del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('elementos')">
+                        <div class="step-number">🌊</div>
+                        <div>
+                            <div class="font-medium text-sm">Elementos</div>
+                            <div class="text-xs text-gray-400">Fuego, Agua, Aire, Tierra</div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="font-bold mt-2 text-sm">🔧 HERRAMIENTAS</h5>
+                    <div class="process-step" onclick="startProcess('tabla_resumen')">
+                        <div class="step-number">📊</div>
+                        <div>
+                            <div class="font-medium text-sm">Tabla Resumen</div>
+                            <div class="text-xs text-gray-400">Factores del Esfuerzo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
+                        <div class="step-number">🔗</div>
+                        <div>
+                            <div class="font-medium text-sm">Tabla Síntesis</div>
+                            <div class="text-xs text-gray-400">Integración completa</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
+                        <div class="step-number">💪</div>
+                        <div>
+                            <div class="font-medium text-sm">Conocimientos Apoyo</div>
+                            <div class="text-xs text-gray-400">Técnicas específicas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-3 text-xs text-gray-300">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo.</p>
+                
+                <!-- Botones de navegación -->
+                <div class="nav-buttons-container">
+                    <button class="nav-button text-xs" onclick="goBack()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                            <path d="m15 18-6-6 6-6"/>
+                        </svg>
+                        Atrás
+                    </button>
+                    <button class="nav-button text-xs" onclick="goToMenu()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        Menú
+                    </button>
+                </div>
+            </div>
+            <!-- Los mensajes dinámicos se añadirán aquí -->
+        </div>
+
+        <footer class="bg-[#1a1a1d] p-2 sm:p-4 border-t border-[#1a1a1d]">
+            <form id="chat-form" class="flex items-center space-x-2 mb-2">
+                <input 
+                    type="text" 
+                    id="user-input"
+                    placeholder="Escribe tu pregunta..."
+                    class="flex-1 p-2 bg-[#2a2a2d] border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#c3073f] text-[#f0f0f0] placeholder-gray-500 text-sm"
+                    autocomplete="off"
+                >
+                <button 
+                    type="submit"
+                    class="p-2 bg-[#c3073f] text-white rounded-xl hover:bg-[#950740] focus:outline-none focus:ring-2 focus:ring-[#c3073f] transition-colors duration-200 flex-shrink-0"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+            <div class="footer-buttons flex flex-wrap gap-1 justify-center">
+                <button class="action-button text-xs" onclick="sendMessage('ejemplos')">💡 Ejemplos</button>
+                <button class="action-button text-xs" onclick="sendMessage('personajes')">🎭 Pers</button>
+                <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
+                <button class="action-button text-xs" onclick="sendMessage('tareas lira')">🔄 Lira</button>
+                <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">👥 Eq</button>
+                <button class="action-button text-xs" onclick="sendMessage('normas')">📜 Norm</button>
+                <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Res</button>
+                <button class="action-button text-xs" onclick="sendMessage('anuncios')">📣 Anun</button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Estado de la conversación
+        const chatState = {
+            currentTopic: null,
+            previousTopic: null,
+            messages: [],
+            conceptsDiscussed: new Set(),
+            history: []
+        };
+
+        // Base de conocimiento COMPLETA
+        const knowledgeBase = {
+            inicio: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">👋 ¡Hola!</h3>',
+                contenido: `
+                <p class="text-sm">¡Bienvenido/a a tu guía de estudio! Elige un tema para comenzar.</p>
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-sm">⚖️ FACTORES DEL ESFUERZO</h4>
+                    <div class="process-step" onclick="startProcess('peso')">
+                        <div class="step-number">⚖️</div><div><div class="font-medium text-sm">Peso</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('tiempo')">
+                        <div class="step-number">⏱️</div><div><div class="font-medium text-sm">Tiempo</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('espacio')">
+                        <div class="step-number">🌐</div><div><div class="font-medium text-sm">Espacio</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('flujo')">
+                        <div class="step-number">💧</div><div><div class="font-medium text-sm">Flujo</div></div>
+                    </div>
+                    
+                    <h4 class="font-bold text-[#3a86ff] mt-2 mb-1 text-sm">🎭 CONSTRUCCIÓN DE PERSONAJES</h4>
+                    <div class="process-step" onclick="startProcess('personajes')">
+                        <div class="step-number">👤</div><div><div class="font-medium text-sm">Guía de Personajes</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('motores')">
+                        <div class="step-number">⚙️</div><div><div class="font-medium text-sm">Motores</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('elementos')">
+                        <div class="step-number">🌊</div><div><div class="font-medium text-sm">Elementos</div></div>
+                    </div>
+                    
+                    <h4 class="font-bold text-[#10b981] mt-2 mb-1 text-sm">🔧 HERRAMIENTAS</h4>
+                    <div class="process-step" onclick="startProcess('tabla_resumen')">
+                        <div class="step-number">📊</div><div><div class="font-medium text-sm">Tabla Resumen</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
+                        <div class="step-number">🔗</div><div><div class="font-medium text-sm">Tabla Síntesis</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
+                        <div class="step-number">💪</div><div><div class="font-medium text-sm">Conocimientos</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('tareas')">
+                        <div class="step-number">📋</div><div><div class="font-medium text-sm">Tareas</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('anuncios')">
+                        <div class="step-number">📣</div><div><div class="font-medium text-sm">Anuncios</div></div>
+                    </div>
+                    <div class="process-step" onclick="startProcess('normas')">
+                        <div class="step-number">📜</div><div><div class="font-medium text-sm">Normas</div></div>
+                    </div>
+                </div>
+                `,
+                pregunta: 'Toca un tema o escribe su nombre.',
+                navButtons: true
+            },
+
+            // ANUNCIOS Y EVENTOS
+            anuncios: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📣 ANUNCIOS Y EVENTOS</h3>',
+                contenido: `
+                <div class="announcement-card">
+                    <h4 class="font-bold text-sm">29 de noviembre: Pasacalle Caminando Juntxs</h4>
+                    <p class="text-xs mt-1">Participa en el pasacalle "Caminando Juntxs".</p>
+                    <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
+                </div>
+                
+                <div class="announcement-card">
+                    <h4 class="font-bold text-sm">10-18 enero: ENFETELA Festival Latinoamericano de Teatro - La Granja</h4>
+                    <p class="text-xs mt-1">Festival Latinoamericano de Teatro en La Granja.</p>
+                    <p class="text-xs mt-2 text-gray-400">Más información próximamente.</p>
+                </div>
+                
+                <div class="announcement-card">
+                    <h4 class="font-bold text-sm">10 de Enero: GALA FINAL</h4>
+                    <p class="text-xs mt-1">Nuestra gran muestra de fin de temporada.</p>
+                </div>
+                `,
+                pregunta: '¿Necesitas información sobre algún otro tema?',
+                navButtons: true
+            },
+
+            // NORMAS COMUNITARIAS
+            normas: {
+                titulo: '<h3 class="font-bold text-[#10b981] text-sm">📜 NUESTRAS NORMAS COMUNITARIAS</h3>',
+                contenido: `
+                <div class="rules-card">
+                    <div class="safety-warning text-xs">
+                        <p class="font-bold text-red-400">⚠️ ATENCIÓN: ACTIVIDADES DE RIESGO</p>
+                        <p class="mt-1">Realizamos prácticas que incluyen acrobacias, trabajo aéreo, breaking y otras disciplinas que conllevan riesgos físicos. La seguridad es nuestra prioridad.</p>
+                    </div>
+                    
+                    <h4 class="font-bold mb-1 mt-2 text-sm">Para mantener un espacio seguro y respetuoso:</h4>
+                    <ul class="list-disc list-inside mt-1 space-y-1 text-xs">
+                        <li><strong>Mantener limpio y limpiar al irnos:</strong> Nuestro espacio es compartido.</li>
+                        <li><strong>Regular gritos o volumen:</strong> Espacio compartido, conciencia del ruido.</li>
+                        <li><strong>Cuidar a las infancias presentes:</strong> Por su seguridad y la de tod@s.</li>
+                        <li><strong>Espacio de respeto mutuo:</strong> Sin machismo, racismo, homofobia, transfobia ni acciones violentas.</li>
+                    </ul>
+                </div>
+                `,
+                pregunta: '¿Necesitas información sobre algún otro tema?',
+                navButtons: true
+            },
+
+            // FACTORES DEL ESFUERZO
+            peso: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">⚖️ FACTOR: PESO</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">El <strong>Peso</strong> es la intención de fuerza que aplicas a tu movimiento.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">FUERTE (Pesado)</h4>
+                    <p class="text-xs mt-1">Como moverte con una <strong>mochila pesada</strong>. Movimiento potente que cede a la gravedad.</p>
+                    <div class="mt-1 flex flex-wrap">
+                        <a href="https://youtube.com/shorts/Kms5wINAd4U?si=uRJa5SAXsdKTfU8m" target="_blank" class="video-link text-xs">Lira: Drop</a>
+                        <a href="https://youtube.com/shorts/h9JYqZy6Fb0?si=navpdLaTlGs1YMBU" target="_blank" class="video-link text-xs">Breaking: Coin drop</a>
+                    </div>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">LIGERO</h4>
+                    <p class="text-xs mt-1">Como si <strong>flotaras</strong>. Movimiento sutil, delicado y sin esfuerzo aparente.</p>
+                    <div class="mt-1 flex flex-wrap">
+                        <a href="https://youtu.be/p44MfTpCqrQ?si=tyFq00X1xilZMWrH&t=100" target="_blank" class="video-link text-xs">Lira: Subida</a>
+                        <a href="https://youtu.be/Da3Oqab5nes?si=yzKGcWESN5mxskiB" target="_blank" class="video-link text-xs">Breaking: Bajada</a>
+                    </div>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar otro factor?',
+                navButtons: true
+            },
+
+            tiempo: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">⏱️ FACTOR: TIEMPO</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">El <strong>Tiempo</strong> se refiere a la duración de tus acciones.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">SÚBITO (Rápido)</h4>
+                    <p class="text-xs mt-1">Cambio rápido, urgente, explosivo. Como un interruptor de luz.</p>
+                    <div class="mt-1 flex flex-wrap">
+                        <a href="https://youtu.be/MhP1-m7alUs?si=nPCQpy_wMPTDyiee&t=253" target="_blank" class="video-link text-xs">Mano a Mano: Mov súbito</a>
+                    </div>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">SOSTENIDO (Lento)</h4>
+                    <p class="text-xs mt-1">Como <strong>"derretirse"</strong>. Acción alargada, en "cámara lenta".</p>
+                    <div class="mt-1 flex flex-wrap">
+                        <a href="https://youtu.be/3Gmh2bLq3vY?si=ED49oAjAoJjpvmdO&t=99" target="_blank" class="video-link text-xs">Mano a Mano: Lift</a>
+                        <a href="https://youtu.be/wej-3vHpiFs?si=uaTjslaU-dwWqwSh&t=48" target="_blank" class="video-link text-xs">Lira: Tiempos variados</a>
+                    </div>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar otro factor?',
+                navButtons: true
+            },
+
+            espacio: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🌐 FACTOR: ESPACIO</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">El <strong>Espacio</strong> es tu actitud o atención hacia el espacio.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">DIRECTO</h4>
+                    <p class="text-xs mt-1">Tu movimiento va "al grano". Atención <strong>enfocada</strong>.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">FLEXIBLE (Indirecto)</h4>
+                    <p class="text-xs mt-1">Tu movimiento "da rodeos". Atención <strong>exploratoria</strong>.</p>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar otro factor?',
+                navButtons: true
+            },
+
+            flujo: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">💧 FACTOR: FLUJO</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">El <strong>Flujo</strong> es sobre controlar o liberar la energía de tu movimiento.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">LIBRE</h4>
+                    <p class="text-xs mt-1">Es "Flow". Dejas que el movimiento fluya sin pausas ni frenos.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">CONTENIDO (Controlado)</h4>
+                    <p class="text-xs mt-1">Tienes control total. Movimiento tenso, controlado.</p>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar otro factor?',
+                navButtons: true
+            },
+
+            // CONSTRUCCIÓN DE PERSONAJES
+            personajes: {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">🎭 CONSTRUCCIÓN DE PERSONAJES</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">Nuestro espectáculo está basado en un <strong>mundo post-apocalíptico</strong>.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🌿 SERES DEL BOSQUE (Lira)</h4>
+                    <p class="text-xs mt-1">Personajes como <strong>Hadas, Elfos y Faunos</strong> que defienden la naturaleza.</p>
+                    <div class="mt-1">
+                        <span class="element-tag water">Agua</span>
+                        <span class="element-tag earth">Tierra</span>
+                        <span class="element-tag air">Aire</span>
+                    </div>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🤖 HUMANOS Y SERES "DAÑADOS" (Breaking)</h4>
+                    <p class="text-xs mt-1">Seres que simbolizan la <strong>fuerza, resistencia y adaptabilidad</strong>.</p>
+                    <div class="mt-1">
+                        <span class="element-tag fire">Fuego</span>
+                        <span class="element-tag earth">Tierra</span>
+                    </div>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar más sobre motores de movimiento o elementos?',
+                navButtons: true
+            },
+
+            motores: {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">⚙️ MOTORES DE MOVIMIENTO</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">El movimiento de tu personaje nace desde una zona del cuerpo.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">CABEZA</h4>
+                    <p class="text-xs mt-1">Movimiento desde la conciencia, el pensamiento y la mirada.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">PECHO</h4>
+                    <p class="text-xs mt-1">Movimiento desde las emociones y el corazón.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">CADERA/PELVIS</h4>
+                    <p class="text-xs mt-1">Movimiento desde el instinto y la vitalidad.</p>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar los elementos o volver a los personajes?',
+                navButtons: true
+            },
+
+            elementos: {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">🌊 ELEMENTOS</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">Cada elemento tiene una energía particular que influye en tu personaje.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm"><span class="element-tag fire">FUEGO</span></h4>
+                    <p class="text-xs mt-1">Movimientos <strong>intensos, rápidos y transformadores</strong>.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm"><span class="element-tag water">AGUA</span></h4>
+                    <p class="text-xs mt-1">Fluye con <strong>suavidad o fuerza, adaptándose</strong>.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm"><span class="element-tag air">AIRE</span></h4>
+                    <p class="text-xs mt-1">Es <strong>ligero, cambiante y libre</strong>.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm"><span class="element-tag earth">TIERRA</span></h4>
+                    <p class="text-xs mt-1"><strong>Sostiene, da peso y estabilidad</strong>.</p>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar los motores de movimiento o volver a los personajes?',
+                navButtons: true
+            },
+
+            // HERRAMIENTAS ADICIONALES
+            tabla_resumen: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📊 TABLA RESUMEN</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">Resumen completo de los Factores del Esfuerzo.</p>
+                </div>
+                
+                <div class="overflow-x-auto mt-2">
+                    <table class="w-full text-xs text-left">
+                        <thead class="bg-[#1a1a1d]">
+                            <tr>
+                                <th class="p-1 font-bold">Factor</th>
+                                <th class="p-1 font-bold">Polaridades</th>
+                                <th class="p-1 font-bold">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-1 font-medium">⚖️ Peso</td>
+                                <td class="p-1">Fuerte / Ligero</td>
+                                <td class="p-1">Intensidad de fuerza aplicada</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-1 font-medium">⏱️ Tiempo</td>
+                                <td class="p-1">Súbito / Sostenido</td>
+                                <td class="p-1">Duración y velocidad</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-1 font-medium">🌐 Espacio</td>
+                                <td class="p-1">Directo / Flexible</td>
+                                <td class="p-1">Actitud hacia el espacio</td>
+                            </tr>
+                            <tr>
+                                <td class="p-1 font-medium">💧 Flujo</td>
+                                <td class="p-1">Libre / Contenido</td>
+                                <td class="p-1">Continuidad y control</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar algún factor en particular?',
+                navButtons: true
+            },
+
+            tabla_sintesis: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🔗 TABLA DE SÍNTESIS</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">Integración de todos los componentes para enriquecer tu expresión.</p>
+                </div>
+                
+                <div class="overflow-x-auto mt-2">
+                    <table class="w-full text-xs text-left">
+                        <thead class="bg-[#1a1a1d]">
+                            <tr>
+                                <th class="p-1 font-bold">Factores</th>
+                                <th class="p-1 font-bold">Personajes</th>
+                                <th class="p-1 font-bold">Motores</th>
+                                <th class="p-1 font-bold">Elementos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-1">
+                                    <strong>⚖️ Peso:</strong> F/L<br>
+                                    <strong>⏱️ Tiempo:</strong> S/S<br>
+                                    <strong>🌐 Espacio:</strong> D/F<br>
+                                    <strong>💧 Flujo:</strong> L/C
+                                </td>
+                                <td class="p-1">
+                                    <strong>🌿 Bosque (Lira)</strong><br>
+                                    <strong>🤖 Dañados (Brk)</strong>
+                                </td>
+                                <td class="p-1">
+                                    <strong>Cabeza:</strong> Pensar<br>
+                                    <strong>Pecho:</strong> Emoción<br>
+                                    <strong>Cadera:</strong> Instinto
+                                </td>
+                                <td class="p-1">
+                                    <span class="element-tag fire">Fuego</span><br>
+                                    <span class="element-tag water">Agua</span><br>
+                                    <span class="element-tag air">Aire</span><br>
+                                    <span class="element-tag earth">Tierra</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar más sobre algún componente?',
+                navButtons: true
+            },
+
+            // CONOCIMIENTOS DE APOYO - ACTUALIZADO
             conocimientos_apoyo: {
                 titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">💪 CONOCIMIENTOS DE APOYO</h3>',
                 contenido: `
@@ -43,3 +1247,394 @@
                 pregunta: '¿Necesitas repasar algún movimiento específico?',
                 navButtons: true
             },
+
+            // TAREAS
+            tareas: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📋 TAREAS</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm">Aquí encontrarás las tareas organizadas por disciplina.</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-1 mb-2">
+                    <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
+                    <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
+                    <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
+                </div>
+                
+                <div class="task-card breaking-task">
+                    <h4 class="font-bold text-sm">🔄 BREAKING</h4>
+                    <p class="text-xs mt-1">Tareas actuales para breaking:</p>
+                    <ol class="list-decimal list-inside mt-1 space-y-1 text-xs">
+                        <li>Aprenderse todos los fraseos y combis</li>
+                        <li>Mandar avances en video</li>
+                        <li>Conectar secuencias con la música</li>
+                    </ol>
+                </div>
+                `,
+                pregunta: '¿Quieres ver las tareas de alguna disciplina en particular?',
+                navButtons: true
+            },
+
+            'tareas_breaking': {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🔄 TAREAS - BREAKING</h3>',
+                contenido: `
+                <div class="task-card breaking-task">
+                    <h4 class="font-bold text-sm">📝 TAREAS ACTUALES - BREAKING</h4>
+                    <ol class="list-decimal list-inside mt-1 space-y-1 text-xs">
+                        <li><strong>Aprenderse todos los fraseos y combis</strong> que realizamos aquí.</li>
+                        <li><strong>Mandar avances de lo trabajado en video</strong>, por este medio y/o IG.</li>
+                        <li><strong>Escuchar la música</strong> y buscar encajar las secuencias/frases.</li>
+                    </ol>
+                </div>
+                
+                <div class="mt-2 task-card breaking-task">
+                    <h4 class="font-bold text-sm">🎵 MÚSICA ACTUAL - BREAKING</h4>
+                    <a href="https://www.youtube.com/watch?v=JmxIFmcTsF0&list=RDJmxIFmcTsF0&start_radio=1" 
+                       class="block mt-1 p-1 bg-[#1a1a1d] rounded text-blue-400 underline text-xs text-center"
+                       target="_blank">
+                       🎧 Música Breaking - YouTube
+                    </a>
+                </div>
+                `,
+                pregunta: '¿Quieres ver las tareas de otra disciplina?',
+                navButtons: true
+            },
+
+            'tareas_lira': {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">🎪 TAREAS - LIRA</h3>',
+                contenido: `
+                <div class="task-card lira-task">
+                    <h4 class="font-bold text-sm">📝 TAREAS ACTUALES - LIRA</h4>
+                    <ol class="list-decimal list-inside mt-1 space-y-1 text-xs">
+                        <li><strong>Aprenderse todos los fraseos y combis</strong> que realizamos aquí.</li>
+                        <li><strong>Mandar avances de lo trabajado en video</strong>, por este medio y/o IG.</li>
+                        <li><strong>Escuchar la música</strong> y buscar encajar las secuencias/frases.</li>
+                    </ol>
+                </div>
+                
+                <div class="mt-2 task-card lira-task">
+                    <h4 class="font-bold text-sm">🎵 MÚSICA ACTUAL - LIRA</h4>
+                    <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" 
+                       class="block mt-1 p-1 bg-[#1a1a1d] rounded text-blue-400 underline text-xs text-center"
+                       target="_blank">
+                       🎧 Playlist Completa - YouTube
+                    </a>
+                </div>
+                `,
+                pregunta: '¿Quieres ver las tareas de otra disciplina?',
+                navButtons: true
+            },
+
+            'tareas_equipo': {
+                titulo: '<h3 class="font-bold text-[#10b981] text-sm">👥 TAREAS - EQUIPO COMPLETO</h3>',
+                contenido: `
+                <div class="task-card team-task">
+                    <h4 class="font-bold text-sm">📝 TAREAS GRUPALES</h4>
+                    <ol class="list-decimal list-inside mt-1 space-y-1 text-xs">
+                        <li><strong>Coordinación de horarios</strong> para ensayos grupales</li>
+                        <li><strong>Revisión de vestuario</strong> y elementos escénicos</li>
+                        <li><strong>Memorización de entradas y salidas</strong> de escena</li>
+                        <li><strong>Práctica de transiciones</strong> entre disciplinas</li>
+                    </ol>
+                </div>
+                `,
+                pregunta: '¿Quieres ver las tareas de alguna disciplina específica?',
+                navButtons: true
+            }
+        };
+
+        // Funciones de navegación
+        window.goBack = function() {
+            if (chatState.history.length > 1) {
+                chatState.history.pop();
+                const previousTopic = chatState.history.pop();
+                if (previousTopic) {
+                    startProcess(previousTopic);
+                } else {
+                    goToMenu();
+                }
+            } else {
+                goToMenu();
+            }
+        };
+
+        window.goToMenu = function() {
+            chatState.history = [];
+            chatState.currentTopic = null;
+            const response = knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
+            addMessage(response, 'bot');
+        };
+
+        // Lógica del bot COMPLETA
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase().trim();
+            
+            chatState.messages.push({ type: 'user', content: userMessage, timestamp: new Date().toLocaleTimeString() });
+
+            // Guardar el tema anterior en el historial
+            if (chatState.currentTopic) {
+                chatState.history.push(chatState.currentTopic);
+            }
+
+            // Detección de todos los temas
+            if (message.includes('anuncios') || message.includes('eventos')) {
+                chatState.currentTopic = 'anuncios';
+                return formatResponse('anuncios');
+            }
+            
+            if (message.includes('normas') || message.includes('reglas')) {
+                chatState.currentTopic = 'normas';
+                return formatResponse('normas');
+            }
+            
+            if (message.includes('peso')) {
+                chatState.currentTopic = 'peso';
+                return formatResponse('peso');
+            }
+            
+            if (message.includes('tiempo')) {
+                chatState.currentTopic = 'tiempo';
+                return formatResponse('tiempo');
+            }
+            
+            if (message.includes('espacio')) {
+                chatState.currentTopic = 'espacio';
+                return formatResponse('espacio');
+            }
+            
+            if (message.includes('flujo') || message.includes('flow')) {
+                chatState.currentTopic = 'flujo';
+                return formatResponse('flujo');
+            }
+            
+            if (message.includes('personajes') || message.includes('personaje')) {
+                chatState.currentTopic = 'personajes';
+                return formatResponse('personajes');
+            }
+            
+            if (message.includes('motores') || message.includes('motor')) {
+                chatState.currentTopic = 'motores';
+                return formatResponse('motores');
+            }
+            
+            if (message.includes('elementos') || message.includes('elemento') || message.includes('fuego') || message.includes('agua') || message.includes('aire') || message.includes('tierra')) {
+                chatState.currentTopic = 'elementos';
+                return formatResponse('elementos');
+            }
+            
+            if (message.includes('tabla resumen') || message.includes('resumen')) {
+                chatState.currentTopic = 'tabla_resumen';
+                return formatResponse('tabla_resumen');
+            }
+            
+            if (message.includes('síntesis') || message.includes('sintesis')) {
+                chatState.currentTopic = 'tabla_sintesis';
+                return formatResponse('tabla_sintesis');
+            }
+            
+            if (message.includes('conocimientos') || message.includes('apoyo') || message.includes('técnica')) {
+                chatState.currentTopic = 'conocimientos_apoyo';
+                return formatResponse('conocimientos_apoyo');
+            }
+            
+            if (message.includes('tareas breaking') || message.includes('tarea breaking')) {
+                chatState.currentTopic = 'tareas_breaking';
+                return formatResponse('tareas_breaking');
+            }
+            
+            if (message.includes('tareas lira') || message.includes('tarea lira')) {
+                chatState.currentTopic = 'tareas_lira';
+                return formatResponse('tareas_lira');
+            }
+            
+            if (message.includes('tareas equipo') || message.includes('tarea equipo')) {
+                chatState.currentTopic = 'tareas_equipo';
+                return formatResponse('tareas_equipo');
+            }
+            
+            if (message.includes('tareas') || message.includes('tarea')) {
+                chatState.currentTopic = 'tareas';
+                return formatResponse('tareas');
+            }
+
+            if (message.includes('ejemplos') || message.includes('ejemplo')) {
+                const topic = chatState.currentTopic || 'peso';
+                return showExamples(topic);
+            }
+
+            if (message.includes('hola') || message.includes('inicio') || message.includes('menu')) {
+                chatState.currentTopic = null;
+                chatState.history = [];
+                return knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
+            }
+
+            // Respuesta por defecto
+            return `
+            <p class="text-sm">No entendí eso. Prueba con uno de estos temas:</p>
+            <div class="flex flex-wrap gap-1 mt-2">
+                <button class="concept-tag" onclick="startProcess('peso')">Peso</button>
+                <button class="concept-tag" onclick="startProcess('tiempo')">Tiempo</button>
+                <button class="concept-tag" onclick="startProcess('espacio')">Espacio</button>
+                <button class="concept-tag" onclick="startProcess('flujo')">Flujo</button>
+                <button class="concept-tag" onclick="startProcess('personajes')">🎭 Pers</button>
+                <button class="concept-tag" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
+                <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
+                <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
+                <button class="concept-tag" onclick="startProcess('anuncios')">📣 Anun</button>
+            </div>
+            ${getNavigationButtons()}
+            `;
+        }
+
+        // Función para formatear respuestas con navegación
+        function formatResponse(topic) {
+            if (!knowledgeBase[topic]) {
+                return `<p class="text-sm">El tema "${topic}" no está disponible.</p>${getNavigationButtons()}`;
+            }
+            
+            const content = knowledgeBase[topic].titulo + knowledgeBase[topic].contenido;
+            const examplesButton = knowledgeBase[topic].ejemplos ? 
+                `<div class="flex flex-wrap gap-1 mt-2"><button class="action-button text-xs" onclick="showExamplesWrapper('${topic}')">💡 Ver Ejemplos</button></div>` : '';
+            
+            const question = knowledgeBase[topic].pregunta ? 
+                `<p class="mt-2 font-medium text-sm">${knowledgeBase[topic].pregunta}</p>` : '';
+            
+            const navButtons = knowledgeBase[topic].navButtons ? getNavigationButtons() : '';
+            
+            return content + examplesButton + question + navButtons;
+        }
+
+        // Función para obtener botones de navegación
+        function getNavigationButtons() {
+            return `
+            <div class="nav-buttons-container">
+                <button class="nav-button text-xs" onclick="goBack()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                    Atrás
+                </button>
+                <button class="nav-button text-xs" onclick="goToMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Menú
+                </button>
+            </div>
+            `;
+        }
+
+        // Funciones Auxiliares de Interfaz
+        window.showExamplesWrapper = function(topic) {
+            const exampleContent = showExamples(topic);
+            addMessage(exampleContent, 'bot');
+        }
+
+        function showExamples(topic) {
+            if (knowledgeBase[topic] && knowledgeBase[topic].ejemplos) {
+                return `
+                ${knowledgeBase[topic].ejemplos}
+                <div class="flex flex-wrap gap-1 mt-2">
+                    <button class="action-button text-xs" onclick="quickAccess('${topic}')">📖 Volver</button>
+                    <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Resumen</button>
+                </div>
+                ${getNavigationButtons()}
+                `;
+            }
+            return `<p class="text-sm">No hay ejemplos disponibles para ${topic}.</p>${getNavigationButtons()}`;
+        }
+        
+        // Funciones Globales para HTML (onclick)
+        window.startProcess = function(step) {
+            chatState.currentTopic = step;
+            const response = getBotResponse(step);
+            addMessage(response, 'bot');
+        };
+
+        window.quickAccess = function(concept) {
+            sendMessage(concept);
+        };
+
+        window.sendMessage = function(message) {
+            const input = document.getElementById('user-input');
+            input.value = message;
+            document.getElementById('chat-form').dispatchEvent(new Event('submit', { cancelable: true }));
+        };
+
+        // Manejador de Formulario Principal
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+                
+                chatState.messages.push({
+                    type: 'bot', 
+                    content: 'Respondió a: ' + message,
+                    timestamp: new Date().toLocaleTimeString()
+                });
+            }, 500);
+        });
+
+        function addMessage(content, sender) {
+            const container = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.className = `chat-bubble max-w-[90%] sm:max-w-[85%] ${
+                sender === 'user' 
+                    ? 'bg-[#c3073f] ml-auto rounded-2xl rounded-tr-none' 
+                    : 'bg-[#3b3b3f] rounded-2xl rounded-tl-none'
+            } p-3`;
+            
+            messageDiv.innerHTML = content;
+            container.appendChild(messageDiv);
+            
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    messageDiv.style.opacity = 1;
+                    messageDiv.style.transform = 'translateY(0)';
+                });
+            });
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Inicialización
+        console.log("✅ Guía de Estudio 'Dilo con Movimiento' cargada.");
+        
+        // Ajustar altura del contenedor de chat
+        function adjustChatHeight() {
+            const chatContainer = document.getElementById('chat-container');
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            
+            if (window.innerWidth <= 640) {
+                const viewportHeight = window.innerHeight;
+                const headerHeight = header.offsetHeight;
+                const footerHeight = footer.offsetHeight;
+                const chatHeight = viewportHeight - headerHeight - footerHeight - 10;
+                
+                chatContainer.style.height = `${chatHeight}px`;
+                chatContainer.style.maxHeight = `${chatHeight}px`;
+            } else {
+                chatContainer.style.height = '';
+                chatContainer.style.maxHeight = '';
+            }
+        }
+
+        window.addEventListener('load', adjustChatHeight);
+        window.addEventListener('resize', adjustChatHeight);
+        window.addEventListener('orientationchange', adjustChatHeight);
+    </script>
+</body>
+</html>
