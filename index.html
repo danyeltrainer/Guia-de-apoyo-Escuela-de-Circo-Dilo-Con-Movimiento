@@ -1151,32 +1151,34 @@
 
         // === INTEGRACIÓN DEL JSON REMOTO - VERSIÓN CORREGIDA ===
         (function() {
-            const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/743fe15cbd3abda724840b97f1f9b1581c334676/datos.json';
+            const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/743fe15cbd3abda724840b97f1f9b1581c334676/datos.json?' + Date.now();
 
             async function loadRemoteData(url) {
-                try {
-                    console.log('🔄 Cargando datos remotos...');
-                    const res = await fetch(url, { cache: 'no-cache' });
-                    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-                    const remote = await res.json();
-                    console.log('✅ Datos remotos recibidos:', remote);
-                    mergeRemoteIntoKnowledgeBase(remote);
-                    
-                    // Si es la primera carga, mostrar contenido actualizado
-                    if (chatState.firstLoad) {
-                        showInitialContent();
-                        chatState.firstLoad = false;
-                    }
-                } catch (err) {
-                    console.error('URL intentada:', url);
-                    // Si falla, usar contenido local y mostrar mensaje
-                    if (chatState.firstLoad) {
-                        showInitialContent();
-                        addMessage('<p class="text-sm text-yellow-400">⚠️ Usando versión local (error cargando datos remotos)</p>', 'bot');
-                        chatState.firstLoad = false;
-                    }
-                }
-            }
+    try {
+        console.log('🔄 Cargando datos remotos...', url);
+        const res = await fetch(url, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        const text = await res.text();
+        console.log('📦 Respuesta recibida:', text.substring(0, 200) + '...');
+        
+        const remote = JSON.parse(text);
+        console.log('✅ JSON parseado correctamente');
+        
+        mergeRemoteIntoKnowledgeBase(remote);
+        
+        if (chatState.firstLoad) {
+            showInitialContent();
+            chatState.firstLoad = false;
+        }
+    } catch (err) {
+        console.error('❌ Error cargando datos remotos:', err);
+        if (chatState.firstLoad) {
+            showInitialContent();
+            addMessage('<p class="text-sm text-yellow-400">⚠️ Error cargando datos remotos: ' + err.message + '</p>', 'bot');
+            chatState.firstLoad = false;
+        }
+    }
+}
 
             function showInitialContent() {
                 const container = document.getElementById('chat-container');
