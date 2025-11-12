@@ -249,6 +249,14 @@
             border-left: 3px solid #6a5acd;
         }
         
+        .principal-announcement {
+            background: rgba(195, 7, 63, 0.2);
+            border-left: 4px solid #c3073f;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+        
         .task-card {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 8px;
@@ -610,166 +618,7 @@
         </header>
 
         <div id="chat-container" class="flex-1 p-2 sm:p-4 md:p-6 space-y-3 overflow-y-auto">
-            <!-- Mensaje de bienvenida para estudiantes -->
-            <div class="chat-bubble max-w-[90%] sm:max-w-[85%] bg-[#3b3b3f] p-3 rounded-2xl rounded-tl-none">
-                <p class="font-semibold text-[#c3073f]">¡Hola, Artista!</p>
-                <p class="mt-1">Soy tu guía de la <strong>Escuela "Dilo con Movimiento"</strong>. Estoy aquí para ayudarte a <strong>recordar y aplicar mejor los conocimientos del año</strong>.</p>
-                
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📣 EVENTOS</h4>
-                    
-                    <div class="announcement-card">
-                        <h5 class="font-bold text-sm">29 nov: Pasacalle</h5>
-                        <p class="text-xs mt-1">Participa en "Caminando Juntxs".</p>
-                        <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
-                    </div>
-                    
-                    <div class="announcement-card">
-                        <h5 class="font-bold text-sm">10-18 ene: ENFETELA</h5>
-                        <p class="text-xs mt-1">Festival Latinoamericano de Teatro.</p>
-                    </div>
-                    
-                    <div class="announcement-card">
-                        <h5 class="font-bold text-sm">10 Ene: GALA FINAL</h5>
-                        <p class="text-xs mt-1">Nuestra gran muestra.</p>
-                    </div>
-                </div>
-
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
-                    <p class="text-xs">• <strong>Gala Final:</strong> 10 Ene</p>
-                    <p class="text-xs mt-1">• <strong>Tareas:</strong> 
-                        <div class="flex flex-wrap mt-1">
-                            <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
-                            <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
-                            <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
-                        </div>
-                    </p>
-                    <p class="text-xs mt-1">• <strong>Música:</strong> <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>
-                    <p class="text-xs">• <strong>Calendario:</strong> <a href="https://probaaaaaaaaan.my.canva.site/calendario2026escueladcm" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>
-                </div>
-
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#10b981] mb-1 text-center">📜 NORMAS</h4>
-                    <div class="safety-warning text-xs">
-                        <p class="font-bold text-red-400">⚠️ ACTIVIDADES DE RIESGO</p>
-                        <p class="mt-1">Acrobacias y movimientos aéreos requieren precaución.</p>
-                    </div>
-                    <ul class="text-xs space-y-1 mt-1 list-disc list-inside">
-                        <li>Mantener limpio el espacio</li>
-                        <li>Regular volumen</li>
-                        <li>Cuidar a las infancias</li>
-                        <li>Respeto mutuo</li>
-                    </ul>
-                </div>
-
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📚 TEMAS DE ESTUDIO</h4>
-                    
-                    <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
-                    <div class="process-step" onclick="startProcess('peso')">
-                        <div class="step-number">⚖️</div>
-                        <div>
-                            <div class="font-medium text-sm">Peso</div>
-                            <div class="text-xs text-gray-400">Fuerza del movimiento</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('tiempo')">
-                        <div class="step-number">⏱️</div>
-                        <div>
-                            <div class="font-medium text-sm">Tiempo</div>
-                            <div class="text-xs text-gray-400">Velocidad del movimiento</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('espacio')">
-                        <div class="step-number">🌐</div>
-                        <div>
-                            <div class="font-medium text-sm">Espacio</div>
-                            <div class="text-xs text-gray-400">Actitud espacial</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('flujo')">
-                        <div class="step-number">💧</div>
-                        <div>
-                            <div class="font-medium text-sm">Flujo</div>
-                            <div class="text-xs text-gray-400">Control del movimiento</div>
-                        </div>
-                    </div>
-                    
-                    <h5 class="font-bold mt-2 text-sm">🎭 PERSONAJES</h5>
-                    <div class="process-step" onclick="startProcess('personajes')">
-                        <div class="step-number">👤</div>
-                        <div>
-                            <div class="font-medium text-sm">Guía de Personajes</div>
-                            <div class="text-xs text-gray-400">Mundo post-apocalíptico</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('motores')">
-                        <div class="step-number">⚙️</div>
-                        <div>
-                            <div class="font-medium text-sm">Motores</div>
-                            <div class="text-xs text-gray-400">Origen del movimiento</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('elementos')">
-                        <div class="step-number">🌊</div>
-                        <div>
-                            <div class="font-medium text-sm">Elementos</div>
-                            <div class="text-xs text-gray-400">Fuego, Agua, Aire, Tierra</div>
-                        </div>
-                    </div>
-                    
-                    <h5 class="font-bold mt-2 text-sm">🔧 HERRAMIENTAS</h5>
-                    <div class="process-step" onclick="startProcess('tabla_resumen')">
-                        <div class="step-number">📊</div>
-                        <div>
-                            <div class="font-medium text-sm">Tabla Resumen</div>
-                            <div class="text-xs text-gray-400">Factores del Esfuerzo</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
-                        <div class="step-number">🔗</div>
-                        <div>
-                            <div class="font-medium text-sm">Tabla Síntesis</div>
-                            <div class="text-xs text-gray-400">Integración completa</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
-                        <div class="step-number">💪</div>
-                        <div>
-                            <div class="font-medium text-sm">Conocimientos Apoyo</div>
-                            <div class="text-xs text-gray-400">Técnicas específicas</div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="mt-3 text-xs text-gray-300">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo.</p>
-                
-                <!-- Botones de navegación -->
-                <div class="nav-buttons-container">
-                    <button class="nav-button text-xs" onclick="goBack()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-                            <path d="m15 18-6-6 6-6"/>
-                        </svg>
-                        Atrás
-                    </button>
-                    <button class="nav-button text-xs" onclick="goToMenu()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
-                        Menú
-                    </button>
-                </div>
-            </div>
-            <!-- Los mensajes dinámicos se añadirán aquí -->
+            <!-- Los mensajes se cargarán dinámicamente aquí -->
         </div>
 
         <footer class="bg-[#1a1a1d] p-2 sm:p-4 border-t border-[#1a1a1d]">
@@ -800,6 +649,7 @@
                 <button class="action-button text-xs" onclick="sendMessage('normas')">📜 Norm</button>
                 <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Res</button>
                 <button class="action-button text-xs" onclick="sendMessage('anuncios')">📣 Anun</button>
+                <button class="action-button text-xs" onclick="sendMessage('recordatorios')">🎯 Rec</button>
             </div>
         </footer>
     </div>
@@ -811,66 +661,22 @@
             previousTopic: null,
             messages: [],
             conceptsDiscussed: new Set(),
-            history: []
+            history: [],
+            firstLoad: true
         };
 
         // Base de conocimiento COMPLETA
         const knowledgeBase = {
             inicio: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">👋 ¡Hola!</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">👋 ¡Hola, Artista!</h3>',
                 contenido: `
-                <p class="text-sm">¡Bienvenido/a a tu guía de estudio! Elige un tema para comenzar.</p>
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-sm">⚖️ FACTORES DEL ESFUERZO</h4>
-                    <div class="process-step" onclick="startProcess('peso')">
-                        <div class="step-number">⚖️</div><div><div class="font-medium text-sm">Peso</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('tiempo')">
-                        <div class="step-number">⏱️</div><div><div class="font-medium text-sm">Tiempo</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('espacio')">
-                        <div class="step-number">🌐</div><div><div class="font-medium text-sm">Espacio</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('flujo')">
-                        <div class="step-number">💧</div><div><div class="font-medium text-sm">Flujo</div></div>
-                    </div>
-                    
-                    <h4 class="font-bold text-[#3a86ff] mt-2 mb-1 text-sm">🎭 CONSTRUCCIÓN DE PERSONAJES</h4>
-                    <div class="process-step" onclick="startProcess('personajes')">
-                        <div class="step-number">👤</div><div><div class="font-medium text-sm">Guía de Personajes</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('motores')">
-                        <div class="step-number">⚙️</div><div><div class="font-medium text-sm">Motores</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('elementos')">
-                        <div class="step-number">🌊</div><div><div class="font-medium text-sm">Elementos</div></div>
-                    </div>
-                    
-                    <h4 class="font-bold text-[#10b981] mt-2 mb-1 text-sm">🔧 HERRAMIENTAS</h4>
-                    <div class="process-step" onclick="startProcess('tabla_resumen')">
-                        <div class="step-number">📊</div><div><div class="font-medium text-sm">Tabla Resumen</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
-                        <div class="step-number">🔗</div><div><div class="font-medium text-sm">Tabla Síntesis</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
-                        <div class="step-number">💪</div><div><div class="font-medium text-sm">Conocimientos</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('tareas')">
-                        <div class="step-number">📋</div><div><div class="font-medium text-sm">Tareas</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('anuncios')">
-                        <div class="step-number">📣</div><div><div class="font-medium text-sm">Anuncios</div></div>
-                    </div>
-                    <div class="process-step" onclick="startProcess('normas')">
-                        <div class="step-number">📜</div><div><div class="font-medium text-sm">Normas</div></div>
-                    </div>
-                </div>
+                <p class="text-sm">Soy tu guía de la <strong>Escuela "Dilo con Movimiento"</strong>. Estoy aquí para ayudarte a <strong>recordar y aplicar mejor los conocimientos del año</strong>.</p>
                 `,
                 pregunta: 'Toca un tema o escribe su nombre.',
                 navButtons: true
             },
 
+            // ... (las demás secciones del knowledgeBase se mantienen igual)
             // ANUNCIOS Y EVENTOS
             anuncios: {
                 titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📣 ANUNCIOS Y EVENTOS</h3>',
@@ -1344,7 +1150,7 @@
             }
         };
 
-        // === INTEGRACIÓN DEL JSON REMOTO - VERSIÓN CORREGIDA ===
+        // === INTEGRACIÓN DEL JSON REMOTO - VERSIÓN COMPLETA ===
         (function() {
             const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/29fa4a7d152e3617c28345a9727cd76c7d66aea4/datos.json';
 
@@ -1355,24 +1161,55 @@
                     const remote = await res.json();
                     mergeRemoteIntoKnowledgeBase(remote);
                     
-                    // Si no hay tema activo, re-renderizo la vista inicial
-                    if (!chatState.currentTopic) {
+                    // Si es la primera carga, mostrar anuncio principal y menú
+                    if (chatState.firstLoad) {
                         const container = document.getElementById('chat-container');
                         container.innerHTML = '';
+                        
+                        // Mostrar anuncio principal si existe
+                        if (knowledgeBase.anuncio_principal) {
+                            addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
+                        }
+                        
+                        // Mostrar menú principal
                         const response = knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
                         addMessage(response, 'bot');
+                        
+                        chatState.firstLoad = false;
                     }
                     console.log('✅ Datos remotos cargados y aplicados.');
                 } catch (err) {
                     console.warn('⚠️ No se pudo cargar datos remotos:', err);
-                    // No rompe; seguimos con conocimiento local
                 }
             }
 
             function mergeRemoteIntoKnowledgeBase(remote) {
                 if (!remote || typeof remote !== 'object') return;
 
-                // Procesar EVENTOS (tu estructura actual)
+                // Procesar ANUNCIO PRINCIPAL
+                if (remote.anuncio_principal && typeof remote.anuncio_principal === 'object') {
+                    const anuncio = remote.anuncio_principal;
+                    let linkHtml = '';
+                    if (anuncio.link && anuncio.link.trim() !== '') {
+                        const linkText = anuncio.tipo === 'instagram' ? '📷 Ver en Instagram' : 
+                                        anuncio.tipo === 'evento' ? '📅 Ver evento' : '🔗 Ver más';
+                        linkHtml = `<a href="${anuncio.link}" target="_blank" class="video-link mt-1 block text-xs">${linkText}</a>`;
+                    }
+                    knowledgeBase.anuncio_principal = {
+                        titulo: `<h3 class="font-bold text-[#c3073f] text-sm">📢 ${anuncio.titulo}</h3>`,
+                        contenido: `
+                            <div class="principal-announcement">
+                                <h4 class="font-bold text-sm">${anuncio.titulo}</h4>
+                                <p class="text-xs mt-1">${anuncio.descripcion}</p>
+                                ${linkHtml}
+                            </div>
+                        `,
+                        pregunta: '',
+                        navButtons: false
+                    };
+                }
+
+                // Procesar EVENTOS
                 if (remote.eventos && Array.isArray(remote.eventos)) {
                     const html = remote.eventos.map(evento => {
                         const titulo = evento.fecha ? `${evento.fecha}: ${evento.titulo}` : evento.titulo;
@@ -1389,15 +1226,15 @@
                     knowledgeBase.anuncios.contenido = html;
                 }
 
-                // Procesar TAREAS (tu estructura actual)
+                // Procesar TAREAS (nueva estructura con música)
                 if (remote.tareas && typeof remote.tareas === 'object') {
-                    if (remote.tareas.breaking && Array.isArray(remote.tareas.breaking)) {
+                    if (remote.tareas.breaking) {
                         knowledgeBase.tareas_breaking.contenido = buildTaskSectionHtml('BREAKING', remote.tareas.breaking);
                     }
-                    if (remote.tareas.lira && Array.isArray(remote.tareas.lira)) {
+                    if (remote.tareas.lira) {
                         knowledgeBase.tareas_lira.contenido = buildTaskSectionHtml('LIRA', remote.tareas.lira);
                     }
-                    if (remote.tareas.equipo && Array.isArray(remote.tareas.equipo)) {
+                    if (remote.tareas.equipo) {
                         knowledgeBase.tareas_equipo.contenido = buildTaskSectionHtml('EQUIPO', remote.tareas.equipo);
                     }
                     
@@ -1407,16 +1244,31 @@
                     }
                 }
 
-                // Procesar RECORDATORIOS (nueva sección)
+                // Procesar RECORDATORIOS
                 if (remote.recordatorios && typeof remote.recordatorios === 'object') {
                     updateRecordatorios(remote.recordatorios);
                 }
 
+                // Procesar FACTORES DE ESFUERZO
+                if (remote.factores_esfuerzo && typeof remote.factores_esfuerzo === 'object') {
+                    for (const [factor, data] of Object.entries(remote.factores_esfuerzo)) {
+                        if (knowledgeBase[factor]) {
+                            knowledgeBase[factor].contenido = buildFactorEsfuerzoHtml(data);
+                        }
+                    }
+                }
+
+                // Procesar CONOCIMIENTOS DE APOYO
+                if (remote.conocimientos_apoyo && typeof remote.conocimientos_apoyo === 'object') {
+                    knowledgeBase.conocimientos_apoyo.contenido = buildConocimientosApoyoHtml(remote.conocimientos_apoyo);
+                }
+
                 // Funciones auxiliares:
-                function buildTaskSectionHtml(title, itemsArray) {
-                    const itemsHtml = `<ol class="list-decimal list-inside mt-1 space-y-1 text-xs">${itemsArray.map(i => `<li>${i}</li>`).join('')}</ol>`;
+                function buildTaskSectionHtml(title, tareaObj) {
+                    const itemsHtml = `<ol class="list-decimal list-inside mt-1 space-y-1 text-xs">${tareaObj.items.map(i => `<li>${i}</li>`).join('')}</ol>`;
+                    const musicHtml = tareaObj.musica ? `<a href="${tareaObj.musica}" class="block mt-1 p-1 bg-[#1a1a1d] rounded text-blue-400 underline text-xs text-center" target="_blank">🎧 Música ${title}</a>` : '';
                     const cls = title === 'BREAKING' ? 'breaking-task' : (title === 'LIRA' ? 'lira-task' : 'team-task');
-                    return `<div class="task-card ${cls}"><h4 class="font-bold text-sm">📝 TAREAS ACTUALES - ${title}</h4>${itemsHtml}</div>`;
+                    return `<div class="task-card ${cls}"><h4 class="font-bold text-sm">📝 TAREAS ACTUALES - ${title}</h4>${itemsHtml}${musicHtml}</div>`;
                 }
                 
                 function buildGeneralTasksHtml(tareas) {
@@ -1435,7 +1287,7 @@
                         <h4 class="font-bold text-sm">🔄 BREAKING</h4>
                         <p class="text-xs mt-1">Tareas actuales para breaking:</p>
                         <ol class="list-decimal list-inside mt-1 space-y-1 text-xs">
-                            ${tareas.breaking ? tareas.breaking.map(item => `<li>${item}</li>`).join('') : ''}
+                            ${tareas.breaking ? tareas.breaking.items.map(item => `<li>${item}</li>`).join('') : ''}
                         </ol>
                     </div>
                     `;
@@ -1446,7 +1298,7 @@
                     let recordatoriosHtml = `
                         <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
                             <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
-                            ${recordatorios['gala_final(Confirmado)'] ? `<p class="text-xs">• <strong>Gala Final:</strong> ${recordatorios['gala_final(Confirmado)']}</p>` : ''}
+                            ${recordatorios.gala_final ? `<p class="text-xs">• <strong>Gala Final:</strong> ${recordatorios.gala_final}</p>` : ''}
                             <p class="text-xs mt-1">• <strong>Tareas:</strong> 
                                 <div class="flex flex-wrap mt-1">
                                     <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
@@ -1454,12 +1306,12 @@
                                     <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
                                 </div>
                             </p>
-                            ${recordatorios['Playlist a estudiar'] ? `<p class="text-xs mt-1">• <strong>Música:</strong> <a href="${recordatorios['Playlist a estudiar']}" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>` : ''}
-                            ${recordatorios['calendario de sesiones'] ? `<p class="text-xs">• <strong>Calendario:</strong> <a href="${recordatorios['calendario de sesiones']}" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>` : ''}
+                            ${recordatorios.playlist_estudio ? `<p class="text-xs mt-1">• <strong>Música:</strong> <a href="${recordatorios.playlist_estudio}" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>` : ''}
+                            ${recordatorios.calendario_sesiones ? `<p class="text-xs">• <strong>Calendario:</strong> <a href="${recordatorios.calendario_sesiones}" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>` : ''}
                         </div>
                     `;
                     
-                    // También podemos crear una nueva sección de knowledgeBase para recordatorios si quieres
+                    // Crear sección de knowledgeBase para recordatorios
                     knowledgeBase.recordatorios = {
                         titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🎯 RECORDATORIOS IMPORTANTES</h3>',
                         contenido: recordatoriosHtml,
@@ -1467,12 +1319,72 @@
                         navButtons: true
                     };
                 }
+                
+                function buildFactorEsfuerzoHtml(data) {
+                    let ejemplosHtml = '';
+                    if (data.ejemplos && Array.isArray(data.ejemplos)) {
+                        ejemplosHtml = data.ejemplos.map(ejemplo => {
+                            let linksHtml = '';
+                            if (ejemplo.links && Array.isArray(ejemplo.links)) {
+                                linksHtml = ejemplo.links.map(link => {
+                                    if (link.url) {
+                                        return `<a href="${link.url}" target="_blank" class="video-link text-xs">${link.texto}</a>`;
+                                    }
+                                    return '';
+                                }).join('');
+                            }
+                            return `
+                            <div class="mt-2 example-card content-section">
+                                <h4 class="font-bold text-sm">${ejemplo.titulo}</h4>
+                                <p class="text-xs mt-1">${ejemplo.descripcion}</p>
+                                <div class="mt-1 flex flex-wrap">
+                                    ${linksHtml}
+                                </div>
+                            </div>
+                            `;
+                        }).join('');
+                    }
+                    
+                    return `
+                    <div class="content-section">
+                        <p class="text-sm">${data.descripcion}</p>
+                    </div>
+                    ${ejemplosHtml}
+                    `;
+                }
+                
+                function buildConocimientosApoyoHtml(conocimientos) {
+                    let html = '';
+                    for (const [key, data] of Object.entries(conocimientos)) {
+                        let linksHtml = '';
+                        if (data.links && Array.isArray(data.links)) {
+                            linksHtml = data.links.map(link => {
+                                if (link.url) {
+                                    return `<a href="${link.url}" target="_blank" class="video-link block text-center text-xs">${link.texto}</a>`;
+                                } else {
+                                    return `<div class="video-link block text-center text-xs bg-gray-600">${link.texto}</div>`;
+                                }
+                            }).join('');
+                        }
+                        html += `
+                        <div class="mt-2 character-card content-section">
+                            <h4 class="font-bold text-sm">${data.titulo}</h4>
+                            ${data.descripcion ? `<p class="text-xs mt-1">${data.descripcion}</p>` : ''}
+                            <div class="mt-1 space-y-1">
+                                ${linksHtml}
+                            </div>
+                        </div>
+                        `;
+                    }
+                    return html;
+                }
             }
 
             // Ejecutar carga en background
             loadRemoteData(REMOTE_JSON_URL);
         })();
 
+        // ... (el resto del código JavaScript se mantiene igual)
         // Funciones de navegación
         window.goBack = function() {
             if (chatState.history.length > 1) {
