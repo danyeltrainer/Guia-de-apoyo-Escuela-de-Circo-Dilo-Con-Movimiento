@@ -1181,13 +1181,44 @@
 }
 
             function showInitialContent() {
-                const container = document.getElementById('chat-container');
-                container.innerHTML = '';
-                
-                // Mostrar anuncio principal si existe
-                if (knowledgeBase.anuncio_principal) {
-                    addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
-                }
+    const container = document.getElementById('chat-container');
+    container.innerHTML = '';
+    
+    // Mostrar anuncio principal si existe (del JSON remoto)
+    if (knowledgeBase.anuncio_principal) {
+        addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
+    }
+    
+    // Mostrar menú principal COMPLETO con todos los botones
+    const menuContent = `
+        ${knowledgeBase.inicio.titulo}
+        ${knowledgeBase.inicio.contenido}
+        <div class="flex flex-wrap gap-1 mt-3">
+            <button class="concept-tag" onclick="startProcess('peso')">⚖️ Peso</button>
+            <button class="concept-tag" onclick="startProcess('tiempo')">⏱️ Tiempo</button>
+            <button class="concept-tag" onclick="startProcess('espacio')">🌐 Espacio</button>
+            <button class="concept-tag" onclick="startProcess('flujo')">💧 Flujo</button>
+            <button class="concept-tag" onclick="startProcess('personajes')">🎭 Personajes</button>
+            <button class="concept-tag" onclick="startProcess('motores')">⚙️ Motores</button>
+            <button class="concept-tag" onclick="startProcess('elementos')">🌊 Elementos</button>
+        </div>
+        <div class="flex flex-wrap gap-1 mt-2">
+            <button class="action-button" onclick="sendMessage('tareas breaking')">🔄 Breaking</button>
+            <button class="action-button" onclick="sendMessage('tareas lira')">🎪 Lira</button>
+            <button class="action-button" onclick="sendMessage('tareas equipo')">👥 Equipo</button>
+            <button class="action-button" onclick="startProcess('normas')">📜 Normas</button>
+            <button class="action-button" onclick="startProcess('anuncios')">📣 Anuncios</button>
+            <button class="action-button" onclick="startProcess('recordatorios')">🎯 Recordatorios</button>
+            <button class="action-button" onclick="startProcess('conocimientos_apoyo')">💪 Técnicas</button>
+            <button class="action-button" onclick="startProcess('tabla_resumen')">📊 Resumen</button>
+            <button class="action-button" onclick="startProcess('tabla_sintesis')">🔗 Síntesis</button>
+        </div>
+        <p class="mt-2 font-medium text-sm">${knowledgeBase.inicio.pregunta}</p>
+        ${getNavigationButtons()}
+    `;
+    
+    addMessage(menuContent, 'bot');
+}
                 
                 // Mostrar menú principal
                 const response = knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
@@ -1269,21 +1300,29 @@
                     console.log('✅ Recordatorios actualizados');
                 }
 
-                // Procesar FACTORES DE ESFUERZO
-                if (remote.factores_esfuerzo && typeof remote.factores_esfuerzo === 'object') {
-                    for (const [factor, data] of Object.entries(remote.factores_esfuerzo)) {
-                        if (knowledgeBase[factor]) {
-                            knowledgeBase[factor].contenido = buildFactorEsfuerzoHtml(data);
-                        }
-                    }
-                    console.log('✅ Factores de esfuerzo actualizados');
-                }
+                // Procesar FACTORES DE ESFUERZO - ACTUALIZAR sin perder estructura local
+if (remote.factores_esfuerzo && typeof remote.factores_esfuerzo === 'object') {
+    for (const [factor, data] of Object.entries(remote.factores_esfuerzo)) {
+        if (knowledgeBase[factor]) {
+            // Actualizar el contenido pero mantener la estructura existente
+            knowledgeBase[factor].contenido = buildFactorEsfuerzoHtml(data);
+            // Preservar la pregunta y navButtons locales
+            knowledgeBase[factor].pregunta = knowledgeBase[factor].pregunta || '¿Quieres explorar otro factor?';
+            knowledgeBase[factor].navButtons = true;
+        }
+    }
+    console.log('✅ Factores de esfuerzo actualizados');
+}
 
-                // Procesar CONOCIMIENTOS DE APOYO
-                if (remote.conocimientos_apoyo && typeof remote.conocimientos_apoyo === 'object') {
-                    knowledgeBase.conocimientos_apoyo.contenido = buildConocimientosApoyoHtml(remote.conocimientos_apoyo);
-                    console.log('✅ Conocimientos de apoyo actualizados');
-                }
+                // Procesar CONOCIMIENTOS DE APOYO - ACTUALIZAR sin perder estructura local
+if (remote.conocimientos_apoyo && typeof remote.conocimientos_apoyo === 'object') {
+    const nuevoContenido = buildConocimientosApoyoHtml(remote.conocimientos_apoyo);
+    knowledgeBase.conocimientos_apoyo.contenido = nuevoContenido;
+    // Preservar la estructura local
+    knowledgeBase.conocimientos_apoyo.pregunta = '¿Necesitas repasar algún movimiento específico?';
+    knowledgeBase.conocimientos_apoyo.navButtons = true;
+    console.log('✅ Conocimientos de apoyo actualizados');
+}
 
                 // Funciones auxiliares:
                 function buildTaskSectionHtml(title, tareaObj) {
@@ -1332,13 +1371,25 @@
                         </div>
                     `;
                     
-                    knowledgeBase.recordatorios = {
-                        titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🎯 RECORDATORIOS IMPORTANTES</h3>',
-                        contenido: recordatoriosHtml,
-                        pregunta: '¿Necesitas información sobre algún otro tema?',
-                        navButtons: true
-                    };
-                }
+                    knowledgeBase.recordatorios: {
+    titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🎯 RECORDATORIOS IMPORTANTES</h3>',
+    contenido: `
+        <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+            <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
+            <p class="text-xs">• <strong>Gala Final:</strong> Próximamente</p>
+            <p class="text-xs mt-1">• <strong>Tareas:</strong> 
+                <div class="flex flex-wrap mt-1">
+                    <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
+                    <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
+                    <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
+                </div>
+            </p>
+            <p class="text-xs mt-1">• <strong>Música:</strong> <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" class="text-blue-400 underline break-words" target="_blank">Playlist de estudio</a></p>
+        </div>
+    `,
+    pregunta: '¿Necesitas información sobre algún otro tema?',
+    navButtons: true
+},
                 
                 function buildFactorEsfuerzoHtml(data) {
                     let ejemplosHtml = '';
