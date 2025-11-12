@@ -618,7 +618,166 @@
         </header>
 
         <div id="chat-container" class="flex-1 p-2 sm:p-4 md:p-6 space-y-3 overflow-y-auto">
-            <!-- Los mensajes se cargarán dinámicamente aquí -->
+            <!-- Mensaje de bienvenida para estudiantes -->
+            <div class="chat-bubble max-w-[90%] sm:max-w-[85%] bg-[#3b3b3f] p-3 rounded-2xl rounded-tl-none">
+                <p class="font-semibold text-[#c3073f]">¡Hola, Artista!</p>
+                <p class="mt-1">Soy tu guía de la <strong>Escuela "Dilo con Movimiento"</strong>. Estoy aquí para ayudarte a <strong>recordar y aplicar mejor los conocimientos del año</strong>.</p>
+                
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📣 EVENTOS</h4>
+                    
+                    <div class="announcement-card">
+                        <h5 class="font-bold text-sm">29 nov: Pasacalle</h5>
+                        <p class="text-xs mt-1">Participa en "Caminando Juntxs".</p>
+                        <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
+                    </div>
+                    
+                    <div class="announcement-card">
+                        <h5 class="font-bold text-sm">10-18 ene: ENFETELA</h5>
+                        <p class="text-xs mt-1">Festival Latinoamericano de Teatro.</p>
+                    </div>
+                    
+                    <div class="announcement-card">
+                        <h5 class="font-bold text-sm">10 Ene: GALA FINAL</h5>
+                        <p class="text-xs mt-1">Nuestra gran muestra.</p>
+                    </div>
+                </div>
+
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
+                    <p class="text-xs">• <strong>Gala Final:</strong> 10 Ene</p>
+                    <p class="text-xs mt-1">• <strong>Tareas:</strong> 
+                        <div class="flex flex-wrap mt-1">
+                            <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
+                            <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
+                            <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
+                        </div>
+                    </p>
+                    <p class="text-xs mt-1">• <strong>Música:</strong> <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>
+                    <p class="text-xs">• <strong>Calendario:</strong> <a href="https://probaaaaaaaaan.my.canva.site/calendario2026escueladcm" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>
+                </div>
+
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#10b981] mb-1 text-center">📜 NORMAS</h4>
+                    <div class="safety-warning text-xs">
+                        <p class="font-bold text-red-400">⚠️ ACTIVIDADES DE RIESGO</p>
+                        <p class="mt-1">Acrobacias y movimientos aéreos requieren precaución.</p>
+                    </div>
+                    <ul class="text-xs space-y-1 mt-1 list-disc list-inside">
+                        <li>Mantener limpio el espacio</li>
+                        <li>Regular volumen</li>
+                        <li>Cuidar a las infancias</li>
+                        <li>Respeto mutuo</li>
+                    </ul>
+                </div>
+
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📚 TEMAS DE ESTUDIO</h4>
+                    
+                    <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
+                    <div class="process-step" onclick="startProcess('peso')">
+                        <div class="step-number">⚖️</div>
+                        <div>
+                            <div class="font-medium text-sm">Peso</div>
+                            <div class="text-xs text-gray-400">Fuerza del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('tiempo')">
+                        <div class="step-number">⏱️</div>
+                        <div>
+                            <div class="font-medium text-sm">Tiempo</div>
+                            <div class="text-xs text-gray-400">Velocidad del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('espacio')">
+                        <div class="step-number">🌐</div>
+                        <div>
+                            <div class="font-medium text-sm">Espacio</div>
+                            <div class="text-xs text-gray-400">Actitud espacial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('flujo')">
+                        <div class="step-number">💧</div>
+                        <div>
+                            <div class="font-medium text-sm">Flujo</div>
+                            <div class="text-xs text-gray-400">Control del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="font-bold mt-2 text-sm">🎭 PERSONAJES</h5>
+                    <div class="process-step" onclick="startProcess('personajes')">
+                        <div class="step-number">👤</div>
+                        <div>
+                            <div class="font-medium text-sm">Guía de Personajes</div>
+                            <div class="text-xs text-gray-400">Mundo post-apocalíptico</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('motores')">
+                        <div class="step-number">⚙️</div>
+                        <div>
+                            <div class="font-medium text-sm">Motores</div>
+                            <div class="text-xs text-gray-400">Origen del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('elementos')">
+                        <div class="step-number">🌊</div>
+                        <div>
+                            <div class="font-medium text-sm">Elementos</div>
+                            <div class="text-xs text-gray-400">Fuego, Agua, Aire, Tierra</div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="font-bold mt-2 text-sm">🔧 HERRAMIENTAS</h5>
+                    <div class="process-step" onclick="startProcess('tabla_resumen')">
+                        <div class="step-number">📊</div>
+                        <div>
+                            <div class="font-medium text-sm">Tabla Resumen</div>
+                            <div class="text-xs text-gray-400">Factores del Esfuerzo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
+                        <div class="step-number">🔗</div>
+                        <div>
+                            <div class="font-medium text-sm">Tabla Síntesis</div>
+                            <div class="text-xs text-gray-400">Integración completa</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
+                        <div class="step-number">💪</div>
+                        <div>
+                            <div class="font-medium text-sm">Conocimientos Apoyo</div>
+                            <div class="text-xs text-gray-400">Técnicas específicas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-3 text-xs text-gray-300">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo.</p>
+                
+                <!-- Botones de navegación -->
+                <div class="nav-buttons-container">
+                    <button class="nav-button text-xs" onclick="goBack()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                            <path d="m15 18-6-6 6-6"/>
+                        </svg>
+                        Atrás
+                    </button>
+                    <button class="nav-button text-xs" onclick="goToMenu()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        Menú
+                    </button>
+                </div>
+            </div>
+            <!-- Los mensajes dinámicos se añadirán aquí -->
         </div>
 
         <footer class="bg-[#1a1a1d] p-2 sm:p-4 border-t border-[#1a1a1d]">
@@ -649,7 +808,6 @@
                 <button class="action-button text-xs" onclick="sendMessage('normas')">📜 Norm</button>
                 <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Res</button>
                 <button class="action-button text-xs" onclick="sendMessage('anuncios')">📣 Anun</button>
-                <button class="action-button text-xs" onclick="sendMessage('recordatorios')">🎯 Rec</button>
             </div>
         </footer>
     </div>
@@ -668,9 +826,9 @@
         // Base de conocimiento COMPLETA
         const knowledgeBase = {
             inicio: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">👋 ¡Hola, Artista!</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">👋 ¡Hola!</h3>',
                 contenido: `
-                <p class="text-sm">Soy tu guía de la <strong>Escuela "Dilo con Movimiento"</strong>. Estoy aquí para ayudarte a <strong>recordar y aplicar mejor los conocimientos del año</strong>.</p>
+                <p class="text-sm">¡Bienvenido/a a tu guía de estudio! Elige un tema para comenzar.</p>
                 `,
                 pregunta: 'Toca un tema o escribe su nombre.',
                 navButtons: true
@@ -912,27 +1070,6 @@
                 navButtons: true
             },
 
-            // RECORDATORIOS (nueva sección)
-            recordatorios: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🎯 RECORDATORIOS IMPORTANTES</h3>',
-                contenido: `
-                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
-                        <p class="text-xs">• <strong>Gala Final:</strong> Próximamente</p>
-                        <p class="text-xs mt-1">• <strong>Tareas:</strong> 
-                            <div class="flex flex-wrap mt-1">
-                                <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
-                                <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
-                                <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
-                            </div>
-                        </p>
-                        <p class="text-xs mt-1">• <strong>Música:</strong> <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" class="text-blue-400 underline break-words" target="_blank">Playlist de estudio</a></p>
-                    </div>
-                `,
-                pregunta: '¿Necesitas información sobre algún otro tema?',
-                navButtons: true
-            },
-
             // HERRAMIENTAS ADICIONALES
             tabla_resumen: {
                 titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📊 TABLA RESUMEN</h3>',
@@ -1048,6 +1185,13 @@
                         <a href="https://www.instagram.com/p/DC6lEJNuuUw/?img_index=1" target="_blank" class="video-link block text-center text-xs">Front swipe</a>
                         <a href="https://www.instagram.com/p/CsbkT25RPZl/" target="_blank" class="video-link block text-center text-xs">Bronko</a>
                         <div class="video-link block text-center text-xs bg-gray-600">Hook (breaking) - Pendiente link</div>
+                    </div>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">Lira</h4>
+                    <div class="mt-1 space-y-1">
+                        <a href="https://www.instagram.com/p/C5ECy8WOlcG/" target="_blank" class="video-link block text-center text-xs">3 maneras de subirse a la Lira</a>
                     </div>
                 </div>
                 
@@ -1210,31 +1354,123 @@
                     addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
                 }
                 
-                // Mostrar menú principal COMPLETO con todos los botones
+                // Mostrar menú principal con categorías
                 const menuContent = `
                     ${knowledgeBase.inicio.titulo}
                     ${knowledgeBase.inicio.contenido}
-                    <div class="flex flex-wrap gap-1 mt-3">
-                        <button class="concept-tag" onclick="startProcess('peso')">⚖️ Peso</button>
-                        <button class="concept-tag" onclick="startProcess('tiempo')">⏱️ Tiempo</button>
-                        <button class="concept-tag" onclick="startProcess('espacio')">🌐 Espacio</button>
-                        <button class="concept-tag" onclick="startProcess('flujo')">💧 Flujo</button>
-                        <button class="concept-tag" onclick="startProcess('personajes')">🎭 Personajes</button>
-                        <button class="concept-tag" onclick="startProcess('motores')">⚙️ Motores</button>
-                        <button class="concept-tag" onclick="startProcess('elementos')">🌊 Elementos</button>
+                    
+                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">📣 EVENTOS</h4>
+                        ${knowledgeBase.anuncios.contenido}
                     </div>
-                    <div class="flex flex-wrap gap-1 mt-2">
-                        <button class="action-button" onclick="sendMessage('tareas breaking')">🔄 Breaking</button>
-                        <button class="action-button" onclick="sendMessage('tareas lira')">🎪 Lira</button>
-                        <button class="action-button" onclick="sendMessage('tareas equipo')">👥 Equipo</button>
-                        <button class="action-button" onclick="startProcess('normas')">📜 Normas</button>
-                        <button class="action-button" onclick="startProcess('anuncios')">📣 Anuncios</button>
-                        <button class="action-button" onclick="startProcess('recordatorios')">🎯 Recordatorios</button>
-                        <button class="action-button" onclick="startProcess('conocimientos_apoyo')">💪 Técnicas</button>
-                        <button class="action-button" onclick="startProcess('tabla_resumen')">📊 Resumen</button>
-                        <button class="action-button" onclick="startProcess('tabla_sintesis')">🔗 Síntesis</button>
+
+                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
+                        <p class="text-xs">• <strong>Gala Final:</strong> ${knowledgeBase.recordatorios.gala_final || '10 Ene'}</p>
+                        <p class="text-xs mt-1">• <strong>Tareas:</strong> 
+                            <div class="flex flex-wrap mt-1">
+                                <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
+                                <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
+                                <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
+                            </div>
+                        </p>
+                        <p class="text-xs mt-1">• <strong>Música:</strong> <a href="${knowledgeBase.recordatorios.playlist_estudio || 'https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj'}" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>
+                        <p class="text-xs">• <strong>Calendario:</strong> <a href="${knowledgeBase.recordatorios.calendario_sesiones || 'https://probaaaaaaaaan.my.canva.site/calendario2026escueladcm'}" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>
                     </div>
-                    <p class="mt-2 font-medium text-sm">${knowledgeBase.inicio.pregunta}</p>
+
+                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                        <h4 class="font-bold text-[#10b981] mb-1 text-center">📜 NORMAS</h4>
+                        ${knowledgeBase.normas.contenido}
+                    </div>
+
+                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">📚 TEMAS DE ESTUDIO</h4>
+                        
+                        <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
+                        <div class="process-step" onclick="startProcess('peso')">
+                            <div class="step-number">⚖️</div>
+                            <div>
+                                <div class="font-medium text-sm">Peso</div>
+                                <div class="text-xs text-gray-400">Fuerza del movimiento</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('tiempo')">
+                            <div class="step-number">⏱️</div>
+                            <div>
+                                <div class="font-medium text-sm">Tiempo</div>
+                                <div class="text-xs text-gray-400">Velocidad del movimiento</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('espacio')">
+                            <div class="step-number">🌐</div>
+                            <div>
+                                <div class="font-medium text-sm">Espacio</div>
+                                <div class="text-xs text-gray-400">Actitud espacial</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('flujo')">
+                            <div class="step-number">💧</div>
+                            <div>
+                                <div class="font-medium text-sm">Flujo</div>
+                                <div class="text-xs text-gray-400">Control del movimiento</div>
+                            </div>
+                        </div>
+                        
+                        <h5 class="font-bold mt-2 text-sm">🎭 PERSONAJES</h5>
+                        <div class="process-step" onclick="startProcess('personajes')">
+                            <div class="step-number">👤</div>
+                            <div>
+                                <div class="font-medium text-sm">Guía de Personajes</div>
+                                <div class="text-xs text-gray-400">Mundo post-apocalíptico</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('motores')">
+                            <div class="step-number">⚙️</div>
+                            <div>
+                                <div class="font-medium text-sm">Motores</div>
+                                <div class="text-xs text-gray-400">Origen del movimiento</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('elementos')">
+                            <div class="step-number">🌊</div>
+                            <div>
+                                <div class="font-medium text-sm">Elementos</div>
+                                <div class="text-xs text-gray-400">Fuego, Agua, Aire, Tierra</div>
+                            </div>
+                        </div>
+                        
+                        <h5 class="font-bold mt-2 text-sm">🔧 HERRAMIENTAS</h5>
+                        <div class="process-step" onclick="startProcess('tabla_resumen')">
+                            <div class="step-number">📊</div>
+                            <div>
+                                <div class="font-medium text-sm">Tabla Resumen</div>
+                                <div class="text-xs text-gray-400">Factores del Esfuerzo</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('tabla_sintesis')">
+                            <div class="step-number">🔗</div>
+                            <div>
+                                <div class="font-medium text-sm">Tabla Síntesis</div>
+                                <div class="text-xs text-gray-400">Integración completa</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
+                            <div class="step-number">💪</div>
+                            <div>
+                                <div class="font-medium text-sm">Conocimientos Apoyo</div>
+                                <div class="text-xs text-gray-400">Técnicas específicas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mt-3 text-xs text-gray-300">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo.</p>
                     ${getNavigationButtons()}
                 `;
                 
@@ -1371,27 +1607,10 @@
                 }
                 
                 function updateRecordatorios(recordatorios) {
-                    let recordatoriosHtml = `
-                        <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                            <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
-                            ${recordatorios.gala_final ? `<p class="text-xs">• <strong>Gala Final:</strong> ${recordatorios.gala_final}</p>` : ''}
-                            <p class="text-xs mt-1">• <strong>Tareas:</strong> 
-                                <div class="flex flex-wrap mt-1">
-                                    <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
-                                    <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
-                                    <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
-                                </div>
-                            </p>
-                            ${recordatorios.playlist_estudio ? `<p class="text-xs mt-1">• <strong>Música:</strong> <a href="${recordatorios.playlist_estudio}" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>` : ''}
-                            ${recordatorios.calendario_sesiones ? `<p class="text-xs">• <strong>Calendario:</strong> <a href="${recordatorios.calendario_sesiones}" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>` : ''}
-                        </div>
-                    `;
-                    
                     knowledgeBase.recordatorios = {
-                        titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🎯 RECORDATORIOS IMPORTANTES</h3>',
-                        contenido: recordatoriosHtml,
-                        pregunta: '¿Necesitas información sobre algún otro tema?',
-                        navButtons: true
+                        gala_final: recordatorios.gala_final,
+                        playlist_estudio: recordatorios.playlist_estudio,
+                        calendario_sesiones: recordatorios.calendario_sesiones
                     };
                 }
                 
@@ -1578,12 +1797,6 @@
                 return formatResponse('tareas');
             }
 
-            // Nueva detección para recordatorios
-            if (message.includes('recordatorios') || message.includes('recordatorio')) {
-                chatState.currentTopic = 'recordatorios';
-                return formatResponse('recordatorios');
-            }
-
             if (message.includes('ejemplos') || message.includes('ejemplo')) {
                 const topic = chatState.currentTopic || 'peso';
                 return showExamples(topic);
@@ -1608,7 +1821,6 @@
                 <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
                 <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
                 <button class="concept-tag" onclick="startProcess('anuncios')">📣 Anun</button>
-                <button class="concept-tag" onclick="startProcess('recordatorios')">🎯 Rec</button>
             </div>
             ${getNavigationButtons()}
             `;
