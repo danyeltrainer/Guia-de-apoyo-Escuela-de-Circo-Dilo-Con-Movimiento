@@ -676,7 +676,6 @@
                 navButtons: true
             },
 
-            // ... (las demás secciones del knowledgeBase se mantienen igual)
             // ANUNCIOS Y EVENTOS
             anuncios: {
                 titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📣 ANUNCIOS Y EVENTOS</h3>',
@@ -1150,41 +1149,56 @@
             }
         };
 
-        // === INTEGRACIÓN DEL JSON REMOTO - VERSIÓN COMPLETA ===
+        // === INTEGRACIÓN DEL JSON REMOTO - VERSIÓN CORREGIDA ===
         (function() {
             const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/29fa4a7d152e3617c28345a9727cd76c7d66aea4/datos.json';
 
             async function loadRemoteData(url) {
                 try {
+                    console.log('🔄 Cargando datos remotos...');
                     const res = await fetch(url, { cache: 'no-cache' });
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
                     const remote = await res.json();
+                    console.log('✅ Datos remotos recibidos:', remote);
                     mergeRemoteIntoKnowledgeBase(remote);
                     
-                    // Si es la primera carga, mostrar anuncio principal y menú
+                    // Si es la primera carga, mostrar contenido actualizado
                     if (chatState.firstLoad) {
-                        const container = document.getElementById('chat-container');
-                        container.innerHTML = '';
-                        
-                        // Mostrar anuncio principal si existe
-                        if (knowledgeBase.anuncio_principal) {
-                            addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
-                        }
-                        
-                        // Mostrar menú principal
-                        const response = knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
-                        addMessage(response, 'bot');
-                        
+                        showInitialContent();
                         chatState.firstLoad = false;
                     }
-                    console.log('✅ Datos remotos cargados y aplicados.');
                 } catch (err) {
-                    console.warn('⚠️ No se pudo cargar datos remotos:', err);
+                    console.error('❌ Error cargando datos remotos:', err);
+                    // Si falla, usar contenido local y mostrar mensaje
+                    if (chatState.firstLoad) {
+                        showInitialContent();
+                        addMessage('<p class="text-sm text-yellow-400">⚠️ Usando versión local (error cargando datos remotos)</p>', 'bot');
+                        chatState.firstLoad = false;
+                    }
                 }
             }
 
+            function showInitialContent() {
+                const container = document.getElementById('chat-container');
+                container.innerHTML = '';
+                
+                // Mostrar anuncio principal si existe
+                if (knowledgeBase.anuncio_principal) {
+                    addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
+                }
+                
+                // Mostrar menú principal
+                const response = knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
+                addMessage(response, 'bot');
+            }
+
             function mergeRemoteIntoKnowledgeBase(remote) {
-                if (!remote || typeof remote !== 'object') return;
+                if (!remote || typeof remote !== 'object') {
+                    console.warn('❌ Datos remotos no válidos');
+                    return;
+                }
+
+                console.log('🔄 Fusionando datos remotos...');
 
                 // Procesar ANUNCIO PRINCIPAL
                 if (remote.anuncio_principal && typeof remote.anuncio_principal === 'object') {
@@ -1207,6 +1221,7 @@
                         pregunta: '',
                         navButtons: false
                     };
+                    console.log('✅ Anuncio principal actualizado');
                 }
 
                 // Procesar EVENTOS
@@ -1224,6 +1239,7 @@
                         return `<div class="announcement-card"><h4 class="font-bold text-sm">${titulo}</h4><p class="text-xs mt-1">${texto}</p>${link}</div>`;
                     }).join('');
                     knowledgeBase.anuncios.contenido = html;
+                    console.log('✅ Eventos actualizados');
                 }
 
                 // Procesar TAREAS (nueva estructura con música)
@@ -1242,11 +1258,13 @@
                     if (remote.tareas) {
                         knowledgeBase.tareas.contenido = buildGeneralTasksHtml(remote.tareas);
                     }
+                    console.log('✅ Tareas actualizadas');
                 }
 
                 // Procesar RECORDATORIOS
                 if (remote.recordatorios && typeof remote.recordatorios === 'object') {
                     updateRecordatorios(remote.recordatorios);
+                    console.log('✅ Recordatorios actualizados');
                 }
 
                 // Procesar FACTORES DE ESFUERZO
@@ -1256,11 +1274,13 @@
                             knowledgeBase[factor].contenido = buildFactorEsfuerzoHtml(data);
                         }
                     }
+                    console.log('✅ Factores de esfuerzo actualizados');
                 }
 
                 // Procesar CONOCIMIENTOS DE APOYO
                 if (remote.conocimientos_apoyo && typeof remote.conocimientos_apoyo === 'object') {
                     knowledgeBase.conocimientos_apoyo.contenido = buildConocimientosApoyoHtml(remote.conocimientos_apoyo);
+                    console.log('✅ Conocimientos de apoyo actualizados');
                 }
 
                 // Funciones auxiliares:
@@ -1294,7 +1314,6 @@
                 }
                 
                 function updateRecordatorios(recordatorios) {
-                    // Actualizar los recordatorios en la sección de inicio
                     let recordatoriosHtml = `
                         <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
                             <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
@@ -1311,7 +1330,6 @@
                         </div>
                     `;
                     
-                    // Crear sección de knowledgeBase para recordatorios
                     knowledgeBase.recordatorios = {
                         titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🎯 RECORDATORIOS IMPORTANTES</h3>',
                         contenido: recordatoriosHtml,
@@ -1354,7 +1372,12 @@
                 }
                 
                 function buildConocimientosApoyoHtml(conocimientos) {
-                    let html = '';
+                    let html = `
+                    <div class="content-section">
+                        <p class="text-sm">Técnicas y movimientos específicos que complementan tu entrenamiento.</p>
+                    </div>
+                    `;
+                    
                     for (const [key, data] of Object.entries(conocimientos)) {
                         let linksHtml = '';
                         if (data.links && Array.isArray(data.links)) {
