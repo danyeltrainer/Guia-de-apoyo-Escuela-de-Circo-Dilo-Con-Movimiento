@@ -618,61 +618,58 @@
         </header>
 
         <div id="chat-container" class="flex-1 p-2 sm:p-4 md:p-6 space-y-3 overflow-y-auto">
-            <!-- Mensaje de bienvenida para estudiantes -->
-            <div class="chat-bubble max-w-[90%] sm:max-w-[85%] bg-[#3b3b3f] p-3 rounded-2xl rounded-tl-none">
-                <p class="font-semibold text-[#c3073f]">¡Hola, Artista!</p>
-                <p class="mt-1">Soy tu guía de la <strong>Escuela "Dilo con Movimiento"</strong>. Estoy aquí para ayudarte a <strong>recordar y aplicar mejor los conocimientos del año</strong>.</p>
+            <!-- El contenido se cargará dinámicamente -->
+        </div>
+
+        <footer class="bg-[#1a1a1d] p-2 sm:p-4 border-t border-[#1a1a1d]">
+            <form id="chat-form" class="flex items-center space-x-2 mb-2">
+                <input 
+                    type="text" 
+                    id="user-input"
+                    placeholder="Escribe tu pregunta..."
+                    class="flex-1 p-2 bg-[#2a2a2d] border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#c3073f] text-[#f0f0f0] placeholder-gray-500 text-sm"
+                    autocomplete="off"
+                >
+                <button 
+                    type="submit"
+                    class="p-2 bg-[#c3073f] text-white rounded-xl hover:bg-[#950740] focus:outline-none focus:ring-2 focus:ring-[#c3073f] transition-colors duration-200 flex-shrink-0"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+            <div class="footer-buttons flex flex-wrap gap-1 justify-center">
+                <button class="action-button text-xs" onclick="sendMessage('ejemplos')">💡 Ejemplos</button>
+                <button class="action-button text-xs" onclick="sendMessage('personajes')">🎭 Pers</button>
+                <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
+                <button class="action-button text-xs" onclick="sendMessage('tareas lira')">🔄 Lira</button>
+                <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">👥 Eq</button>
+                <button class="action-button text-xs" onclick="sendMessage('normas')">📜 Norm</button>
+                <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Res</button>
+                <button class="action-button text-xs" onclick="sendMessage('anuncios')">📣 Anun</button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Estado de la conversación - CORREGIDO
+        const chatState = {
+            currentTopic: null,
+            history: [],
+            firstLoad: true
+        };
+
+        // Base de conocimiento LOCAL COMPLETA con todas las secciones
+        const knowledgeBase = {
+            inicio: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">👋 ¡Bienvenido/a a tu Guía de Estudio!</h3>',
+                contenido: `
+                <p class="text-sm mb-3">Soy tu asistente para ayudarte a recordar y aplicar mejor los conocimientos del año en la Escuela "Dilo con Movimiento".</p>
                 
                 <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📣 EVENTOS</h4>
-                    
-                    <div class="announcement-card">
-                        <h5 class="font-bold text-sm">29 nov: Pasacalle</h5>
-                        <p class="text-xs mt-1">Participa en "Caminando Juntxs".</p>
-                        <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
-                    </div>
-                    
-                    <div class="announcement-card">
-                        <h5 class="font-bold text-sm">10-18 ene: ENFETELA</h5>
-                        <p class="text-xs mt-1">Festival Latinoamericano de Teatro.</p>
-                    </div>
-                    
-                    <div class="announcement-card">
-                        <h5 class="font-bold text-sm">10 Ene: GALA FINAL</h5>
-                        <p class="text-xs mt-1">Nuestra gran muestra.</p>
-                    </div>
-                </div>
-
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
-                    <p class="text-xs">• <strong>Gala Final:</strong> 10 Ene</p>
-                    <p class="text-xs mt-1">• <strong>Tareas:</strong> 
-                        <div class="flex flex-wrap mt-1">
-                            <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
-                            <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
-                            <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
-                        </div>
-                    </p>
-                    <p class="text-xs mt-1">• <strong>Música:</strong> <a href="https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>
-                    <p class="text-xs">• <strong>Calendario:</strong> <a href="https://probaaaaaaaaan.my.canva.site/calendario2026escueladcm" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>
-                </div>
-
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#10b981] mb-1 text-center">📜 NORMAS</h4>
-                    <div class="safety-warning text-xs">
-                        <p class="font-bold text-red-400">⚠️ ACTIVIDADES DE RIESGO</p>
-                        <p class="mt-1">Acrobacias y movimientos aéreos requieren precaución.</p>
-                    </div>
-                    <ul class="text-xs space-y-1 mt-1 list-disc list-inside">
-                        <li>Mantener limpio el espacio</li>
-                        <li>Regular volumen</li>
-                        <li>Cuidar a las infancias</li>
-                        <li>Respeto mutuo</li>
-                    </ul>
-                </div>
-
-                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                    <h4 class="font-bold text-[#c3073f] mb-1 text-center">📚 TEMAS DE ESTUDIO</h4>
+                    <h4 class="font-bold text-[#c3073f] mb-2 text-center">📚 TEMAS DE ESTUDIO</h4>
                     
                     <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
                     <div class="process-step" onclick="startProcess('peso')">
@@ -741,14 +738,6 @@
                         </div>
                     </div>
                     
-                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
-                        <div class="step-number">🔗</div>
-                        <div>
-                            <div class="font-medium text-sm">Tabla Síntesis</div>
-                            <div class="text-xs text-gray-400">Integración completa</div>
-                        </div>
-                    </div>
-                    
                     <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
                         <div class="step-number">💪</div>
                         <div>
@@ -756,147 +745,44 @@
                             <div class="text-xs text-gray-400">Técnicas específicas</div>
                         </div>
                     </div>
-                </div>
-
-                <p class="mt-3 text-xs text-gray-300">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo.</p>
-                
-                <!-- Botones de navegación -->
-                <div class="nav-buttons-container">
-                    <button class="nav-button text-xs" onclick="goBack()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-                            <path d="m15 18-6-6 6-6"/>
-                        </svg>
-                        Atrás
-                    </button>
-                    <button class="nav-button text-xs" onclick="goToMenu()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
-                        Menú
-                    </button>
-                </div>
-            </div>
-            <!-- Los mensajes dinámicos se añadirán aquí -->
-        </div>
-
-        <footer class="bg-[#1a1a1d] p-2 sm:p-4 border-t border-[#1a1a1d]">
-            <form id="chat-form" class="flex items-center space-x-2 mb-2">
-                <input 
-                    type="text" 
-                    id="user-input"
-                    placeholder="Escribe tu pregunta..."
-                    class="flex-1 p-2 bg-[#2a2a2d] border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#c3073f] text-[#f0f0f0] placeholder-gray-500 text-sm"
-                    autocomplete="off"
-                >
-                <button 
-                    type="submit"
-                    class="p-2 bg-[#c3073f] text-white rounded-xl hover:bg-[#950740] focus:outline-none focus:ring-2 focus:ring-[#c3073f] transition-colors duration-200 flex-shrink-0"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                </button>
-            </form>
-            <div class="footer-buttons flex flex-wrap gap-1 justify-center">
-                <button class="action-button text-xs" onclick="sendMessage('ejemplos')">💡 Ejemplos</button>
-                <button class="action-button text-xs" onclick="sendMessage('personajes')">🎭 Pers</button>
-                <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
-                <button class="action-button text-xs" onclick="sendMessage('tareas lira')">🔄 Lira</button>
-                <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">👥 Eq</button>
-                <button class="action-button text-xs" onclick="sendMessage('normas')">📜 Norm</button>
-                <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Res</button>
-                <button class="action-button text-xs" onclick="sendMessage('anuncios')">📣 Anun</button>
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // Estado de la conversación
-        const chatState = {
-            currentTopic: null,
-            previousTopic: null,
-            messages: [],
-            conceptsDiscussed: new Set(),
-            history: [],
-            firstLoad: true
-        };
-
-        // Base de conocimiento COMPLETA
-        const knowledgeBase = {
-            inicio: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">👋 ¡Hola!</h3>',
-                contenido: `
-                <p class="text-sm">¡Bienvenido/a a tu guía de estudio! Elige un tema para comenzar.</p>
-                `,
-                pregunta: 'Toca un tema o escribe su nombre.',
-                navButtons: true
-            },
-
-            // ANUNCIOS Y EVENTOS
-            anuncios: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📣 ANUNCIOS Y EVENTOS</h3>',
-                contenido: `
-                <div class="announcement-card">
-                    <h4 class="font-bold text-sm">29 de noviembre: Pasacalle Caminando Juntxs</h4>
-                    <p class="text-xs mt-1">Participa en el pasacalle "Caminando Juntxs".</p>
-                    <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
-                </div>
-                
-                <div class="announcement-card">
-                    <h4 class="font-bold text-sm">10-18 enero: ENFETELA Festival Latinoamericano de Teatro - La Granja</h4>
-                    <p class="text-xs mt-1">Festival Latinoamericano de Teatro en La Granja.</p>
-                    <p class="text-xs mt-2 text-gray-400">Más información próximamente.</p>
-                </div>
-                
-                <div class="announcement-card">
-                    <h4 class="font-bold text-sm">10 de Enero: GALA FINAL</h4>
-                    <p class="text-xs mt-1">Nuestra gran muestra de fin de temporada.</p>
-                </div>
-                `,
-                pregunta: '¿Necesitas información sobre algún otro tema?',
-                navButtons: true
-            },
-
-            // NORMAS COMUNITARIAS
-            normas: {
-                titulo: '<h3 class="font-bold text-[#10b981] text-sm">📜 NUESTRAS NORMAS COMUNITARIAS</h3>',
-                contenido: `
-                <div class="rules-card">
-                    <div class="safety-warning text-xs">
-                        <p class="font-bold text-red-400">⚠️ ATENCIÓN: ACTIVIDADES DE RIESGO</p>
-                        <p class="mt-1">Realizamos prácticas que incluyen acrobacias, trabajo aéreo, breaking y otras disciplinas que conllevan riesgos físicos. La seguridad es nuestra prioridad.</p>
+                    
+                    <h5 class="font-bold mt-2 text-sm">📋 TAREAS Y EVENTOS</h5>
+                    <div class="process-step" onclick="startProcess('tareas')">
+                        <div class="step-number">📋</div>
+                        <div>
+                            <div class="font-medium text-sm">Tareas</div>
+                            <div class="text-xs text-gray-400">Por disciplina</div>
+                        </div>
                     </div>
                     
-                    <h4 class="font-bold mb-1 mt-2 text-sm">Para mantener un espacio seguro y respetuoso:</h4>
-                    <ul class="list-disc list-inside mt-1 space-y-1 text-xs">
-                        <li><strong>Mantener limpio y limpiar al irnos:</strong> Nuestro espacio es compartido.</li>
-                        <li><strong>Regular gritos o volumen:</strong> Espacio compartido, conciencia del ruido.</li>
-                        <li><strong>Cuidar a las infancias presentes:</strong> Por su seguridad y la de tod@s.</li>
-                        <li><strong>Espacio de respeto mutuo:</strong> Sin machismo, racismo, homofobia, transfobia ni acciones violentas.</li>
-                    </ul>
+                    <div class="process-step" onclick="startProcess('anuncios')">
+                        <div class="step-number">📣</div>
+                        <div>
+                            <div class="font-medium text-sm">Anuncios</div>
+                            <div class="text-xs text-gray-400">Eventos y noticias</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('normas')">
+                        <div class="step-number">📜</div>
+                        <div>
+                            <div class="font-medium text-sm">Normas</div>
+                            <div class="text-xs text-gray-400">Comunidad y seguridad</div>
+                        </div>
+                    </div>
                 </div>
+
+                <p class="mt-3 text-xs text-gray-300 text-center">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo o usa los botones de abajo.</p>
                 `,
-                pregunta: '¿Necesitas información sobre algún otro tema?',
                 navButtons: true
             },
 
             // FACTORES DEL ESFUERZO
             peso: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">⚖️ FACTOR: PESO</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">⚖️ FACTOR: PESO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">El <strong>Peso</strong> es la intención de fuerza que aplicas a tu movimiento.</p>
-                </div>
-                
-                <div class="mt-2 example-card content-section">
-                    <h4 class="font-bold text-sm">FUERTE (Pesado)</h4>
-                    <p class="text-xs mt-1">Como moverte con una <strong>mochila pesada</strong>. Movimiento potente que cede a la gravedad.</p>
-                    <div class="mt-1 flex flex-wrap">
-                        <a href="https://youtube.com/shorts/Kms5wINAd4U?si=uRJa5SAXsdKTfU8m" target="_blank" class="video-link text-xs">Lira: Drop</a>
-                        <a href="https://youtube.com/shorts/h9JYqZy6Fb0?si=navpdLaTlGs1YMBU" target="_blank" class="video-link text-xs">Breaking: Coin drop</a>
-                    </div>
+                    <p class="text-sm mb-3">El <strong>Peso</strong> es la intención de fuerza que aplicas a tu movimiento.</p>
                 </div>
                 
                 <div class="mt-2 example-card content-section">
@@ -907,16 +793,25 @@
                         <a href="https://youtu.be/Da3Oqab5nes?si=yzKGcWESN5mxskiB" target="_blank" class="video-link text-xs">Breaking: Bajada</a>
                     </div>
                 </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">FUERTE (Pesado)</h4>
+                    <p class="text-xs mt-1">Como moverte con una <strong>mochila pesada</strong>. Movimiento potente que cede a la gravedad.</p>
+                    <div class="mt-1 flex flex-wrap">
+                        <a href="https://youtube.com/shorts/Kms5wINAd4U?si=uRJa5SAXsdKTfU8m" target="_blank" class="video-link text-xs">Lira: Drop</a>
+                        <a href="https://youtube.com/shorts/h9JYqZy6Fb0?si=navpdLaTlGs1YMBU" target="_blank" class="video-link text-xs">Breaking: Coin drop</a>
+                    </div>
+                </div>
                 `,
                 pregunta: '¿Quieres explorar otro factor?',
                 navButtons: true
             },
 
             tiempo: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">⏱️ FACTOR: TIEMPO</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">⏱️ FACTOR: TIEMPO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">El <strong>Tiempo</strong> se refiere a la duración de tus acciones.</p>
+                    <p class="text-sm mb-3">El <strong>Tiempo</strong> se refiere a la duración de tus acciones.</p>
                 </div>
                 
                 <div class="mt-2 example-card content-section">
@@ -941,20 +836,20 @@
             },
 
             espacio: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🌐 FACTOR: ESPACIO</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">🌐 FACTOR: ESPACIO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">El <strong>Espacio</strong> es tu actitud o atención hacia el espacio.</p>
+                    <p class="text-sm mb-3">El <strong>Espacio</strong> es tu actitud o atención hacia el espacio. Aspectos más locomotores o de traslado.</p>
                 </div>
                 
                 <div class="mt-2 example-card content-section">
                     <h4 class="font-bold text-sm">DIRECTO</h4>
-                    <p class="text-xs mt-1">Tu movimiento va "al grano". Atención <strong>enfocada</strong>.</p>
+                    <p class="text-xs mt-1">Tu movimiento va "al grano". Atención <strong>enfocada</strong>. Del Punto A al Punto B, simple.</p>
                 </div>
                 
                 <div class="mt-2 example-card content-section">
                     <h4 class="font-bold text-sm">FLEXIBLE (Indirecto)</h4>
-                    <p class="text-xs mt-1">Tu movimiento "da rodeos". Atención <strong>exploratoria</strong>.</p>
+                    <p class="text-xs mt-1">Tu movimiento "da rodeos". Atención <strong>exploratoria</strong>. Del Punta A al Punto B, la vuelta larga.</p>
                 </div>
                 `,
                 pregunta: '¿Quieres explorar otro factor?',
@@ -962,10 +857,10 @@
             },
 
             flujo: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">💧 FACTOR: FLUJO</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">💧 FACTOR: FLUJO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">El <strong>Flujo</strong> es sobre controlar o liberar la energía de tu movimiento.</p>
+                    <p class="text-sm mb-3">El <strong>Flujo</strong> es sobre controlar o liberar la energía de tu movimiento.</p>
                 </div>
                 
                 <div class="mt-2 example-card content-section">
@@ -975,7 +870,7 @@
                 
                 <div class="mt-2 example-card content-section">
                     <h4 class="font-bold text-sm">CONTENIDO (Controlado)</h4>
-                    <p class="text-xs mt-1">Tienes control total. Movimiento tenso, controlado.</p>
+                    <p class="text-xs mt-1">Tienes control total. Movimiento tenso, controlado. Como hacer figuras más bien fijas, como esculturas o freeze.</p>
                 </div>
                 `,
                 pregunta: '¿Quieres explorar otro factor?',
@@ -984,10 +879,10 @@
 
             // CONSTRUCCIÓN DE PERSONAJES
             personajes: {
-                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">🎭 CONSTRUCCIÓN DE PERSONAJES</h3>',
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🎭 CONSTRUCCIÓN DE PERSONAJES</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">Nuestro espectáculo está basado en un <strong>mundo post-apocalíptico</strong>.</p>
+                    <p class="text-sm mb-3">Nuestro espectáculo está basado en un <strong>mundo post-apocalíptico</strong>.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
@@ -1014,10 +909,10 @@
             },
 
             motores: {
-                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">⚙️ MOTORES DE MOVIMIENTO</h3>',
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">⚙️ MOTORES DE MOVIMIENTO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">El movimiento de tu personaje nace desde una zona del cuerpo.</p>
+                    <p class="text-sm mb-3">El movimiento de tu personaje nace desde una zona del cuerpo.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
@@ -1040,10 +935,10 @@
             },
 
             elementos: {
-                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">🌊 ELEMENTOS</h3>',
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🌊 ELEMENTOS</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">Cada elemento tiene una energía particular que influye en tu personaje.</p>
+                    <p class="text-sm mb-3">Cada elemento tiene una energía particular que influye en tu personaje.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
@@ -1072,10 +967,10 @@
 
             // HERRAMIENTAS ADICIONALES
             tabla_resumen: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📊 TABLA RESUMEN</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">📊 TABLA RESUMEN</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">Resumen completo de los Factores del Esfuerzo.</p>
+                    <p class="text-sm mb-3">Resumen completo de los Factores del Esfuerzo.</p>
                 </div>
                 
                 <div class="overflow-x-auto mt-2">
@@ -1116,61 +1011,12 @@
                 navButtons: true
             },
 
-            tabla_sintesis: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🔗 TABLA DE SÍNTESIS</h3>',
-                contenido: `
-                <div class="content-section">
-                    <p class="text-sm">Integración de todos los componentes para enriquecer tu expresión.</p>
-                </div>
-                
-                <div class="overflow-x-auto mt-2">
-                    <table class="w-full text-xs text-left">
-                        <thead class="bg-[#1a1a1d]">
-                            <tr>
-                                <th class="p-1 font-bold">Factores</th>
-                                <th class="p-1 font-bold">Personajes</th>
-                                <th class="p-1 font-bold">Motores</th>
-                                <th class="p-1 font-bold">Elementos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-gray-700">
-                                <td class="p-1">
-                                    <strong>⚖️ Peso:</strong> F/L<br>
-                                    <strong>⏱️ Tiempo:</strong> S/S<br>
-                                    <strong>🌐 Espacio:</strong> D/F<br>
-                                    <strong>💧 Flujo:</strong> L/C
-                                </td>
-                                <td class="p-1">
-                                    <strong>🌿 Bosque (Lira)</strong><br>
-                                    <strong>🤖 Dañados (Brk)</strong>
-                                </td>
-                                <td class="p-1">
-                                    <strong>Cabeza:</strong> Pensar<br>
-                                    <strong>Pecho:</strong> Emoción<br>
-                                    <strong>Cadera:</strong> Instinto
-                                </td>
-                                <td class="p-1">
-                                    <span class="element-tag fire">Fuego</span><br>
-                                    <span class="element-tag water">Agua</span><br>
-                                    <span class="element-tag air">Aire</span><br>
-                                    <span class="element-tag earth">Tierra</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                `,
-                pregunta: '¿Quieres explorar más sobre algún componente?',
-                navButtons: true
-            },
-
-            // CONOCIMIENTOS DE APOYO - ACTUALIZADO
+            // CONOCIMIENTOS DE APOYO - VERSIÓN LOCAL COMPLETA
             conocimientos_apoyo: {
-                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">💪 CONOCIMIENTOS DE APOYO</h3>',
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">💪 CONOCIMIENTOS DE APOYO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">Técnicas y movimientos específicos que complementan tu entrenamiento.</p>
+                    <p class="text-sm mb-3">Técnicas y movimientos específicos que complementan tu entrenamiento.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
@@ -1192,6 +1038,14 @@
                     <h4 class="font-bold text-sm">Lira</h4>
                     <div class="mt-1 space-y-1">
                         <a href="https://www.instagram.com/p/C5ECy8WOlcG/" target="_blank" class="video-link block text-center text-xs">3 maneras de subirse a la Lira</a>
+                        <div class="video-link block text-center text-xs bg-gray-600">Subidas - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Figuras basicas 1 - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Figuras basicas 2 - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Figuras basicas 3 - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Ejercicios especificos - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Escuadra - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Medio Gancho - Pendiente link</div>
+                        <div class="video-link block text-center text-xs bg-gray-600">Equilibrios - Pendiente link</div>
                     </div>
                 </div>
                 
@@ -1203,27 +1057,65 @@
                         <a href="https://www.instagram.com/p/C6Mrhu5uUg5/" target="_blank" class="video-link block text-center text-xs">Roll de hombros o rueda con los hombros</a>
                     </div>
                 </div>
-                
-                <div class="mt-2 character-card content-section">
-                    <h4 class="font-bold text-sm">🎥 EJEMPLOS INTEGRADORES</h4>
-                    <p class="text-xs mt-1">Aplicación completa de todas las técnicas:</p>
-                    <div class="mt-1 flex flex-wrap">
-                        <a href="https://www.youtube.com/watch?v=P4r-gk4E7c4&list=RDP4r-gk4E7c4&start_radio=1" target="_blank" class="video-link text-xs">Piso: Breakin, mano a mano, teatro</a>
-                        <a href="https://youtu.be/p44MfTpCqrQ?si=c7-UfYvpkPQDhsW5" target="_blank" class="video-link text-xs">Aéreo: Aplicación completa</a>
-                        <a href="https://www.youtube.com/watch?v=j8uJ89Gh9LI" target="_blank" class="video-link text-xs">Performance impecable</a>
-                    </div>
-                </div>
                 `,
                 pregunta: '¿Necesitas repasar algún movimiento específico?',
                 navButtons: true
             },
 
+            // ANUNCIOS Y EVENTOS
+            anuncios: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">📣 ANUNCIOS Y EVENTOS</h3>',
+                contenido: `
+                <div class="announcement-card">
+                    <h4 class="font-bold text-sm">29 de noviembre: Pasacalle Caminando Juntxs</h4>
+                    <p class="text-xs mt-1">Participa en el pasacalle "Caminando Juntxs".</p>
+                    <a href="https://www.instagram.com/p/DNg0JbxPkhL/" target="_blank" class="video-link mt-1 block text-xs">📷 Ver en Instagram</a>
+                </div>
+                
+                <div class="announcement-card">
+                    <h4 class="font-bold text-sm">10-18 enero: ENFETELA Festival Latinoamericano de Teatro - La Granja</h4>
+                    <p class="text-xs mt-1">Festival Latinoamericano de Teatro en La Granja.</p>
+                    <p class="text-xs mt-2 text-gray-400">Más información próximamente.</p>
+                </div>
+                
+                <div class="announcement-card">
+                    <h4 class="font-bold text-sm">10 de Enero: GALA FINAL</h4>
+                    <p class="text-xs mt-1">Nuestra gran muestra de fin de temporada.</p>
+                </div>
+                `,
+                pregunta: '¿Necesitas información sobre algún otro tema?',
+                navButtons: true
+            },
+
+            // NORMAS COMUNITARIAS
+            normas: {
+                titulo: '<h3 class="font-bold text-[#10b981] text-sm mb-2">📜 NUESTRAS NORMAS COMUNITARIAS</h3>',
+                contenido: `
+                <div class="rules-card">
+                    <div class="safety-warning text-xs">
+                        <p class="font-bold text-red-400">⚠️ ATENCIÓN: ACTIVIDADES DE RIESGO</p>
+                        <p class="mt-1">Realizamos prácticas que incluyen acrobacias, trabajo aéreo, breaking y otras disciplinas que conllevan riesgos físicos. La seguridad es nuestra prioridad.</p>
+                    </div>
+                    
+                    <h4 class="font-bold mb-1 mt-2 text-sm">Para mantener un espacio seguro y respetuoso:</h4>
+                    <ul class="list-disc list-inside mt-1 space-y-1 text-xs">
+                        <li><strong>Mantener limpio y limpiar al irnos:</strong> Nuestro espacio es compartido.</li>
+                        <li><strong>Regular gritos o volumen:</strong> Espacio compartido, conciencia del ruido.</li>
+                        <li><strong>Cuidar a las infancias presentes:</strong> Por su seguridad y la de tod@s.</li>
+                        <li><strong>Espacio de respeto mutuo:</strong> Sin machismo, racismo, homofobia, transfobia ni acciones violentas.</li>
+                    </ul>
+                </div>
+                `,
+                pregunta: '¿Necesitas información sobre algún otro tema?',
+                navButtons: true
+            },
+
             // TAREAS
             tareas: {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">📋 TAREAS</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">📋 TAREAS</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm">Aquí encontrarás las tareas organizadas por disciplina.</p>
+                    <p class="text-sm mb-3">Aquí encontrarás las tareas organizadas por disciplina.</p>
                 </div>
                 
                 <div class="flex flex-wrap gap-1 mb-2">
@@ -1247,7 +1139,7 @@
             },
 
             'tareas_breaking': {
-                titulo: '<h3 class="font-bold text-[#c3073f] text-sm">🔄 TAREAS - BREAKING</h3>',
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">🔄 TAREAS - BREAKING</h3>',
                 contenido: `
                 <div class="task-card breaking-task">
                     <h4 class="font-bold text-sm">📝 TAREAS ACTUALES - BREAKING</h4>
@@ -1272,7 +1164,7 @@
             },
 
             'tareas_lira': {
-                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm">🎪 TAREAS - LIRA</h3>',
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🎪 TAREAS - LIRA</h3>',
                 contenido: `
                 <div class="task-card lira-task">
                     <h4 class="font-bold text-sm">📝 TAREAS ACTUALES - LIRA</h4>
@@ -1297,7 +1189,7 @@
             },
 
             'tareas_equipo': {
-                titulo: '<h3 class="font-bold text-[#10b981] text-sm">👥 TAREAS - EQUIPO COMPLETO</h3>',
+                titulo: '<h3 class="font-bold text-[#10b981] text-sm mb-2">👥 TAREAS - EQUIPO COMPLETO</h3>',
                 contenido: `
                 <div class="task-card team-task">
                     <h4 class="font-bold text-sm">📝 TAREAS GRUPALES</h4>
@@ -1314,200 +1206,30 @@
             }
         };
 
-        // === INTEGRACIÓN DEL JSON REMOTO - VERSIÓN CORREGIDA ===
+        // === SISTEMA DE INTEGRACIÓN CON JSON REMOTO ===
         (function() {
-            const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/743fe15cbd3abda724840b97f1f9b1581c334676/datos.json?' + Date.now();
+            const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/29fa4a7d152e3617c28345a9727cd76c7d66aea4/datos.json';
 
             async function loadRemoteData(url) {
                 try {
-                    console.log('🔄 Cargando datos remotos...', url);
                     const res = await fetch(url, { cache: 'no-cache' });
-                    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-                    const text = await res.text();
-                    console.log('📦 Respuesta recibida:', text.substring(0, 200) + '...');
-                    
-                    const remote = JSON.parse(text);
-                    console.log('✅ JSON parseado correctamente');
-                    
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    const remote = await res.json();
                     mergeRemoteIntoKnowledgeBase(remote);
                     
-                    if (chatState.firstLoad) {
-                        showInitialContent();
-                        chatState.firstLoad = false;
+                    // Si no hay tema activo, re-renderizo la vista inicial
+                    if (!chatState.currentTopic) {
+                        showTopic('inicio');
                     }
+                    console.log('✅ Datos remotos cargados y aplicados.');
                 } catch (err) {
-                    console.error('❌ Error cargando datos remotos:', err);
-                    if (chatState.firstLoad) {
-                        showInitialContent();
-                        addMessage('<p class="text-sm text-yellow-400">⚠️ Error cargando datos remotos: ' + err.message + '</p>', 'bot');
-                        chatState.firstLoad = false;
-                    }
+                    console.warn('⚠️ No se pudo cargar datos remotos:', err);
+                    // No rompe; seguimos con conocimiento local
                 }
-            }
-
-            function showInitialContent() {
-                const container = document.getElementById('chat-container');
-                container.innerHTML = '';
-                
-                // Mostrar anuncio principal si existe (del JSON remoto)
-                if (knowledgeBase.anuncio_principal) {
-                    addMessage(knowledgeBase.anuncio_principal.titulo + knowledgeBase.anuncio_principal.contenido, 'bot');
-                }
-                
-                // Mostrar menú principal con categorías
-                const menuContent = `
-                    ${knowledgeBase.inicio.titulo}
-                    ${knowledgeBase.inicio.contenido}
-                    
-                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">📣 EVENTOS</h4>
-                        ${knowledgeBase.anuncios.contenido}
-                    </div>
-
-                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">🎯 RECORDATORIOS</h4>
-                        <p class="text-xs">• <strong>Gala Final:</strong> ${knowledgeBase.recordatorios.gala_final || '10 Ene'}</p>
-                        <p class="text-xs mt-1">• <strong>Tareas:</strong> 
-                            <div class="flex flex-wrap mt-1">
-                                <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">Breaking</button>
-                                <button class="action-button text-xs" onclick="sendMessage('tareas lira')">Lira</button>
-                                <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">Equipo</button>
-                            </div>
-                        </p>
-                        <p class="text-xs mt-1">• <strong>Música:</strong> <a href="${knowledgeBase.recordatorios.playlist_estudio || 'https://youtube.com/playlist?list=PLthfBcYw9Q18LILg0-6184cg-ywVrNauw&si=oFts-OKgW0Aml8Tj'}" class="text-blue-400 underline break-words" target="_blank">Playlist</a></p>
-                        <p class="text-xs">• <strong>Calendario:</strong> <a href="${knowledgeBase.recordatorios.calendario_sesiones || 'https://probaaaaaaaaan.my.canva.site/calendario2026escueladcm'}" class="text-blue-400 underline break-words" target="_blank">Ver aquí</a></p>
-                    </div>
-
-                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                        <h4 class="font-bold text-[#10b981] mb-1 text-center">📜 NORMAS</h4>
-                        ${knowledgeBase.normas.contenido}
-                    </div>
-
-                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
-                        <h4 class="font-bold text-[#c3073f] mb-1 text-center">📚 TEMAS DE ESTUDIO</h4>
-                        
-                        <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
-                        <div class="process-step" onclick="startProcess('peso')">
-                            <div class="step-number">⚖️</div>
-                            <div>
-                                <div class="font-medium text-sm">Peso</div>
-                                <div class="text-xs text-gray-400">Fuerza del movimiento</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('tiempo')">
-                            <div class="step-number">⏱️</div>
-                            <div>
-                                <div class="font-medium text-sm">Tiempo</div>
-                                <div class="text-xs text-gray-400">Velocidad del movimiento</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('espacio')">
-                            <div class="step-number">🌐</div>
-                            <div>
-                                <div class="font-medium text-sm">Espacio</div>
-                                <div class="text-xs text-gray-400">Actitud espacial</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('flujo')">
-                            <div class="step-number">💧</div>
-                            <div>
-                                <div class="font-medium text-sm">Flujo</div>
-                                <div class="text-xs text-gray-400">Control del movimiento</div>
-                            </div>
-                        </div>
-                        
-                        <h5 class="font-bold mt-2 text-sm">🎭 PERSONAJES</h5>
-                        <div class="process-step" onclick="startProcess('personajes')">
-                            <div class="step-number">👤</div>
-                            <div>
-                                <div class="font-medium text-sm">Guía de Personajes</div>
-                                <div class="text-xs text-gray-400">Mundo post-apocalíptico</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('motores')">
-                            <div class="step-number">⚙️</div>
-                            <div>
-                                <div class="font-medium text-sm">Motores</div>
-                                <div class="text-xs text-gray-400">Origen del movimiento</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('elementos')">
-                            <div class="step-number">🌊</div>
-                            <div>
-                                <div class="font-medium text-sm">Elementos</div>
-                                <div class="text-xs text-gray-400">Fuego, Agua, Aire, Tierra</div>
-                            </div>
-                        </div>
-                        
-                        <h5 class="font-bold mt-2 text-sm">🔧 HERRAMIENTAS</h5>
-                        <div class="process-step" onclick="startProcess('tabla_resumen')">
-                            <div class="step-number">📊</div>
-                            <div>
-                                <div class="font-medium text-sm">Tabla Resumen</div>
-                                <div class="text-xs text-gray-400">Factores del Esfuerzo</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('tabla_sintesis')">
-                            <div class="step-number">🔗</div>
-                            <div>
-                                <div class="font-medium text-sm">Tabla Síntesis</div>
-                                <div class="text-xs text-gray-400">Integración completa</div>
-                            </div>
-                        </div>
-                        
-                        <div class="process-step" onclick="startProcess('conocimientos_apoyo')">
-                            <div class="step-number">💪</div>
-                            <div>
-                                <div class="font-medium text-sm">Conocimientos Apoyo</div>
-                                <div class="text-xs text-gray-400">Técnicas específicas</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="mt-3 text-xs text-gray-300">💡 <strong>Consejo:</strong> Toca cualquier tema para explorarlo.</p>
-                    ${getNavigationButtons()}
-                `;
-                
-                addMessage(menuContent, 'bot');
             }
 
             function mergeRemoteIntoKnowledgeBase(remote) {
-                if (!remote || typeof remote !== 'object') {
-                    console.warn('❌ Datos remotos no válidos');
-                    return;
-                }
-
-                console.log('🔄 Fusionando datos remotos...');
-
-                // Procesar ANUNCIO PRINCIPAL
-                if (remote.anuncio_principal && typeof remote.anuncio_principal === 'object') {
-                    const anuncio = remote.anuncio_principal;
-                    let linkHtml = '';
-                    if (anuncio.link && anuncio.link.trim() !== '') {
-                        const linkText = anuncio.tipo === 'instagram' ? '📷 Ver en Instagram' : 
-                                        anuncio.tipo === 'evento' ? '📅 Ver evento' : '🔗 Ver más';
-                        linkHtml = `<a href="${anuncio.link}" target="_blank" class="video-link mt-1 block text-xs">${linkText}</a>`;
-                    }
-                    knowledgeBase.anuncio_principal = {
-                        titulo: `<h3 class="font-bold text-[#c3073f] text-sm">📢 ${anuncio.titulo}</h3>`,
-                        contenido: `
-                            <div class="principal-announcement">
-                                <h4 class="font-bold text-sm">${anuncio.titulo}</h4>
-                                <p class="text-xs mt-1">${anuncio.descripcion}</p>
-                                ${linkHtml}
-                            </div>
-                        `,
-                        pregunta: '',
-                        navButtons: false
-                    };
-                    console.log('✅ Anuncio principal actualizado');
-                }
+                if (!remote || typeof remote !== 'object') return;
 
                 // Procesar EVENTOS
                 if (remote.eventos && Array.isArray(remote.eventos)) {
@@ -1523,65 +1245,60 @@
                         
                         return `<div class="announcement-card"><h4 class="font-bold text-sm">${titulo}</h4><p class="text-xs mt-1">${texto}</p>${link}</div>`;
                     }).join('');
+                    
+                    // Actualizar anuncios principales
                     knowledgeBase.anuncios.contenido = html;
-                    console.log('✅ Eventos actualizados');
                 }
 
-                // Procesar TAREAS (nueva estructura con música)
+                // Procesar TAREAS
                 if (remote.tareas && typeof remote.tareas === 'object') {
-                    if (remote.tareas.breaking) {
-                        knowledgeBase.tareas_breaking.contenido = buildTaskSectionHtml('BREAKING', remote.tareas.breaking);
+                    // Actualizar tareas específicas
+                    if (remote.tareas.breaking && remote.tareas.breaking.items) {
+                        knowledgeBase.tareas_breaking.contenido = buildTaskSectionHtml('BREAKING', remote.tareas.breaking.items, remote.tareas.breaking.musica);
                     }
-                    if (remote.tareas.lira) {
-                        knowledgeBase.tareas_lira.contenido = buildTaskSectionHtml('LIRA', remote.tareas.lira);
+                    if (remote.tareas.lira && remote.tareas.lira.items) {
+                        knowledgeBase.tareas_lira.contenido = buildTaskSectionHtml('LIRA', remote.tareas.lira.items, remote.tareas.lira.musica);
                     }
-                    if (remote.tareas.equipo) {
-                        knowledgeBase.tareas_equipo.contenido = buildTaskSectionHtml('EQUIPO', remote.tareas.equipo);
+                    if (remote.tareas.equipo && remote.tareas.equipo.items) {
+                        knowledgeBase.tareas_equipo.contenido = buildTaskSectionHtml('EQUIPO', remote.tareas.equipo.items, remote.tareas.equipo.musica);
                     }
                     
                     // Actualizar también la vista general de tareas
                     if (remote.tareas) {
                         knowledgeBase.tareas.contenido = buildGeneralTasksHtml(remote.tareas);
                     }
-                    console.log('✅ Tareas actualizadas');
                 }
 
-                // Procesar RECORDATORIOS
-                if (remote.recordatorios && typeof remote.recordatorios === 'object') {
-                    updateRecordatorios(remote.recordatorios);
-                    console.log('✅ Recordatorios actualizados');
-                }
-
-                // Procesar FACTORES DE ESFUERZO - ACTUALIZAR sin perder estructura local
+                // Procesar FACTORES DE ESFUERZO
                 if (remote.factores_esfuerzo && typeof remote.factores_esfuerzo === 'object') {
-                    for (const [factor, data] of Object.entries(remote.factores_esfuerzo)) {
-                        if (knowledgeBase[factor]) {
-                            // Actualizar el contenido pero mantener la estructura existente
-                            knowledgeBase[factor].contenido = buildFactorEsfuerzoHtml(data);
-                            // Preservar la pregunta y navButtons locales
-                            knowledgeBase[factor].pregunta = knowledgeBase[factor].pregunta || '¿Quieres explorar otro factor?';
-                            knowledgeBase[factor].navButtons = true;
-                        }
-                    }
-                    console.log('✅ Factores de esfuerzo actualizados');
+                    updateFactoresEsfuerzo(remote.factores_esfuerzo);
                 }
 
-                // Procesar CONOCIMIENTOS DE APOYO - ACTUALIZAR sin perder estructura local
+                // Procesar CONOCIMIENTOS DE APOYO
                 if (remote.conocimientos_apoyo && typeof remote.conocimientos_apoyo === 'object') {
-                    const nuevoContenido = buildConocimientosApoyoHtml(remote.conocimientos_apoyo);
-                    knowledgeBase.conocimientos_apoyo.contenido = nuevoContenido;
-                    // Preservar la estructura local
-                    knowledgeBase.conocimientos_apoyo.pregunta = '¿Necesitas repasar algún movimiento específico?';
-                    knowledgeBase.conocimientos_apoyo.navButtons = true;
-                    console.log('✅ Conocimientos de apoyo actualizados');
+                    updateConocimientosApoyo(remote.conocimientos_apoyo);
                 }
 
                 // Funciones auxiliares:
-                function buildTaskSectionHtml(title, tareaObj) {
-                    const itemsHtml = `<ol class="list-decimal list-inside mt-1 space-y-1 text-xs">${tareaObj.items.map(i => `<li>${i}</li>`).join('')}</ol>`;
-                    const musicHtml = tareaObj.musica ? `<a href="${tareaObj.musica}" class="block mt-1 p-1 bg-[#1a1a1d] rounded text-blue-400 underline text-xs text-center" target="_blank">🎧 Música ${title}</a>` : '';
+                function buildTaskSectionHtml(title, itemsArray, musicaUrl) {
+                    const itemsHtml = `<ol class="list-decimal list-inside mt-1 space-y-1 text-xs">${itemsArray.map(i => `<li>${i}</li>`).join('')}</ol>`;
                     const cls = title === 'BREAKING' ? 'breaking-task' : (title === 'LIRA' ? 'lira-task' : 'team-task');
-                    return `<div class="task-card ${cls}"><h4 class="font-bold text-sm">📝 TAREAS ACTUALES - ${title}</h4>${itemsHtml}${musicHtml}</div>`;
+                    
+                    let musicaHtml = '';
+                    if (musicaUrl) {
+                        musicaHtml = `
+                        <div class="mt-2 task-card ${cls}">
+                            <h4 class="font-bold text-sm">🎵 MÚSICA ACTUAL - ${title}</h4>
+                            <a href="${musicaUrl}" 
+                               class="block mt-1 p-1 bg-[#1a1a1d] rounded text-blue-400 underline text-xs text-center"
+                               target="_blank">
+                               🎧 Música ${title} - YouTube
+                            </a>
+                        </div>
+                        `;
+                    }
+                    
+                    return `<div class="task-card ${cls}"><h4 class="font-bold text-sm">📝 TAREAS ACTUALES - ${title}</h4>${itemsHtml}</div>${musicaHtml}`;
                 }
                 
                 function buildGeneralTasksHtml(tareas) {
@@ -1600,82 +1317,81 @@
                         <h4 class="font-bold text-sm">🔄 BREAKING</h4>
                         <p class="text-xs mt-1">Tareas actuales para breaking:</p>
                         <ol class="list-decimal list-inside mt-1 space-y-1 text-xs">
-                            ${tareas.breaking ? tareas.breaking.items.map(item => `<li>${item}</li>`).join('') : ''}
+                            ${tareas.breaking && tareas.breaking.items ? tareas.breaking.items.map(item => `<li>${item}</li>`).join('') : ''}
                         </ol>
                     </div>
                     `;
                 }
                 
-                function updateRecordatorios(recordatorios) {
-                    knowledgeBase.recordatorios = {
-                        gala_final: recordatorios.gala_final,
-                        playlist_estudio: recordatorios.playlist_estudio,
-                        calendario_sesiones: recordatorios.calendario_sesiones
-                    };
-                }
-                
-                function buildFactorEsfuerzoHtml(data) {
-                    let ejemplosHtml = '';
-                    if (data.ejemplos && Array.isArray(data.ejemplos)) {
-                        ejemplosHtml = data.ejemplos.map(ejemplo => {
-                            let linksHtml = '';
-                            if (ejemplo.links && Array.isArray(ejemplo.links)) {
-                                linksHtml = ejemplo.links.map(link => {
-                                    if (link.url) {
-                                        return `<a href="${link.url}" target="_blank" class="video-link text-xs">${link.texto}</a>`;
+                function updateFactoresEsfuerzo(factores) {
+                    // Actualizar cada factor del esfuerzo con los datos del JSON
+                    Object.keys(factores).forEach(factor => {
+                        if (knowledgeBase[factor] && factores[factor]) {
+                            const factorData = factores[factor];
+                            let ejemplosHtml = '';
+                            
+                            if (factorData.ejemplos && Array.isArray(factorData.ejemplos)) {
+                                ejemplosHtml = factorData.ejemplos.map(ejemplo => {
+                                    let linksHtml = '';
+                                    if (ejemplo.links && Array.isArray(ejemplo.links)) {
+                                        linksHtml = `<div class="mt-1 flex flex-wrap">${ejemplo.links.map(link => 
+                                            `<a href="${link.url}" target="_blank" class="video-link text-xs">${link.texto}</a>`
+                                        ).join('')}</div>`;
                                     }
-                                    return '';
+                                    
+                                    return `
+                                    <div class="mt-2 example-card content-section">
+                                        <h4 class="font-bold text-sm">${ejemplo.titulo}</h4>
+                                        <p class="text-xs mt-1">${ejemplo.descripcion}</p>
+                                        ${linksHtml}
+                                    </div>
+                                    `;
                                 }).join('');
                             }
-                            return `
-                            <div class="mt-2 example-card content-section">
-                                <h4 class="font-bold text-sm">${ejemplo.titulo}</h4>
-                                <p class="text-xs mt-1">${ejemplo.descripcion}</p>
-                                <div class="mt-1 flex flex-wrap">
-                                    ${linksHtml}
-                                </div>
+                            
+                            knowledgeBase[factor].contenido = `
+                            <div class="content-section">
+                                <p class="text-sm mb-3">${factorData.descripcion}</p>
                             </div>
+                            ${ejemplosHtml}
                             `;
-                        }).join('');
-                    }
-                    
-                    return `
-                    <div class="content-section">
-                        <p class="text-sm">${data.descripcion}</p>
-                    </div>
-                    ${ejemplosHtml}
-                    `;
+                        }
+                    });
                 }
                 
-                function buildConocimientosApoyoHtml(conocimientos) {
-                    let html = `
+                function updateConocimientosApoyo(conocimientos) {
+                    let contenidoHtml = `
                     <div class="content-section">
-                        <p class="text-sm">Técnicas y movimientos específicos que complementan tu entrenamiento.</p>
+                        <p class="text-sm mb-3">Técnicas y movimientos específicos que complementan tu entrenamiento.</p>
                     </div>
                     `;
                     
-                    for (const [key, data] of Object.entries(conocimientos)) {
+                    // Procesar cada sección de conocimientos
+                    Object.keys(conocimientos).forEach(seccion => {
+                        const seccionData = conocimientos[seccion];
                         let linksHtml = '';
-                        if (data.links && Array.isArray(data.links)) {
-                            linksHtml = data.links.map(link => {
-                                if (link.url) {
+                        
+                        if (seccionData.links && Array.isArray(seccionData.links)) {
+                            linksHtml = seccionData.links.map(link => {
+                                if (link.url && link.url.trim() !== '') {
                                     return `<a href="${link.url}" target="_blank" class="video-link block text-center text-xs">${link.texto}</a>`;
                                 } else {
                                     return `<div class="video-link block text-center text-xs bg-gray-600">${link.texto}</div>`;
                                 }
                             }).join('');
                         }
-                        html += `
+                        
+                        contenidoHtml += `
                         <div class="mt-2 character-card content-section">
-                            <h4 class="font-bold text-sm">${data.titulo}</h4>
-                            ${data.descripcion ? `<p class="text-xs mt-1">${data.descripcion}</p>` : ''}
+                            <h4 class="font-bold text-sm">${seccionData.titulo}</h4>
                             <div class="mt-1 space-y-1">
                                 ${linksHtml}
                             </div>
                         </div>
                         `;
-                    }
-                    return html;
+                    });
+                    
+                    knowledgeBase.conocimientos_apoyo.contenido = contenidoHtml;
                 }
             }
 
@@ -1683,16 +1399,11 @@
             loadRemoteData(REMOTE_JSON_URL);
         })();
 
-        // Funciones de navegación
+        // === SISTEMA DE NAVEGACIÓN CORREGIDO ===
         window.goBack = function() {
-            if (chatState.history.length > 1) {
-                chatState.history.pop();
+            if (chatState.history.length > 0) {
                 const previousTopic = chatState.history.pop();
-                if (previousTopic) {
-                    startProcess(previousTopic);
-                } else {
-                    goToMenu();
-                }
+                showTopic(previousTopic);
             } else {
                 goToMenu();
             }
@@ -1701,150 +1412,39 @@
         window.goToMenu = function() {
             chatState.history = [];
             chatState.currentTopic = null;
-            const response = knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
-            addMessage(response, 'bot');
+            showTopic('inicio');
         };
 
-        // Lógica del bot COMPLETA
-        function getBotResponse(userMessage) {
-            const message = userMessage.toLowerCase().trim();
-            
-            chatState.messages.push({ type: 'user', content: userMessage, timestamp: new Date().toLocaleTimeString() });
-
-            // Guardar el tema anterior en el historial
-            if (chatState.currentTopic) {
+        window.startProcess = function(topic) {
+            if (chatState.currentTopic && chatState.currentTopic !== topic) {
                 chatState.history.push(chatState.currentTopic);
             }
+            chatState.currentTopic = topic;
+            showTopic(topic);
+        };
 
-            // Detección de todos los temas
-            if (message.includes('anuncios') || message.includes('eventos')) {
-                chatState.currentTopic = 'anuncios';
-                return formatResponse('anuncios');
-            }
-            
-            if (message.includes('normas') || message.includes('reglas')) {
-                chatState.currentTopic = 'normas';
-                return formatResponse('normas');
-            }
-            
-            if (message.includes('peso')) {
-                chatState.currentTopic = 'peso';
-                return formatResponse('peso');
-            }
-            
-            if (message.includes('tiempo')) {
-                chatState.currentTopic = 'tiempo';
-                return formatResponse('tiempo');
-            }
-            
-            if (message.includes('espacio')) {
-                chatState.currentTopic = 'espacio';
-                return formatResponse('espacio');
-            }
-            
-            if (message.includes('flujo') || message.includes('flow')) {
-                chatState.currentTopic = 'flujo';
-                return formatResponse('flujo');
-            }
-            
-            if (message.includes('personajes') || message.includes('personaje')) {
-                chatState.currentTopic = 'personajes';
-                return formatResponse('personajes');
-            }
-            
-            if (message.includes('motores') || message.includes('motor')) {
-                chatState.currentTopic = 'motores';
-                return formatResponse('motores');
-            }
-            
-            if (message.includes('elementos') || message.includes('elemento') || message.includes('fuego') || message.includes('agua') || message.includes('aire') || message.includes('tierra')) {
-                chatState.currentTopic = 'elementos';
-                return formatResponse('elementos');
-            }
-            
-            if (message.includes('tabla resumen') || message.includes('resumen')) {
-                chatState.currentTopic = 'tabla_resumen';
-                return formatResponse('tabla_resumen');
-            }
-            
-            if (message.includes('síntesis') || message.includes('sintesis')) {
-                chatState.currentTopic = 'tabla_sintesis';
-                return formatResponse('tabla_sintesis');
-            }
-            
-            if (message.includes('conocimientos') || message.includes('apoyo') || message.includes('técnica')) {
-                chatState.currentTopic = 'conocimientos_apoyo';
-                return formatResponse('conocimientos_apoyo');
-            }
-            
-            if (message.includes('tareas breaking') || message.includes('tarea breaking')) {
-                chatState.currentTopic = 'tareas_breaking';
-                return formatResponse('tareas_breaking');
-            }
-            
-            if (message.includes('tareas lira') || message.includes('tarea lira')) {
-                chatState.currentTopic = 'tareas_lira';
-                return formatResponse('tareas_lira');
-            }
-            
-            if (message.includes('tareas equipo') || message.includes('tarea equipo')) {
-                chatState.currentTopic = 'tareas_equipo';
-                return formatResponse('tareas_equipo');
-            }
-            
-            if (message.includes('tareas') || message.includes('tarea')) {
-                chatState.currentTopic = 'tareas';
-                return formatResponse('tareas');
-            }
+        window.sendMessage = function(message) {
+            processUserInput(message);
+        };
 
-            if (message.includes('ejemplos') || message.includes('ejemplo')) {
-                const topic = chatState.currentTopic || 'peso';
-                return showExamples(topic);
+        // === FUNCIONES PRINCIPALES CORREGIDAS ===
+        function showTopic(topic) {
+            const container = document.getElementById('chat-container');
+            container.innerHTML = '';
+            
+            if (knowledgeBase[topic]) {
+                const content = knowledgeBase[topic].titulo + knowledgeBase[topic].contenido;
+                const question = knowledgeBase[topic].pregunta ? 
+                    `<p class="mt-3 font-medium text-sm">${knowledgeBase[topic].pregunta}</p>` : '';
+                
+                const navButtons = knowledgeBase[topic].navButtons ? getNavigationButtons() : '';
+                
+                addMessage(content + question + navButtons, 'bot');
+            } else {
+                addMessage(`<p class="text-sm">El tema "${topic}" no está disponible.</p>${getNavigationButtons()}`, 'bot');
             }
-
-            if (message.includes('hola') || message.includes('inicio') || message.includes('menu')) {
-                chatState.currentTopic = null;
-                chatState.history = [];
-                return knowledgeBase.inicio.titulo + knowledgeBase.inicio.contenido;
-            }
-
-            // Respuesta por defecto
-            return `
-            <p class="text-sm">No entendí eso. Prueba con uno de estos temas:</p>
-            <div class="flex flex-wrap gap-1 mt-2">
-                <button class="concept-tag" onclick="startProcess('peso')">Peso</button>
-                <button class="concept-tag" onclick="startProcess('tiempo')">Tiempo</button>
-                <button class="concept-tag" onclick="startProcess('espacio')">Espacio</button>
-                <button class="concept-tag" onclick="startProcess('flujo')">Flujo</button>
-                <button class="concept-tag" onclick="startProcess('personajes')">🎭 Pers</button>
-                <button class="concept-tag" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
-                <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
-                <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
-                <button class="concept-tag" onclick="startProcess('anuncios')">📣 Anun</button>
-            </div>
-            ${getNavigationButtons()}
-            `;
         }
 
-        // Función para formatear respuestas con navegación
-        function formatResponse(topic) {
-            if (!knowledgeBase[topic]) {
-                return `<p class="text-sm">El tema "${topic}" no está disponible.</p>${getNavigationButtons()}`;
-            }
-            
-            const content = knowledgeBase[topic].titulo + knowledgeBase[topic].contenido;
-            const examplesButton = knowledgeBase[topic].ejemplos ? 
-                `<div class="flex flex-wrap gap-1 mt-2"><button class="action-button text-xs" onclick="showExamplesWrapper('${topic}')">💡 Ver Ejemplos</button></div>` : '';
-            
-            const question = knowledgeBase[topic].pregunta ? 
-                `<p class="mt-2 font-medium text-sm">${knowledgeBase[topic].pregunta}</p>` : '';
-            
-            const navButtons = knowledgeBase[topic].navButtons ? getNavigationButtons() : '';
-            
-            return content + examplesButton + question + navButtons;
-        }
-
-        // Función para obtener botones de navegación
         function getNavigationButtons() {
             return `
             <div class="nav-buttons-container">
@@ -1865,65 +1465,94 @@
             `;
         }
 
-        // Funciones Auxiliares de Interfaz
-        window.showExamplesWrapper = function(topic) {
-            const exampleContent = showExamples(topic);
-            addMessage(exampleContent, 'bot');
-        }
-
-        function showExamples(topic) {
-            if (knowledgeBase[topic] && knowledgeBase[topic].ejemplos) {
-                return `
-                ${knowledgeBase[topic].ejemplos}
-                <div class="flex flex-wrap gap-1 mt-2">
-                    <button class="action-button text-xs" onclick="quickAccess('${topic}')">📖 Volver</button>
-                    <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Resumen</button>
-                </div>
-                ${getNavigationButtons()}
-                `;
-            }
-            return `<p class="text-sm">No hay ejemplos disponibles para ${topic}.</p>${getNavigationButtons()}`;
-        }
-        
-        // Funciones Globales para HTML (onclick)
-        window.startProcess = function(step) {
-            chatState.currentTopic = step;
-            const response = getBotResponse(step);
-            addMessage(response, 'bot');
-        };
-
-        window.quickAccess = function(concept) {
-            sendMessage(concept);
-        };
-
-        window.sendMessage = function(message) {
-            const input = document.getElementById('user-input');
-            input.value = message;
-            document.getElementById('chat-form').dispatchEvent(new Event('submit', { cancelable: true }));
-        };
-
-        // Manejador de Formulario Principal
-        document.getElementById('chat-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const input = document.getElementById('user-input');
-            const message = input.value.trim();
+        function processUserInput(userMessage) {
+            const message = userMessage.toLowerCase().trim();
             
-            if (!message) return;
+            addMessage(userMessage, 'user');
 
-            addMessage(message, 'user');
-            input.value = '';
+            // Mapeo de comandos a temas
+            const commandMap = {
+                'anuncios': 'anuncios',
+                'eventos': 'anuncios',
+                'normas': 'normas',
+                'reglas': 'normas',
+                'peso': 'peso',
+                'tiempo': 'tiempo',
+                'espacio': 'espacio',
+                'flujo': 'flujo',
+                'flow': 'flujo',
+                'personajes': 'personajes',
+                'personaje': 'personajes',
+                'motores': 'motores',
+                'motor': 'motores',
+                'elementos': 'elementos',
+                'elemento': 'elementos',
+                'fuego': 'elementos',
+                'agua': 'elementos',
+                'aire': 'elementos',
+                'tierra': 'elementos',
+                'tabla resumen': 'tabla_resumen',
+                'resumen': 'tabla_resumen',
+                'conocimientos': 'conocimientos_apoyo',
+                'apoyo': 'conocimientos_apoyo',
+                'técnica': 'conocimientos_apoyo',
+                'tareas breaking': 'tareas_breaking',
+                'tarea breaking': 'tareas_breaking',
+                'tareas lira': 'tareas_lira',
+                'tarea lira': 'tareas_lira',
+                'tareas equipo': 'tareas_equipo',
+                'tarea equipo': 'tareas_equipo',
+                'tareas': 'tareas',
+                'tarea': 'tareas',
+                'ejemplos': 'ejemplos',
+                'ejemplo': 'ejemplos',
+                'hola': 'inicio',
+                'inicio': 'inicio',
+                'menu': 'inicio'
+            };
 
-            setTimeout(() => {
-                const response = getBotResponse(message);
-                addMessage(response, 'bot');
-                
-                chatState.messages.push({
-                    type: 'bot', 
-                    content: 'Respondió a: ' + message,
-                    timestamp: new Date().toLocaleTimeString()
-                });
-            }, 500);
-        });
+            let topic = null;
+            
+            // Buscar coincidencias exactas primero
+            for (const [key, value] of Object.entries(commandMap)) {
+                if (message === key.toLowerCase()) {
+                    topic = value;
+                    break;
+                }
+            }
+            
+            // Si no hay coincidencia exacta, buscar parcial
+            if (!topic) {
+                for (const [key, value] of Object.entries(commandMap)) {
+                    if (message.includes(key)) {
+                        topic = value;
+                        break;
+                    }
+                }
+            }
+
+            if (topic) {
+                startProcess(topic);
+            } else {
+                setTimeout(() => {
+                    addMessage(`
+                    <p class="text-sm">No entendí eso. Prueba con uno de estos temas:</p>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <button class="concept-tag" onclick="startProcess('peso')">Peso</button>
+                        <button class="concept-tag" onclick="startProcess('tiempo')">Tiempo</button>
+                        <button class="concept-tag" onclick="startProcess('espacio')">Espacio</button>
+                        <button class="concept-tag" onclick="startProcess('flujo')">Flujo</button>
+                        <button class="concept-tag" onclick="startProcess('personajes')">🎭 Pers</button>
+                        <button class="concept-tag" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
+                        <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
+                        <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
+                        <button class="concept-tag" onclick="startProcess('anuncios')">📣 Anun</button>
+                    </div>
+                    ${getNavigationButtons()}
+                    `, 'bot');
+                }, 500);
+            }
+        }
 
         function addMessage(content, sender) {
             const container = document.getElementById('chat-container');
@@ -1938,20 +1567,36 @@
             messageDiv.innerHTML = content;
             container.appendChild(messageDiv);
             
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    messageDiv.style.opacity = 1;
-                    messageDiv.style.transform = 'translateY(0)';
-                });
-            });
+            // Animación
+            setTimeout(() => {
+                messageDiv.style.opacity = 1;
+                messageDiv.style.transform = 'translateY(0)';
+            }, 10);
             
             container.scrollTop = container.scrollHeight;
         }
 
+        // Manejador del formulario
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            processUserInput(message);
+            input.value = '';
+        });
+
         // Inicialización
-        console.log("✅ Guía de Estudio 'Dilo con Movimiento' cargada.");
-        
-        // Ajustar altura del contenedor de chat
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("✅ Guía de Estudio 'Dilo con Movimiento' cargada.");
+            goToMenu(); // Mostrar menú principal al cargar
+            
+            // Ajustar altura del chat
+            adjustChatHeight();
+        });
+
         function adjustChatHeight() {
             const chatContainer = document.getElementById('chat-container');
             const header = document.querySelector('header');
@@ -1965,13 +1610,9 @@
                 
                 chatContainer.style.height = `${chatHeight}px`;
                 chatContainer.style.maxHeight = `${chatHeight}px`;
-            } else {
-                chatContainer.style.height = '';
-                chatContainer.style.maxHeight = '';
             }
         }
 
-        window.addEventListener('load', adjustChatHeight);
         window.addEventListener('resize', adjustChatHeight);
         window.addEventListener('orientationchange', adjustChatHeight);
     </script>
