@@ -276,6 +276,58 @@
             border-left: 3px solid #10b981;
         }
         
+        .character-input {
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            background: #1a1a1d;
+            border: 1px solid #555;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .character-textarea {
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            background: #1a1a1d;
+            border: 1px solid #555;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.8rem;
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .motor-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .motor-option {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px;
+            background: #1a1a1d;
+            border: 1px solid #555;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .motor-option:hover {
+            background: #2a2a2d;
+        }
+        
+        .motor-option.selected {
+            background: #c3073f;
+            border-color: #c3073f;
+        }
+        
         /* Mobile-first responsive design */
         @media (max-width: 640px) {
             body {
@@ -416,6 +468,14 @@
             
             li {
                 margin-bottom: 4px;
+            }
+            
+            .motor-selector {
+                flex-direction: column;
+            }
+            
+            .motor-option {
+                min-width: 100%;
             }
         }
         
@@ -643,6 +703,7 @@
             <div class="footer-buttons flex flex-wrap gap-1 justify-center">
                 <button class="action-button text-xs" onclick="sendMessage('ejemplos')">💡 Ejemplos</button>
                 <button class="action-button text-xs" onclick="sendMessage('personajes')">🎭 Pers</button>
+                <button class="action-button text-xs" onclick="sendMessage('construccion personaje')">👤 Crear Pers</button>
                 <button class="action-button text-xs" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
                 <button class="action-button text-xs" onclick="sendMessage('tareas lira')">🔄 Lira</button>
                 <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">👥 Eq</button>
@@ -659,7 +720,8 @@
         const chatState = {
             currentTopic: null,
             history: [],
-            firstLoad: true
+            firstLoad: true,
+            characterData: {}
         };
 
         // Base de conocimiento LOCAL COMPLETA
@@ -671,6 +733,15 @@
                 
                 <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
                     <h4 class="font-bold text-[#c3073f] mb-2 text-center">📚 TEMAS DE ESTUDIO</h4>
+                    
+                    <h5 class="font-bold mt-2 text-sm">🎭 CONSTRUCCIÓN DE PERSONAJE</h5>
+                    <div class="process-step" onclick="startProcess('construccion_personaje')">
+                        <div class="step-number">🎭</div>
+                        <div>
+                            <div class="font-medium text-sm">Construcción de Personaje</div>
+                            <div class="text-xs text-gray-400">Guía completa paso a paso</div>
+                        </div>
+                    </div>
                     
                     <h5 class="font-bold mt-2 text-sm">⚖️ FACTORES DEL ESFUERZO</h5>
                     <div class="process-step" onclick="startProcess('peso')">
@@ -886,6 +957,119 @@
                 navButtons: true
             },
 
+            // CONSTRUCCIÓN DE PERSONAJES - NUEVA SECCIÓN COMPLETA
+            construccion_personaje: {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🎭 CONSTRUCCIÓN DE PERSONAJE</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm mb-3">Guía completa para desarrollar tu personaje en el mundo post-apocalíptico.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🌍 CONCEPTO DEL MUNDO</h4>
+                    <p class="text-xs mt-1">Nuestro espectáculo está basado en un mundo devastado por la sobre tecnologización y el colapso ambiental, donde un pequeño grupo de sobrevivientes redescubre la fuerza de la conexión humana a través del cuerpo, el movimiento y la memoria emocional.</p>
+                    <p class="text-xs mt-1"><strong>En una tierra donde ya no hay palabras, los cuerpos hablan, se enfrentan, recuerdan y resisten.</strong></p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🌿 SERES DEL BOSQUE (Lira)</h4>
+                    <p class="text-xs mt-1">Hadas, Elfos, Faunos y animales que defienden los bosques y la naturaleza, perpetuando la vida, la lucha y la defensa de estos espacios, así como la belleza y la delicadeza.</p>
+                    <div class="mt-1">
+                        <span class="element-tag water">Agua</span>
+                        <span class="element-tag earth">Tierra</span>
+                        <span class="element-tag air">Aire</span>
+                    </div>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🤖 HUMANOS Y SERES "DAÑADOS" (Breakin)</h4>
+                    <p class="text-xs mt-1">Seres que simbolizan la fuerza, la resistencia, la adaptabilidad y la confrontación. Zombies, Humanos con partes cyborg, Cyborgs, Robots y Mutantes que representan la ira, desesperanza y tristeza de los seres 'dañados', pero que aún conservan amor y cuidado dentro de sí.</p>
+                    <div class="mt-1">
+                        <span class="element-tag fire">Fuego</span>
+                        <span class="element-tag earth">Tierra</span>
+                    </div>
+                </div>
+                
+                <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                    <h4 class="font-bold text-[#c3073f] mb-2 text-center">📝 GUÍA DE CONSTRUCCIÓN</h4>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(1)">
+                        <div class="step-number">1</div>
+                        <div>
+                            <div class="font-medium text-sm">Nombre y Edad</div>
+                            <div class="text-xs text-gray-400">Identidad básica</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(3)">
+                        <div class="step-number">2</div>
+                        <div>
+                            <div class="font-medium text-sm">Motores de Movimiento</div>
+                            <div class="text-xs text-gray-400">Origen del movimiento</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(4)">
+                        <div class="step-number">3</div>
+                        <div>
+                            <div class="font-medium text-sm">Elemento</div>
+                            <div class="text-xs text-gray-400">Energía vital</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(5)">
+                        <div class="step-number">4</div>
+                        <div>
+                            <div class="font-medium text-sm">Historia Antes</div>
+                            <div class="text-xs text-gray-400">¿Quién fue?</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(6)">
+                        <div class="step-number">5</div>
+                        <div>
+                            <div class="font-medium text-sm">Transformación</div>
+                            <div class="text-xs text-gray-400">¿Qué cambió?</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(7)">
+                        <div class="step-number">6</div>
+                        <div>
+                            <div class="font-medium text-sm">Aportes</div>
+                            <div class="text-xs text-gray-400">Propósito en el nuevo mundo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(8)">
+                        <div class="step-number">7</div>
+                        <div>
+                            <div class="font-medium text-sm">Emociones</div>
+                            <div class="text-xs text-gray-400">Antes y después</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(9)">
+                        <div class="step-number">8</div>
+                        <div>
+                            <div class="font-medium text-sm">Aspecto Visual</div>
+                            <div class="text-xs text-gray-400">Apariencia y vestimenta</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="showCharacterQuestion(10)">
+                        <div class="step-number">9</div>
+                        <div>
+                            <div class="font-medium text-sm">Maquillaje</div>
+                            <div class="text-xs text-gray-400">Propuesta final</div>
+                        </div>
+                    </div>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar alguna pregunta específica de construcción?',
+                navButtons: true
+            },
+
             // CONSTRUCCIÓN DE PERSONAJES
             personajes: {
                 titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🎭 CONSTRUCCIÓN DE PERSONAJES</h3>',
@@ -921,25 +1105,41 @@
                 titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">⚙️ MOTORES DE MOVIMIENTO</h3>',
                 contenido: `
                 <div class="content-section">
-                    <p class="text-sm mb-3">El movimiento de tu personaje nace desde una zona del cuerpo.</p>
+                    <p class="text-sm mb-3">El movimiento de tu personaje nace desde una zona del cuerpo. <strong>Escoge máximo dos motores:</strong> cabeza, pecho, brazos, pelvis o piernas.</p>
+                    <p class="text-xs text-gray-400 mb-3">Imagina que el movimiento nace desde una zona (motor principal) y se propaga al resto, guiando cómo camina, se expresa y habita el espacio.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
-                    <h4 class="font-bold text-sm">CABEZA</h4>
-                    <p class="text-xs mt-1">Movimiento desde la conciencia, el pensamiento y la mirada.</p>
+                    <h4 class="font-bold text-sm">🧠 CABEZA</h4>
+                    <p class="text-xs mt-1">Movimiento desde el <strong>pensamiento, conciencia y dirección</strong>. Personajes cerebrales, observadores, estratégicos.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
-                    <h4 class="font-bold text-sm">PECHO</h4>
-                    <p class="text-xs mt-1">Movimiento desde las emociones y el corazón.</p>
+                    <h4 class="font-bold text-sm">💖 PECHO</h4>
+                    <p class="text-xs mt-1">Movimiento desde las <strong>emociones, corazón y respiración</strong>. Personajes sentimentales, expresivos, conectados.</p>
                 </div>
                 
                 <div class="mt-2 character-card content-section">
-                    <h4 class="font-bold text-sm">CADERA/PELVIS</h4>
-                    <p class="text-xs mt-1">Movimiento desde el instinto y la vitalidad.</p>
+                    <h4 class="font-bold text-sm">🦾 BRAZOS</h4>
+                    <p class="text-xs mt-1">Movimiento desde la <strong>expresión, alcance y conexión</strong>. Personajes gestuales, comunicativos, que buscan contacto.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🦿 PELVIS</h4>
+                    <p class="text-xs mt-1">Movimiento desde el <strong>instinto, vitalidad y centro</strong>. Personajes terrenales, sensuales, conectados a sus impulsos.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🦵 PIERNAS</h4>
+                    <p class="text-xs mt-1">Movimiento desde el <strong>desplazamiento, raíz y movimiento</strong>. Personajes viajeros, nómadas, con fuerte conexión al suelo.</p>
+                </div>
+                
+                <div class="mt-2 rules-card">
+                    <h4 class="font-bold text-sm">💡 RECOMENDACIÓN</h4>
+                    <p class="text-xs mt-1">Combina un motor principal (que domina el movimiento) con un motor secundario (que complementa). Por ejemplo: <strong>Pecho (principal) + Brazos (secundario)</strong> para un personaje emocional y expresivo.</p>
                 </div>
                 `,
-                pregunta: '¿Quieres explorar los elementos o volver a los personajes?',
+                pregunta: '¿Quieres explorar los elementos o volver a la construcción de personaje?',
                 navButtons: true
             },
 
@@ -1052,7 +1252,9 @@
                                 <td class="p-1">
                                     <strong>Cabeza:</strong> Pensar<br>
                                     <strong>Pecho:</strong> Emoción<br>
-                                    <strong>Cadera:</strong> Instinto
+                                    <strong>Brazos:</strong> Expresión<br>
+                                    <strong>Pelvis:</strong> Instinto<br>
+                                    <strong>Piernas:</strong> Movimiento
                                 </td>
                                 <td class="p-1">
                                     <span class="element-tag fire">Fuego</span><br>
@@ -1393,6 +1595,11 @@
                     updateTablaSintesis(remote.tabla_sintesis);
                 }
 
+                // Procesar CONSTRUCCIÓN DE PERSONAJE
+                if (remote.construccion_personaje && typeof remote.construccion_personaje === 'object') {
+                    updateConstruccionPersonaje(remote.construccion_personaje);
+                }
+
                 // Funciones auxiliares:
                 function buildTaskSectionHtml(title, itemsArray, musicaUrl) {
                     const itemsHtml = `<ol class="list-decimal list-inside mt-1 space-y-1 text-xs">${itemsArray.map(i => `<li>${i}</li>`).join('')}</ol>`;
@@ -1590,6 +1797,130 @@
                         return str.charAt(0).toUpperCase() + str.slice(1);
                     }
                 }
+
+                function updateConstruccionPersonaje(construccion) {
+                    if (!construccion.secciones) return;
+                    
+                    let contenidoHtml = `
+                    <div class="content-section">
+                        <p class="text-sm mb-3">${construccion.descripcion}</p>
+                    </div>
+                    `;
+                    
+                    // Procesar cada sección
+                    construccion.secciones.forEach(seccion => {
+                        if (seccion.titulo === 'CONCEPTO DEL MUNDO') {
+                            contenidoHtml += `
+                            <div class="mt-2 character-card content-section">
+                                <h4 class="font-bold text-sm">🌍 ${seccion.titulo}</h4>
+                                <p class="text-xs mt-1">${seccion.contenido}</p>
+                            </div>
+                            `;
+                        } else if (seccion.titulo === 'GRUPOS DE PERSONAJES') {
+                            contenidoHtml += `
+                            <div class="mt-2 character-card content-section">
+                                <h4 class="font-bold text-sm">🌿 ${seccion.contenido.seres_bosque.nombre}</h4>
+                                <p class="text-xs mt-1">${seccion.contenido.seres_bosque.descripcion}</p>
+                                <div class="mt-1">
+                                    <span class="element-tag water">Agua</span>
+                                    <span class="element-tag earth">Tierra</span>
+                                    <span class="element-tag air">Aire</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-2 character-card content-section">
+                                <h4 class="font-bold text-sm">🤖 ${seccion.contenido.seres_dañados.nombre}</h4>
+                                <p class="text-xs mt-1">${seccion.contenido.seres_dañados.descripcion}</p>
+                                <div class="mt-1">
+                                    <span class="element-tag fire">Fuego</span>
+                                    <span class="element-tag earth">Tierra</span>
+                                </div>
+                            </div>
+                            `;
+                        }
+                    });
+                    
+                    // Agregar la guía de construcción
+                    contenidoHtml += `
+                    <div class="mt-3 p-2 bg-[#1a1a1d] rounded-lg content-section">
+                        <h4 class="font-bold text-[#c3073f] mb-2 text-center">📝 GUÍA DE CONSTRUCCIÓN</h4>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(1)">
+                            <div class="step-number">1</div>
+                            <div>
+                                <div class="font-medium text-sm">Nombre y Edad</div>
+                                <div class="text-xs text-gray-400">Identidad básica</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(3)">
+                            <div class="step-number">2</div>
+                            <div>
+                                <div class="font-medium text-sm">Motores de Movimiento</div>
+                                <div class="text-xs text-gray-400">Origen del movimiento</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(4)">
+                            <div class="step-number">3</div>
+                            <div>
+                                <div class="font-medium text-sm">Elemento</div>
+                                <div class="text-xs text-gray-400">Energía vital</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(5)">
+                            <div class="step-number">4</div>
+                            <div>
+                                <div class="font-medium text-sm">Historia Antes</div>
+                                <div class="text-xs text-gray-400">¿Quién fue?</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(6)">
+                            <div class="step-number">5</div>
+                            <div>
+                                <div class="font-medium text-sm">Transformación</div>
+                                <div class="text-xs text-gray-400">¿Qué cambió?</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(7)">
+                            <div class="step-number">6</div>
+                            <div>
+                                <div class="font-medium text-sm">Aportes</div>
+                                <div class="text-xs text-gray-400">Propósito en el nuevo mundo</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(8)">
+                            <div class="step-number">7</div>
+                            <div>
+                                <div class="font-medium text-sm">Emociones</div>
+                                <div class="text-xs text-gray-400">Antes y después</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(9)">
+                            <div class="step-number">8</div>
+                            <div>
+                                <div class="font-medium text-sm">Aspecto Visual</div>
+                                <div class="text-xs text-gray-400">Apariencia y vestimenta</div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step" onclick="showCharacterQuestion(10)">
+                            <div class="step-number">9</div>
+                            <div>
+                                <div class="font-medium text-sm">Maquillaje</div>
+                                <div class="text-xs text-gray-400">Propuesta final</div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    
+                    knowledgeBase.construccion_personaje.contenido = contenidoHtml;
+                }
             }
 
             // Ejecutar carga en background
@@ -1662,6 +1993,333 @@
             `;
         }
 
+        // Función para mostrar preguntas específicas de construcción de personaje
+        window.showCharacterQuestion = function(questionNumber) {
+            const questions = {
+                1: {
+                    titulo: "📝 NOMBRE Y EDAD",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">1- ¿Cuál es su nombre?</h4>
+                        <p class="text-xs text-gray-400 mt-1">El nombre que identifica a tu personaje en este mundo post-apocalíptico.</p>
+                        <input type="text" class="character-input" placeholder="Escribe el nombre aquí..." id="char-name">
+                    </div>
+                    
+                    <div class="content-section mt-3">
+                        <h4 class="font-bold text-sm">2- ¿Cuántos años tiene?</h4>
+                        <p class="text-xs text-gray-400 mt-1">La edad cronológica o aparente de tu personaje.</p>
+                        <input type="number" class="character-input" placeholder="Edad en años..." id="char-age">
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(1)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                3: {
+                    titulo: "⚙️ MOTORES DE MOVIMIENTO",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">3- ¿Cuál es o son sus motores de movimiento?</h4>
+                        <p class="text-xs text-gray-400 mt-1">Escoge máximo dos motores: cabeza, pecho, brazos, pelvis o piernas.</p>
+                        <p class="text-xs text-gray-400 mt-1">Imagina que el movimiento de tu personaje nace desde una zona del cuerpo (su motor principal) y desde ahí se propaga al resto, guiando la forma en que camina, se expresa y habita el espacio.</p>
+                    </div>
+                    
+                    <div class="motor-selector">
+                        <div class="motor-option" onclick="selectMotor(this, 'cabeza')">
+                            <div class="font-bold">🧠 CABEZA</div>
+                            <div class="text-xs mt-1">Pensamiento y dirección</div>
+                        </div>
+                        <div class="motor-option" onclick="selectMotor(this, 'pecho')">
+                            <div class="font-bold">💖 PECHO</div>
+                            <div class="text-xs mt-1">Emociones y corazón</div>
+                        </div>
+                        <div class="motor-option" onclick="selectMotor(this, 'brazos')">
+                            <div class="font-bold">🦾 BRAZOS</div>
+                            <div class="text-xs mt-1">Expresión y conexión</div>
+                        </div>
+                        <div class="motor-option" onclick="selectMotor(this, 'pelvis')">
+                            <div class="font-bold">🦿 PELVIS</div>
+                            <div class="text-xs mt-1">Instinto y vitalidad</div>
+                        </div>
+                        <div class="motor-option" onclick="selectMotor(this, 'piernas')">
+                            <div class="font-bold">🦵 PIERNAS</div>
+                            <div class="text-xs mt-1">Desplazamiento y raíz</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p class="text-xs font-bold">Motores seleccionados:</p>
+                        <p class="text-xs" id="selected-motors">Ninguno seleccionado</p>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveMotors()">💾 Guardar Motores</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                4: {
+                    titulo: "🌊 ELEMENTO",
+                    contenido: knowledgeBase.elementos.contenido + `
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver a Construcción</button>
+                        <button class="nav-button flex-1" onclick="goToMenu()">🏠 Menú Principal</button>
+                    </div>
+                    `
+                },
+                5: {
+                    titulo: "📖 HISTORIA ANTES DEL APOCALIPSIS",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">5- En un par de líneas describe ¿quién fue antes del apocalipsis?</h4>
+                        <p class="text-xs text-gray-400 mt-1">Señala todas las características que se te puedan ocurrir: profesión, personalidad, sueños, etc.</p>
+                        <textarea class="character-textarea" placeholder="Describe quién era tu personaje antes del apocalipsis..." id="char-before"></textarea>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(5)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                6: {
+                    titulo: "🔄 TRANSFORMACIÓN",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">6- ¿Es la misma persona después del apocalipsis? ¿Qué características mantiene? ¿Cuáles cambiaron?</h4>
+                        <p class="text-xs text-gray-400 mt-1">Reflexiona sobre cómo los eventos han transformado a tu personaje.</p>
+                        <textarea class="character-textarea" placeholder="Describe los cambios y lo que se mantiene..." id="char-transformation"></textarea>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(6)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                7: {
+                    titulo: "🌟 APORTES AL NUEVO MUNDO",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">7- ¿Cuáles son sus aportes para este nuevo mundo post-apocalíptico?</h4>
+                        <p class="text-xs text-gray-400 mt-1">Imagina que tu personaje forma parte de la reconstrucción de un mundo que ha cambiado para siempre. Piensa qué lo mueve, qué defiende, qué busca preservar o transformar a través de su existencia.</p>
+                        <textarea class="character-textarea" placeholder="Describe los aportes y motivaciones de tu personaje..." id="char-contributions"></textarea>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(7)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                8: {
+                    titulo: "😊 EMOCIONES",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">8- ¿Qué emociones predominan antes y después del apocalipsis en tu personaje?</h4>
+                        <p class="text-xs text-gray-400 mt-1">Reflexiona sobre el estado emocional de tu personaje en ambas etapas.</p>
+                        
+                        <div class="mt-3">
+                            <h5 class="font-bold text-sm">Antes:</h5>
+                            <input type="text" class="character-input" placeholder="Emociones predominantes antes del apocalipsis..." id="char-emotions-before">
+                        </div>
+                        
+                        <div class="mt-3">
+                            <h5 class="font-bold text-sm">Después:</h5>
+                            <input type="text" class="character-input" placeholder="Emociones predominantes después del apocalipsis..." id="char-emotions-after">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(8)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                9: {
+                    titulo: "🎨 ASPECTO VISUAL",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">9- ¿Cómo te imaginas el aspecto de tu personaje?</h4>
+                        <p class="text-xs text-gray-400 mt-1">Haz un dibujo o encuentra una imagen referencial y pégala, que te permita visualizar este aspecto, ya sea en maquillaje y vestimenta.</p>
+                        <textarea class="character-textarea" placeholder="Describe el aspecto visual de tu personaje: vestimenta, accesorios, características físicas..." id="char-appearance"></textarea>
+                        <p class="text-xs text-gray-400 mt-2">💡 Consejo: Puedes adjuntar una imagen en tu cuaderno o carpeta digital.</p>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(9)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                },
+                10: {
+                    titulo: "💄 PROPUESTA DE MAQUILLAJE",
+                    contenido: `
+                    <div class="content-section">
+                        <h4 class="font-bold text-sm">10- Propuesta de maquillaje para tu personaje</h4>
+                        <p class="text-xs text-gray-400 mt-1">Crea a continuación una propuesta de maquillaje para tu personaje, la cual se pondrá en práctica la siguiente sesión.</p>
+                        <textarea class="character-textarea" placeholder="Describe tu propuesta de maquillaje: colores, formas, símbolos..." id="char-makeup"></textarea>
+                    </div>
+                    
+                    <div class="mt-3 flex gap-2">
+                        <button class="nav-button flex-1" onclick="saveCharacterData(10)">💾 Guardar</button>
+                        <button class="nav-button flex-1" onclick="startProcess('construccion_personaje')">← Volver</button>
+                    </div>
+                    `
+                }
+            };
+
+            if (questions[questionNumber]) {
+                const container = document.getElementById('chat-container');
+                container.innerHTML = '';
+                
+                const content = `<h3 class="font-bold text-[#3a86ff] text-sm mb-2">${questions[questionNumber].titulo}</h3>` + 
+                               questions[questionNumber].contenido;
+                
+                addMessage(content, 'bot');
+                
+                // Cargar datos guardados si existen
+                loadCharacterData(questionNumber);
+            }
+        }
+
+        // Funciones auxiliares para construcción de personaje
+        let selectedMotors = [];
+
+        window.selectMotor = function(element, motor) {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                selectedMotors = selectedMotors.filter(m => m !== motor);
+            } else {
+                if (selectedMotors.length < 2) {
+                    element.classList.add('selected');
+                    selectedMotors.push(motor);
+                } else {
+                    alert('Solo puedes seleccionar máximo 2 motores');
+                }
+            }
+            
+            updateSelectedMotorsDisplay();
+        }
+
+        function updateSelectedMotorsDisplay() {
+            const display = document.getElementById('selected-motors');
+            if (display) {
+                if (selectedMotors.length === 0) {
+                    display.textContent = 'Ninguno seleccionado';
+                } else {
+                    const motorNames = {
+                        'cabeza': '🧠 Cabeza',
+                        'pecho': '💖 Pecho', 
+                        'brazos': '🦾 Brazos',
+                        'pelvis': '🦿 Pelvis',
+                        'piernas': '🦵 Piernas'
+                    };
+                    display.textContent = selectedMotors.map(m => motorNames[m]).join(', ');
+                }
+            }
+        }
+
+        window.saveMotors = function() {
+            if (selectedMotors.length === 0) {
+                alert('Por favor selecciona al menos un motor');
+                return;
+            }
+            
+            chatState.characterData.motors = [...selectedMotors];
+            alert('✅ Motores guardados: ' + selectedMotors.join(', '));
+            startProcess('construccion_personaje');
+        }
+
+        window.saveCharacterData = function(questionNumber) {
+            const dataMap = {
+                1: {
+                    name: document.getElementById('char-name')?.value,
+                    age: document.getElementById('char-age')?.value
+                },
+                5: {
+                    beforeApocalypse: document.getElementById('char-before')?.value
+                },
+                6: {
+                    transformation: document.getElementById('char-transformation')?.value
+                },
+                7: {
+                    contributions: document.getElementById('char-contributions')?.value
+                },
+                8: {
+                    emotionsBefore: document.getElementById('char-emotions-before')?.value,
+                    emotionsAfter: document.getElementById('char-emotions-after')?.value
+                },
+                9: {
+                    appearance: document.getElementById('char-appearance')?.value
+                },
+                10: {
+                    makeup: document.getElementById('char-makeup')?.value
+                }
+            };
+
+            if (dataMap[questionNumber]) {
+                Object.assign(chatState.characterData, dataMap[questionNumber]);
+                alert('✅ Información guardada correctamente');
+                startProcess('construccion_personaje');
+            }
+        }
+
+        function loadCharacterData(questionNumber) {
+            if (!chatState.characterData) return;
+
+            const loadMap = {
+                1: () => {
+                    const nameInput = document.getElementById('char-name');
+                    const ageInput = document.getElementById('char-age');
+                    if (nameInput && chatState.characterData.name) nameInput.value = chatState.characterData.name;
+                    if (ageInput && chatState.characterData.age) ageInput.value = chatState.characterData.age;
+                },
+                3: () => {
+                    if (chatState.characterData.motors) {
+                        selectedMotors = [...chatState.characterData.motors];
+                        chatState.characterData.motors.forEach(motor => {
+                            const element = document.querySelector(`[onclick*="${motor}"]`);
+                            if (element) element.classList.add('selected');
+                        });
+                        updateSelectedMotorsDisplay();
+                    }
+                },
+                5: () => {
+                    const input = document.getElementById('char-before');
+                    if (input && chatState.characterData.beforeApocalypse) input.value = chatState.characterData.beforeApocalypse;
+                },
+                6: () => {
+                    const input = document.getElementById('char-transformation');
+                    if (input && chatState.characterData.transformation) input.value = chatState.characterData.transformation;
+                },
+                7: () => {
+                    const input = document.getElementById('char-contributions');
+                    if (input && chatState.characterData.contributions) input.value = chatState.characterData.contributions;
+                },
+                8: () => {
+                    const beforeInput = document.getElementById('char-emotions-before');
+                    const afterInput = document.getElementById('char-emotions-after');
+                    if (beforeInput && chatState.characterData.emotionsBefore) beforeInput.value = chatState.characterData.emotionsBefore;
+                    if (afterInput && chatState.characterData.emotionsAfter) afterInput.value = chatState.characterData.emotionsAfter;
+                },
+                9: () => {
+                    const input = document.getElementById('char-appearance');
+                    if (input && chatState.characterData.appearance) input.value = chatState.characterData.appearance;
+                },
+                10: () => {
+                    const input = document.getElementById('char-makeup');
+                    if (input && chatState.characterData.makeup) input.value = chatState.characterData.makeup;
+                }
+            };
+
+            if (loadMap[questionNumber]) {
+                loadMap[questionNumber]();
+            }
+        }
+
         function processUserInput(userMessage) {
             const message = userMessage.toLowerCase().trim();
             
@@ -1680,6 +2338,11 @@
                 'flow': 'flujo',
                 'personajes': 'personajes',
                 'personaje': 'personajes',
+                'construccion personaje': 'construccion_personaje',
+                'construcción personaje': 'construccion_personaje',
+                'construccion': 'construccion_personaje',
+                'construcción': 'construccion_personaje',
+                'crear personaje': 'construccion_personaje',
                 'motores': 'motores',
                 'motor': 'motores',
                 'elementos': 'elementos',
@@ -1744,6 +2407,7 @@
                         <button class="concept-tag" onclick="startProcess('espacio')">Espacio</button>
                         <button class="concept-tag" onclick="startProcess('flujo')">Flujo</button>
                         <button class="concept-tag" onclick="startProcess('personajes')">🎭 Pers</button>
+                        <button class="concept-tag" onclick="startProcess('construccion_personaje')">👤 Crear</button>
                         <button class="concept-tag" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
                         <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
                         <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
