@@ -648,20 +648,21 @@
                 <button class="action-button text-xs" onclick="sendMessage('tareas equipo')">👥 Eq</button>
                 <button class="action-button text-xs" onclick="sendMessage('normas')">📜 Norm</button>
                 <button class="action-button text-xs" onclick="sendMessage('tabla resumen')">📊 Res</button>
+                <button class="action-button text-xs" onclick="sendMessage('tabla síntesis')">🔗 Sint</button>
                 <button class="action-button text-xs" onclick="sendMessage('anuncios')">📣 Anun</button>
             </div>
         </footer>
     </div>
 
     <script>
-        // Estado de la conversación - CORREGIDO
+        // Estado de la conversación
         const chatState = {
             currentTopic: null,
             history: [],
             firstLoad: true
         };
 
-        // Base de conocimiento LOCAL COMPLETA con todas las secciones
+        // Base de conocimiento LOCAL COMPLETA
         const knowledgeBase = {
             inicio: {
                 titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">👋 ¡Bienvenido/a a tu Guía de Estudio!</h3>',
@@ -735,6 +736,14 @@
                         <div>
                             <div class="font-medium text-sm">Tabla Resumen</div>
                             <div class="text-xs text-gray-400">Factores del Esfuerzo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step" onclick="startProcess('tabla_sintesis')">
+                        <div class="step-number">🔗</div>
+                        <div>
+                            <div class="font-medium text-sm">Tabla Síntesis</div>
+                            <div class="text-xs text-gray-400">Integración completa</div>
                         </div>
                     </div>
                     
@@ -1011,7 +1020,56 @@
                 navButtons: true
             },
 
-            // CONOCIMIENTOS DE APOYO - VERSIÓN LOCAL COMPLETA
+            tabla_sintesis: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">🔗 TABLA DE SÍNTESIS</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm mb-3">Integración de todos los componentes para enriquecer tu expresión.</p>
+                </div>
+                
+                <div class="overflow-x-auto mt-2">
+                    <table class="w-full text-xs text-left">
+                        <thead class="bg-[#1a1a1d]">
+                            <tr>
+                                <th class="p-1 font-bold">Factores</th>
+                                <th class="p-1 font-bold">Personajes</th>
+                                <th class="p-1 font-bold">Motores</th>
+                                <th class="p-1 font-bold">Elementos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="p-1">
+                                    <strong>⚖️ Peso:</strong> F/L<br>
+                                    <strong>⏱️ Tiempo:</strong> S/S<br>
+                                    <strong>🌐 Espacio:</strong> D/F<br>
+                                    <strong>💧 Flujo:</strong> L/C
+                                </td>
+                                <td class="p-1">
+                                    <strong>🌿 Bosque (Lira)</strong><br>
+                                    <strong>🤖 Dañados (Brk)</strong>
+                                </td>
+                                <td class="p-1">
+                                    <strong>Cabeza:</strong> Pensar<br>
+                                    <strong>Pecho:</strong> Emoción<br>
+                                    <strong>Cadera:</strong> Instinto
+                                </td>
+                                <td class="p-1">
+                                    <span class="element-tag fire">Fuego</span><br>
+                                    <span class="element-tag water">Agua</span><br>
+                                    <span class="element-tag air">Aire</span><br>
+                                    <span class="element-tag earth">Tierra</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar más sobre algún componente?',
+                navButtons: true
+            },
+
+            // CONOCIMIENTOS DE APOYO
             conocimientos_apoyo: {
                 titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">💪 CONOCIMIENTOS DE APOYO</h3>',
                 contenido: `
@@ -1059,6 +1117,46 @@
                 </div>
                 `,
                 pregunta: '¿Necesitas repasar algún movimiento específico?',
+                navButtons: true
+            },
+
+            // EJEMPLOS - NUEVA SECCIÓN
+            ejemplos: {
+                titulo: '<h3 class="font-bold text-[#c3073f] text-sm mb-2">💡 EJEMPLOS PRÁCTICOS</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm mb-3">Aquí encontrarás ejemplos prácticos para aplicar los conceptos aprendidos.</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">🎭 Ejemplo de Personaje: Ser del Bosque</h4>
+                    <p class="text-xs mt-1"><strong>Movimiento:</strong> Flujo libre, peso ligero, espacio flexible</p>
+                    <p class="text-xs mt-1"><strong>Elemento:</strong> Agua y Aire</p>
+                    <p class="text-xs mt-1"><strong>Motor:</strong> Pecho (emociones de conexión con la naturaleza)</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">🤖 Ejemplo de Personaje: Ser Dañado</h4>
+                    <p class="text-xs mt-1"><strong>Movimiento:</strong> Flujo contenido, peso fuerte, tiempo súbito</p>
+                    <p class="text-xs mt-1"><strong>Elemento:</strong> Fuego y Tierra</p>
+                    <p class="text-xs mt-1"><strong>Motor:</strong> Cadera (instinto de supervivencia)</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">🔄 Secuencia de Breaking</h4>
+                    <p class="text-xs mt-1">1. Entrada con peso fuerte y tiempo súbito</p>
+                    <p class="text-xs mt-1">2. Transición con flujo libre y espacio flexible</p>
+                    <p class="text-xs mt-1">3. Freeze final con flujo contenido y tiempo sostenido</p>
+                </div>
+                
+                <div class="mt-2 example-card content-section">
+                    <h4 class="font-bold text-sm">🎪 Secuencia de Lira</h4>
+                    <p class="text-xs mt-1">1. Subida con peso ligero y tiempo sostenido</p>
+                    <p class="text-xs mt-1">2. Figuras aéreas con flujo libre y espacio directo</p>
+                    <p class="text-xs mt-1">3. Descenso con peso fuerte y tiempo súbito</p>
+                </div>
+                `,
+                pregunta: '¿Quieres ver más ejemplos específicos de algún tema?',
                 navButtons: true
             },
 
@@ -1208,7 +1306,7 @@
 
         // === SISTEMA DE INTEGRACIÓN CON JSON REMOTO ===
         (function() {
-            const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/29fa4a7d152e3617c28345a9727cd76c7d66aea4/datos.json';
+            const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/304ce7a2fc1692281ebd4378c4d63aa1bb71e02a/datos.json';
 
             async function loadRemoteData(url) {
                 try {
@@ -1231,22 +1329,33 @@
             function mergeRemoteIntoKnowledgeBase(remote) {
                 if (!remote || typeof remote !== 'object') return;
 
-                // Procesar EVENTOS
-                if (remote.eventos && Array.isArray(remote.eventos)) {
-                    const html = remote.eventos.map(evento => {
-                        const titulo = evento.fecha ? `${evento.fecha}: ${evento.titulo}` : evento.titulo;
-                        const texto = evento.descripcion || '';
-                        let link = '';
-                        
-                        if (evento.link && evento.link.trim() !== '') {
-                            const linkText = evento.tipo === 'instagram' ? '📷 Ver en Instagram' : '🔗 Ver más';
-                            link = `<a href="${evento.link}" target="_blank" class="video-link mt-1 block text-xs">${linkText}</a>`;
-                        }
-                        
-                        return `<div class="announcement-card"><h4 class="font-bold text-sm">${titulo}</h4><p class="text-xs mt-1">${texto}</p>${link}</div>`;
-                    }).join('');
+                // Procesar ANUNCIO PRINCIPAL
+                if (remote.anuncio_principal) {
+                    const anuncio = remote.anuncio_principal;
+                    let html = `
+                    <div class="principal-announcement">
+                        <h4 class="font-bold text-sm">${anuncio.titulo}</h4>
+                        <p class="text-xs mt-1">${anuncio.descripcion}</p>
+                        ${anuncio.link ? `<a href="${anuncio.link}" target="_blank" class="video-link mt-1 block text-xs">🔗 ${anuncio.tipo === 'noticia' ? 'Ver más' : 'Ver en Instagram'}</a>` : ''}
+                    </div>
+                    `;
                     
-                    // Actualizar anuncios principales
+                    // Procesar EVENTOS
+                    if (remote.eventos && Array.isArray(remote.eventos)) {
+                        html += remote.eventos.map(evento => {
+                            const titulo = evento.fecha ? `${evento.fecha}: ${evento.titulo}` : evento.titulo;
+                            const texto = evento.descripcion || '';
+                            let link = '';
+                            
+                            if (evento.link && evento.link.trim() !== '') {
+                                const linkText = evento.tipo === 'instagram' ? '📷 Ver en Instagram' : '🔗 Ver más';
+                                link = `<a href="${evento.link}" target="_blank" class="video-link mt-1 block text-xs">${linkText}</a>`;
+                            }
+                            
+                            return `<div class="announcement-card"><h4 class="font-bold text-sm">${titulo}</h4><p class="text-xs mt-1">${texto}</p>${link}</div>`;
+                        }).join('');
+                    }
+                    
                     knowledgeBase.anuncios.contenido = html;
                 }
 
@@ -1277,6 +1386,11 @@
                 // Procesar CONOCIMIENTOS DE APOYO
                 if (remote.conocimientos_apoyo && typeof remote.conocimientos_apoyo === 'object') {
                     updateConocimientosApoyo(remote.conocimientos_apoyo);
+                }
+
+                // Procesar TABLA SÍNTESIS
+                if (remote.tabla_sintesis && typeof remote.tabla_sintesis === 'object') {
+                    updateTablaSintesis(remote.tabla_sintesis);
                 }
 
                 // Funciones auxiliares:
@@ -1393,13 +1507,96 @@
                     
                     knowledgeBase.conocimientos_apoyo.contenido = contenidoHtml;
                 }
+                
+                function updateTablaSintesis(sintesis) {
+                    if (!sintesis.contenido) return;
+                    
+                    const contenido = sintesis.contenido;
+                    let tablaHtml = `
+                    <div class="content-section">
+                        <p class="text-sm mb-3">${sintesis.descripcion}</p>
+                    </div>
+                    
+                    <div class="overflow-x-auto mt-2">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-[#1a1a1d]">
+                                <tr>
+                                    <th class="p-1 font-bold">Factores</th>
+                                    <th class="p-1 font-bold">Personajes</th>
+                                    <th class="p-1 font-bold">Motores</th>
+                                    <th class="p-1 font-bold">Elementos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-700">
+                                    <td class="p-1">
+                    `;
+                    
+                    // Factores
+                    if (contenido.factores) {
+                        Object.keys(contenido.factores).forEach(factor => {
+                            tablaHtml += `<strong>${getFactorIcon(factor)} ${capitalizeFirst(factor)}:</strong> ${contenido.factores[factor]}<br>`;
+                        });
+                    }
+                    
+                    tablaHtml += `</td><td class="p-1">`;
+                    
+                    // Personajes
+                    if (contenido.personajes) {
+                        Object.keys(contenido.personajes).forEach(personaje => {
+                            tablaHtml += `<strong>${contenido.personajes[personaje]}</strong><br>`;
+                        });
+                    }
+                    
+                    tablaHtml += `</td><td class="p-1">`;
+                    
+                    // Motores
+                    if (contenido.motores) {
+                        Object.keys(contenido.motores).forEach(motor => {
+                            tablaHtml += `<strong>${capitalizeFirst(motor)}:</strong> ${contenido.motores[motor]}<br>`;
+                        });
+                    }
+                    
+                    tablaHtml += `</td><td class="p-1">`;
+                    
+                    // Elementos
+                    if (contenido.elementos && Array.isArray(contenido.elementos)) {
+                        contenido.elementos.forEach(elemento => {
+                            tablaHtml += `<span class="element-tag ${elemento.toLowerCase()}">${elemento}</span><br>`;
+                        });
+                    }
+                    
+                    tablaHtml += `
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    `;
+                    
+                    knowledgeBase.tabla_sintesis.contenido = tablaHtml;
+                    
+                    function getFactorIcon(factor) {
+                        const icons = {
+                            'peso': '⚖️',
+                            'tiempo': '⏱️',
+                            'espacio': '🌐',
+                            'flujo': '💧'
+                        };
+                        return icons[factor] || '•';
+                    }
+                    
+                    function capitalizeFirst(str) {
+                        return str.charAt(0).toUpperCase() + str.slice(1);
+                    }
+                }
             }
 
             // Ejecutar carga en background
             loadRemoteData(REMOTE_JSON_URL);
         })();
 
-        // === SISTEMA DE NAVEGACIÓN CORREGIDO ===
+        // === SISTEMA DE NAVEGACIÓN ===
         window.goBack = function() {
             if (chatState.history.length > 0) {
                 const previousTopic = chatState.history.pop();
@@ -1427,7 +1624,7 @@
             processUserInput(message);
         };
 
-        // === FUNCIONES PRINCIPALES CORREGIDAS ===
+        // === FUNCIONES PRINCIPALES ===
         function showTopic(topic) {
             const container = document.getElementById('chat-container');
             container.innerHTML = '';
@@ -1493,9 +1690,15 @@
                 'tierra': 'elementos',
                 'tabla resumen': 'tabla_resumen',
                 'resumen': 'tabla_resumen',
+                'tabla síntesis': 'tabla_sintesis',
+                'tabla sintesis': 'tabla_sintesis',
+                'síntesis': 'tabla_sintesis',
+                'sintesis': 'tabla_sintesis',
                 'conocimientos': 'conocimientos_apoyo',
                 'apoyo': 'conocimientos_apoyo',
                 'técnica': 'conocimientos_apoyo',
+                'ejemplos': 'ejemplos',
+                'ejemplo': 'ejemplos',
                 'tareas breaking': 'tareas_breaking',
                 'tarea breaking': 'tareas_breaking',
                 'tareas lira': 'tareas_lira',
@@ -1504,8 +1707,6 @@
                 'tarea equipo': 'tareas_equipo',
                 'tareas': 'tareas',
                 'tarea': 'tareas',
-                'ejemplos': 'ejemplos',
-                'ejemplo': 'ejemplos',
                 'hola': 'inicio',
                 'inicio': 'inicio',
                 'menu': 'inicio'
@@ -1547,6 +1748,8 @@
                         <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
                         <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
                         <button class="concept-tag" onclick="startProcess('anuncios')">📣 Anun</button>
+                        <button class="concept-tag" onclick="startProcess('ejemplos')">💡 Ejemplos</button>
+                        <button class="concept-tag" onclick="startProcess('tabla_sintesis')">🔗 Sint</button>
                     </div>
                     ${getNavigationButtons()}
                     `, 'bot');
