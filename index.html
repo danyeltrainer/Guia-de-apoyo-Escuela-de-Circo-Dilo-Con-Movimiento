@@ -1070,6 +1070,55 @@
                 navButtons: true
             },
 
+            // CONSTRUCCIÓN DE PERSONAJES AMPLIADA
+            construccion_personaje_ampliada: {
+                titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🎭 CONSTRUCCIÓN DE PERSONAJE - GUÍA COMPLETA</h3>',
+                contenido: `
+                <div class="content-section">
+                    <p class="text-sm mb-3">Guía expandida para desarrollar personajes profundos en el mundo post-apocalíptico.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🌍 CONTEXTO NARRATIVO PROFUNDIZADO</h4>
+                    <p class="text-xs mt-1">El mundo colapsó debido a la <strong>sobre-tecnologización extrema</strong> y el <strong>colapso ambiental</strong>. La naturaleza comenzó a reclaimar los espacios urbanos, creando ecosistemas híbridos donde la tecnología abandonada se fusiona con la vida orgánica.</p>
+                    <p class="text-xs mt-1"><strong>Punto de inflexión:</strong> Un evento llamado "El Gran Silencio" desconectó todas las redes globales, forzando a los sobrevivientes a redescubrir formas de comunicación primal a través del movimiento corporal.</p>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🌿 SERES DEL BOSQUE - DETALLES EXPANDIDOS</h4>
+                    <p class="text-xs mt-1"><strong>Hadas Técnicas:</strong> Seres que fusionan biología natural con nanotecnología residual. Movimientos fluidos pero con precisiones mecánicas ocasionales.</p>
+                    <p class="text-xs mt-1"><strong>Elfos Urbanos:</strong> Habitan en rascacielos abandonados convertidos en bosques verticales. Movimientos que alternan entre la gravedad terrestre y aérea.</p>
+                    <p class="text-xs mt-1"><strong>Faunos Adaptativos:</strong> Exhiben características animales que les ayudan a sobrevivir en entornos específicos. Movimientos que reflejan sus adaptaciones únicas.</p>
+                    <div class="mt-1">
+                        <span class="element-tag water">Agua: Fluidez y adaptación</span>
+                        <span class="element-tag earth">Tierra: Raíces y resistencia</span>
+                        <span class="element-tag air">Aire: Libertad y elevación</span>
+                    </div>
+                </div>
+                
+                <div class="mt-2 character-card content-section">
+                    <h4 class="font-bold text-sm">🤖 SERES "DAÑADOS" - MATICES EMOCIONALES</h4>
+                    <p class="text-xs mt-1"><strong>Zombies Conscientes:</strong> Mantienen fragmentos de memoria que generan conflictos internos entre instinto y razón.</p>
+                    <p class="text-xs mt-1"><strong>Cyborgs Emocionales:</strong> Luchan por reconciliar sus componentes mecánicos con emociones humanas residuales.</p>
+                    <p class="text-xs mt-1"><strong>Mutantes Adaptativos:</strong> Desarrollaron habilidades únicas pero cargan con el estigma de su transformación.</p>
+                    <div class="mt-1">
+                        <span class="element-tag fire">Fuego: Pasión y destrucción</span>
+                        <span class="element-tag earth">Tierra: Estabilidad en el caos</span>
+                    </div>
+                </div>
+                
+                <div class="mt-2 rules-card">
+                    <h4 class="font-bold text-sm">💡 CONSEJOS PARA CONSTRUCCIÓN PROFUNDA</h4>
+                    <p class="text-xs mt-1">• <strong>Contradicciones humanas:</strong> Los personajes más interesantes tienen deseos contradictorios.</p>
+                    <p class="text-xs mt-1">• <strong>Historia silenciada:</strong> ¿Qué evento específico los marcó durante el colapso?</p>
+                    <p class="text-xs mt-1">• <strong>Relación con la tecnología:</strong> ¿La ven como herramienta, maldición o extensión de sí mismos?</p>
+                    <p class="text-xs mt-1">• <strong>Secretos:</strong> Todo personaje guarda algo que no quiere revelar.</p>
+                </div>
+                `,
+                pregunta: '¿Quieres explorar algún aspecto específico de la construcción de personaje?',
+                navButtons: true
+            },
+
             // CONSTRUCCIÓN DE PERSONAJES
             personajes: {
                 titulo: '<h3 class="font-bold text-[#3a86ff] text-sm mb-2">🎭 CONSTRUCCIÓN DE PERSONAJES</h3>',
@@ -1506,25 +1555,166 @@
             }
         };
 
+        // === SISTEMA DE IA BÁSICO ===
+        const chatbotAI = {
+            knowledge: {
+                peso: {
+                    keywords: ['peso', 'fuerte', 'ligero', 'fuerza', 'gravedad', 'pesado', 'liviano', 'intensidad'],
+                    responses: [
+                        "El **peso** se refiere a la intención de fuerza en tu movimiento. ¿Buscas algo **fuerte** (como mover algo pesado) o **ligero** (como flotar)?",
+                        "En términos de **peso**, puedes elegir entre movimientos que ceden a la gravedad (fuertes) o que la desafían (ligeros).",
+                        "El factor **peso** determina cuánta energía aplicas contra la gravedad. ¿Te interesa explorar ejemplos específicos?"
+                    ],
+                    relatedTopic: 'peso'
+                },
+                
+                tiempo: {
+                    keywords: ['tiempo', 'rapido', 'lento', 'velocidad', 'súbito', 'sostenido', 'duración', 'veloz', 'pausado'],
+                    responses: [
+                        "El **tiempo** controla la velocidad de tus acciones. ¿Prefieres movimientos **súbitos** (urgentes) o **sostenidos** (prolongados)?",
+                        "Hablando de **tiempo**, esto afecta cómo percibimos la urgencia o calma en el movimiento.",
+                        "El factor **tiempo** va más allá del ritmo - es sobre la actitud interna hacia la duración. ¿Qué aspecto te interesa?"
+                    ],
+                    relatedTopic: 'tiempo'
+                },
+
+                personaje: {
+                    keywords: ['personaje', 'crear personaje', 'construir personaje', 'desarrollar personaje', 'carácter', 'mi personaje'],
+                    responses: [
+                        "Para **crear tu personaje**, comienza definiendo su **motor principal** de movimiento y su **elemento** dominante. ¿Quieres que te guíe paso a paso?",
+                        "La **construcción de personaje** en nuestro mundo post-apocalíptico considera su historia antes del colapso y cómo cambió después. ¿Por dónde quieres empezar?",
+                        "Un buen **personaje** necesita motores de movimiento, elemento energético y una transformación significativa. ¿Te gustaría explorar alguno de estos aspectos?"
+                    ],
+                    relatedTopic: 'construccion_personaje'
+                },
+
+                motores: {
+                    keywords: ['motores', 'motor movimiento', 'cabeza', 'pecho', 'brazos', 'pelvis', 'piernas', 'cadera', 'origen movimiento'],
+                    responses: [
+                        "Los **motores de movimiento** definen desde dónde nace la energía de tu personaje. ¿Ya sabes si se mueve desde la **cabeza** (pensamiento), **pecho** (emociones) u otra zona?",
+                        "Elegir **motores** es clave: máximo dos zonas corporales que guíen todo el movimiento. ¿Necesitas ayuda para decidir?",
+                        "Cada **motor** da una cualidad única: cabeza para estrategas, pecho para emocionales, brazos para expresivos, pelvis para instintivos, piernas para viajeros."
+                    ],
+                    relatedTopic: 'motores'
+                },
+
+                elementos: {
+                    keywords: ['elemento', 'fuego', 'agua', 'aire', 'tierra', 'elementos', 'energía'],
+                    responses: [
+                        "Los **elementos** dan energía vital a tu personaje. **Fuego** para intensidad, **Agua** para adaptación, **Aire** para libertad, **Tierra** para estabilidad. ¿Con cuál te identificas?",
+                        "Cada **elemento** influye en la calidad del movimiento. ¿Buscas algo transformador (fuego), fluido (agua), etéreo (aire) o firme (tierra)?",
+                        "La elección del **elemento** es personal y define la esencia energética de tu personaje. ¿Quieres explorar sus características?"
+                    ],
+                    relatedTopic: 'elementos'
+                },
+
+                tareas: {
+                    keywords: ['tareas', 'ejercicios', 'práctica', 'deberes', 'entrenamiento', 'qué hacer', 'qué practicar'],
+                    responses: [
+                        "Las **tareas** están organizadas por disciplina. ¿Te interesan las de **breaking**, **lira** o **equipo**?",
+                        "Para **tareas específicas**, puedo mostrarte lo que necesitas practicar según tu disciplina. ¿Cuál es la tuya?",
+                        "Las **tareas** actuales incluyen aprender fraseos, mandar avances en video y conectar con la música. ¿De qué disciplina quieres ver las tareas?"
+                    ],
+                    relatedTopic: 'tareas'
+                }
+            },
+
+            processQuestion: function(userInput) {
+                const input = userInput.toLowerCase().trim();
+                let bestMatch = { topic: null, score: 0, response: "" };
+                
+                for (const [topic, data] of Object.entries(this.knowledge)) {
+                    let score = 0;
+                    
+                    data.keywords.forEach(keyword => {
+                        if (input.includes(keyword)) {
+                            score += 2;
+                        }
+                    });
+                    
+                    // Coincidencias contextuales para lenguaje natural
+                    if ((input.includes('como') || input.includes('qué')) && 
+                        (input.includes('personaje') || input.includes('carácter'))) {
+                        if (topic === 'personaje') score += 3;
+                    }
+                    
+                    if (input.includes('que') && input.includes('peso')) {
+                        if (topic === 'peso') score += 3;
+                    }
+                    
+                    if ((input.includes('movimiento') || input.includes('mover')) && 
+                        (input.includes('desde') || input.includes('origen'))) {
+                        if (topic === 'motores') score += 3;
+                    }
+                    
+                    if (input.includes('practicar') || input.includes('entrenar')) {
+                        if (topic === 'tareas') score += 2;
+                    }
+                    
+                    if (score > bestMatch.score) {
+                        bestMatch = {
+                            topic: topic,
+                            score: score,
+                            response: data.responses[Math.floor(Math.random() * data.responses.length)],
+                            relatedTopic: data.relatedTopic
+                        };
+                    }
+                }
+                
+                return bestMatch.score > 0 ? bestMatch : null;
+            },
+
+            generateResponse: function(userInput) {
+                const match = this.processQuestion(userInput);
+                
+                if (match) {
+                    let response = match.response;
+                    
+                    if (match.relatedTopic) {
+                        response += `<br><br><button class="nav-button text-xs mt-2" onclick="startProcess('${match.relatedTopic}')">🎯 Ver más sobre ${match.relatedTopic}</button>`;
+                    }
+                    
+                    return response;
+                }
+                
+                return `🤔 Interesante pregunta. Puedo ayudarte con:
+• Construcción de personajes y sus elementos
+• Factores del esfuerzo (peso, tiempo, espacio, flujo)
+• Motores de movimiento
+• Tareas específicas por disciplina
+• Normas y anuncios
+
+¿Puedes reformular tu pregunta o elegir un tema específico?`;
+            }
+        };
+
         // === SISTEMA DE INTEGRACIÓN CON JSON REMOTO ===
         (function() {
             const REMOTE_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/fee9da8385eaedaa15ccfc150f442a65/raw/0cd118ee755b891adb437f41ffd4b4105c06fb4c/datos.json';
+            const COMPLEMENTARY_JSON_URL = 'https://gist.githubusercontent.com/danyeltrainer/4e61ef610c6321ed35d6350801125927/raw/df91c09b3dc4fe02096a8f0ec4a637c821834340/complementario.json';
 
-            async function loadRemoteData(url) {
+            async function loadAllRemoteData() {
                 try {
-                    const res = await fetch(url, { cache: 'no-cache' });
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    const remote = await res.json();
-                    mergeRemoteIntoKnowledgeBase(remote);
+                    // Cargar JSON principal
+                    const res1 = await fetch(REMOTE_JSON_URL, { cache: 'no-cache' });
+                    if (!res1.ok) throw new Error('HTTP ' + res1.status);
+                    const remote = await res1.json();
                     
-                    // Si no hay tema activo, re-renderizo la vista inicial
+                    // Cargar JSON complementario
+                    const res2 = await fetch(COMPLEMENTARY_JSON_URL, { cache: 'no-cache' });
+                    if (!res2.ok) throw new Error('HTTP ' + res2.status);
+                    const complementary = await res2.json();
+                    
+                    // Fusionar ambos
+                    const mergedData = { ...remote, ...complementary };
+                    mergeRemoteIntoKnowledgeBase(mergedData);
+                    
                     if (!chatState.currentTopic) {
                         showTopic('inicio');
                     }
-                    console.log('✅ Datos remotos cargados y aplicados.');
+                    console.log('✅ Ambos JSONs cargados y aplicados.');
                 } catch (err) {
                     console.warn('⚠️ No se pudo cargar datos remotos:', err);
-                    // No rompe; seguimos con conocimiento local
                 }
             }
 
@@ -1924,7 +2114,7 @@
             }
 
             // Ejecutar carga en background
-            loadRemoteData(REMOTE_JSON_URL);
+            loadAllRemoteData();
         })();
 
         // === SISTEMA DE NAVEGACIÓN ===
@@ -2396,26 +2586,24 @@
             }
 
             if (topic) {
+                // Comando reconocido - usar sistema original
                 startProcess(topic);
             } else {
+                // Usar el sistema de IA para preguntas en lenguaje natural
                 setTimeout(() => {
+                    const aiResponse = chatbotAI.generateResponse(userMessage);
+                    
                     addMessage(`
-                    <p class="text-sm">No entendí eso. Prueba con uno de estos temas:</p>
-                    <div class="flex flex-wrap gap-1 mt-2">
-                        <button class="concept-tag" onclick="startProcess('peso')">Peso</button>
-                        <button class="concept-tag" onclick="startProcess('tiempo')">Tiempo</button>
-                        <button class="concept-tag" onclick="startProcess('espacio')">Espacio</button>
-                        <button class="concept-tag" onclick="startProcess('flujo')">Flujo</button>
-                        <button class="concept-tag" onclick="startProcess('personajes')">🎭 Pers</button>
-                        <button class="concept-tag" onclick="startProcess('construccion_personaje')">👤 Crear</button>
-                        <button class="concept-tag" onclick="sendMessage('tareas breaking')">🔄 Brk</button>
-                        <button class="concept-tag" onclick="sendMessage('tareas lira')">🔄 Lira</button>
-                        <button class="concept-tag" onclick="startProcess('normas')">📜 Norm</button>
-                        <button class="concept-tag" onclick="startProcess('anuncios')">📣 Anun</button>
-                        <button class="concept-tag" onclick="startProcess('ejemplos')">💡 Ejemplos</button>
-                        <button class="concept-tag" onclick="startProcess('tabla_sintesis')">🔗 Sint</button>
+                    <div class="content-section">
+                        <p class="text-sm">${aiResponse}</p>
                     </div>
-                    ${getNavigationButtons()}
+                    
+                    <div class="mt-3 flex flex-wrap gap-1">
+                        <button class="concept-tag text-xs" onclick="sendMessage('como crear personaje')">¿Cómo crear personaje?</button>
+                        <button class="concept-tag text-xs" onclick="sendMessage('explicame los motores')">Motores movimiento</button>
+                        <button class="concept-tag text-xs" onclick="sendMessage('que es el peso')">Factor peso</button>
+                        <button class="concept-tag text-xs" onclick="sendMessage('tareas breaking')">Tareas breaking</button>
+                    </div>
                     `, 'bot');
                 }, 500);
             }
